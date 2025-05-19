@@ -5,7 +5,7 @@
 @section('content')
 
     @php
-    $topic = "";
+        $topic = '';
     @endphp
 
     <x-pricing :topic="$topic" />

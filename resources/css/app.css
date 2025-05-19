@@ -1,10 +1,7 @@
-/* @import 'tailwindcss'; */
-
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 /****Index****/
 /*1. Page Animation*/

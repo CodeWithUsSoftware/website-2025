@@ -114,7 +114,7 @@
                                 </li>
                                 <li>
                                     <a href="/topic/artificial-intelligence" tabindex="-1"
-                                       class="flex items-center justify-between space-x-3 xt-black-lighter-1 block px-4 py-2 text-sm">
+                                        class="flex items-center justify-between space-x-3 xt-black-lighter-1 block px-4 py-2 text-sm">
                                         <div class="flex items-center">
                                             <img class="w-10 h-10" src="/images/icons/ai.webp" />
                                             <span class="pl-4">Artificial Intelligence</span>
@@ -298,4 +298,3 @@
         </ul>
     </nav>
 </div>
-

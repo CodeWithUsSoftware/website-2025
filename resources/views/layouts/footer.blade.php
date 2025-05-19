@@ -101,7 +101,7 @@
                         <li>{{ trans('header_and_footer.cwu_address2') }}</li>
                     </ul>
                 </div>
-        
+
             </div>
             <div class="text-center">
                 <p class="mt-8  text-primary md:mt-0 pb-5">
@@ -134,8 +134,7 @@
                     <a href="https://www.linkedin.com/company/codewithus/" target="_blank"
                         class="text-white hover:text-gray-300">
                         <span class="sr-only">Twitter</span>
-                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M17 13.1305V16.8275H14.857V13.3775C14.857 12.5115 14.547 11.9205 13.771 11.9205C13.179 11.9205 12.826 12.3185 12.671 12.7045C12.615 12.8425 12.6 13.0345 12.6 13.2265V16.8275H10.456C10.456 16.8275 10.485 10.9855 10.456 10.3805H12.6V11.2935L12.586 11.3145H12.6V11.2945C12.885 10.8545 13.393 10.2285 14.532 10.2285C15.942 10.2285 17 11.1505 17 13.1305ZM8.213 7.27148C7.48 7.27148 7 7.75348 7 8.38548C7 9.00548 7.466 9.50048 8.185 9.50048H8.199C8.947 9.50048 9.412 9.00448 9.412 8.38548C9.398 7.75348 8.947 7.27148 8.213 7.27148ZM7.127 16.8275H9.271V10.3805H7.127V16.8275Z"
                                 fill="white" />
