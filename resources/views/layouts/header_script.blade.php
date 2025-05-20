@@ -1,6 +1,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/js/app.js')
+    {{-- @vite('resources/js/app.js') --}}
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
     <link href='https://eduvibe.html.devsvibe.com/assets/css/vendor/remixicon.css' rel='stylesheet'>
     @yield('header_scripts')
