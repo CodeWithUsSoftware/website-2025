@@ -12,7 +12,7 @@ Route::view('/topic/artificial-intelligence', 'ai_course');
 Route::view('/monthly-subscriptions', 'monthly-subscriptions');
 Route::view('/school-program', 'school-program');
 Route::view('/partner', 'partner');
-Route::view('/camps', 'multi_camps_form');
+Route::view('/camps', 'camps');
 Route::view('/coding_classes', 'coding_classes');
 Route::view('/phone-call', 'phone-call');
 Route::view('/reschedule', 'reschedule');

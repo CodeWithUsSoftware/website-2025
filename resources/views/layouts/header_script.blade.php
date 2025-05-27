@@ -7,7 +7,6 @@
     @yield('header_scripts')
     @if (url()->current() !== route('home'))
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="{{asset('blockly/blocklyJs.js')}}"></script>
     @endif
 
     <script>

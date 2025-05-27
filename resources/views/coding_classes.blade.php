@@ -106,9 +106,9 @@
             </div>
         </section>
 
-        {{-- <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20">
             <div class="max-w-6xl mx-auto" id="trial_form">
-                <trial-form-checkout phone_number="{{ trans('free_session.phone_number') }}"
+                <trial-form phone_number="{{ trans('free_session.phone_number') }}"
                     private_session_fee="{{ trans('free_session.private_session_fee') }}"
                     private_session="{{ trans('free_session.private_session') }}"
                     free_trial="{{ trans('free_session.free_trial') }}"
@@ -116,7 +116,7 @@
                     free_session_email="{{ trans('free_session.email') }}" trial="{{ trans('free_session.trial') }}"
                     :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"/>
             </div>
-        </section> --}}
+        </section>
 
         <section class="py-10 md:py-20" id="learnmore">
             <div class="max-w-6xl mx-auto px-2">

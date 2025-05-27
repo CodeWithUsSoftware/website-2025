@@ -7,8 +7,8 @@
     </section>
 
     <section class="py-10 md:py-20">
-        {{-- <contact-us></contact-us> --}}
-        </section>
+        <contact-us></contact-us>
+    </section>
 </div>
 
 @endsection

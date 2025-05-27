@@ -98,17 +98,17 @@
             </div>
         </section>
 
-        {{-- <section>
+        <section>
             <div class="max-w-5xl mx-auto">
-                <multi-camps-form :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"
+                <camps-form :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"
                     :seasonal_camps_dp="'{!! trans('pricing.seasonal_camps_discounted_price') !!}'"
-                    :seasonal_camps_fp="'{!! trans('pricing.seasonal_camps_full_price') !!}'"></multi-camps-form>
+                    :seasonal_camps_fp="'{!! trans('pricing.seasonal_camps_full_price') !!}'"></camps-form>
             </div>
-        </section> --}}
+        </section>
 
-        {{-- <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20">
             <custom-camps-form />
-        </section> --}}
+        </section>
 
         <section class="py-10 md:py-20">
             <div class="max-w-5xl mx-auto px-2">

@@ -124,9 +124,9 @@
                 </div>
             </div>
         </section>
-        {{-- <section class="py-10 md:py-16 text-center">
+        <section class="py-10 md:py-16 text-center">
             <jobs-form />
-        </section> --}}
+        </section>
         @include('layouts.FooterIcons')
     </div>
 @endsection

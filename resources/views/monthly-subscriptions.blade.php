@@ -20,10 +20,10 @@
 
 @section('content')
     <div>
-        {{-- <section id="buy-classes" class="py-10 md:py-20 max-w-6xl mx-auto">
-        <new-monthly-subscription-form private_classes_discount_price="{{trans('coding_classes.private_classes_discount_price')}}" group_classes_discount_price="{{trans('coding_classes.group_classes_discount_price')}}"
-        :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"//>
-    </section> --}}
+        <section id="buy-classes" class="py-10 md:py-20 max-w-6xl mx-auto">
+            <monthly-subscription-form private_classes_discount_price="{{trans('coding_classes.private_classes_discount_price')}}" group_classes_discount_price="{{trans('coding_classes.group_classes_discount_price')}}"
+            :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"//>
+        </section>
 
         <section class="py-10 md:py-20">
             <div class="max-w-6xl mx-auto px-2">

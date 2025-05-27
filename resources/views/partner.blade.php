@@ -27,9 +27,9 @@
             </div>
         </section>
 
-    {{-- <section class="py-20">
+    <section class="py-20">
         <partner-enquiry-form fill_partners_form="{{trans('partners.fill_partners_form')}}" send_us_your_partnership_idea="{{trans('partners.send_us_your_partnership_idea')}}" />
-    </section> --}}
+    </section>
 
         @include('layouts.FooterIcons')
     </div>

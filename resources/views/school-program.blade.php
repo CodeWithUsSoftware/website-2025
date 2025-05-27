@@ -17,7 +17,7 @@
 
         <section class="lg:py-10 md:py-10" style="margin-top:5%;">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 text-center space-y-3">
-                <h3>{{ trans('school_program.school_program_with_us') }} assa</h3>
+                <h3>{{ trans('school_program.school_program_with_us') }}</h3>
                 <p class="text-md">{!! trans('school_program.school_program_with_us_details') !!}</p>
             </div>
         </section>
@@ -569,13 +569,12 @@
             </section>
         </section>
 
-        {{-- <section class="py-10 md:py-20 max-w-5xl mx-auto" id="trial_form">
-            <!-- <trial-form phone_number="{{ trans('free_session.phone_number') }}" private_session_fee="{{ trans('free_session.private_session_fee') }}" private_session="{{ trans('free_session.private_session') }}" free_trial="{{ trans('free_session.free_trial') }}" group_session="{{ trans('free_session.group_session') }}" free_session_email="{{ trans('free_session.email') }}" trial="{{ trans('free_session.trial') }}" /> -->
-            <trial-form-for-schools-checkout free_session_email="{{ trans('free_session.email') }}"
+        <section class="py-10 md:py-20 max-w-5xl mx-auto" id="trial_form">
+            <trial-form-for-schools free_session_email="{{ trans('free_session.email') }}"
                 technology_requirements="{{ trans('school_free_session.technology_requirements') }}"
                 phone_number="{{ trans('free_session.phone_number') }}"
                 :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"/>
-        </section> --}}
+        </section>
 
         <section>
             <div class="items-center justify-center text-center py-3 pt-10 text-sm">
@@ -599,11 +598,11 @@
             </div>
         </section>
 
-        {{-- <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20">
             <school-program-form
                 send_us_your_school_program_details="{{ trans('school_program.send_us_your_school_program_details') }}"
                 fill_school_program_form="{{ trans('school_program.fill_school_program_form') }}" />
-        </section> --}}
+        </section>
 
         <section class="py-10" id="faqs">
             <div class="px-3 md:px-0">

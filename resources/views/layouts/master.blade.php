@@ -10,6 +10,7 @@
     <meta name="description" content="@yield('meta_description')">
     @csrf
     {{-- Custom Script --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('schema')
     <style>
         .grecaptcha-badge {
@@ -20,7 +21,7 @@
 </head>
 
 <body>
-    <div>
+    <div  id="app">
         {{-- Navbar Section --}}
         @include('layouts.navbar')
         @include('layouts.sidebar')
