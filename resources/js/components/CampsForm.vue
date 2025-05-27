@@ -11,35 +11,36 @@
                         </svg>
                       </p>
                       <div class="max-w-3xl mx-auto">
-                        <div class="flex justify-start">
-                          <button disabled class="px-6 py-3 text-lg font-medium border-b-2 border-camps mx-4">Campbell, CA</button>
-                          <button disabled class="px-6 py-3 text-lg font-medium text-gray-500 mx-4">Online Classroom</button>
-                          <button disabled class="px-6 py-3 text-lg font-medium text-gray-500 mx-4">AI Online Camp</button>
+                        <div class="flex justify-center">
+                          <div class="relative bg-gray-200 rounded-full p-1 flex">
+                            <button disabled class="relative px-6 py-3 text-lg font-medium rounded-full whitespace-nowrap z-10 text-white">Campbell, CA</button>
+                            <button disabled class="relative px-6 py-3 text-lg font-medium rounded-full whitespace-nowrap z-10 text-gray-600">Online Classroom</button>
+                            <button disabled class="relative px-6 py-3 text-lg font-medium rounded-full whitespace-nowrap z-10 text-gray-600">AI Online Camp</button>
+                            <!-- Static background for loading state -->
+                            <div class="absolute top-1 bottom-1 bg-teal-600 rounded-full z-0" style="left: 4px; width: calc(33.333% - 8px);"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <!-- <div v-else class="w-full flex justify-start">
-                      <button v-for="location in locationsStore.locations"
-                        :key="location.id"
-                        @click="changeLocation(location)"
-                        class="px-6 py-3 text-lg font-medium transition-colors duration-200 mx-4"
-                        :class="location.id === locationsStore.location.id ? 'text-camps border-b-2 border-camps' : 'text-gray-500 hover:text-camps'">
-                        {{location.location_name}}
-                      </button>
-                    </div> -->
-
                     <div v-else class="w-full overflow-x-auto">
-                        <div class="flex justify-start whitespace-nowrap px-2">
-                          <button
-                            v-for="location in locationsStore.locations"
-                            :key="location.id"
-                            @click="changeLocation(location)"
-                            class="px-6 py-3 text-lg font-medium transition-colors duration-200 mx-2"
-                            :class="location.id === locationsStore.location.id
-                              ? 'text-camps border-b-2 border-camps'
-                              : 'text-gray-500 hover:text-camps'">
-                            {{ location.location_name }}
-                          </button>
+                        <div class="flex justify-center px-2">
+                          <div class="relative bg-gray-200 rounded-full p-1 flex">
+                            <button
+                              v-for="(location, index) in locationsStore.locations"
+                              :key="location.id"
+                              @click="changeLocation(location)"
+                              class="relative px-6 py-3 text-lg font-medium transition-all duration-300 rounded-full whitespace-nowrap z-10"
+                              :class="location.id === locationsStore.location.id
+                                ? 'text-white'
+                                : 'text-gray-600 hover:text-gray-800'">
+                              {{ location.location_name }}
+                            </button>
+                            <!-- Sliding background -->
+                            <div
+                              class="absolute top-1 bottom-1 bg-teal-600 rounded-full transition-all duration-300 ease-in-out z-0"
+                              :style="getSliderStyle()"
+                            ></div>
+                          </div>
                         </div>
                     </div>
                   </div>
@@ -52,54 +53,77 @@
             <div class="max-w-5xl mx-auto bg-white md:p-5 space-y-5">
                 <div class="py-3 row" v-if="campStore.groups_count > 0">
 
-                <div class="py-3" v-for="group in campStore.groups" :key="group.id">
-                    <div class="text-center" >
-
-                    <h5 class="font-weight-bolder" :class="group.isGroupLimitExceeded ? 'text-danger':''">{{group.name}} {{ (group.isGroupLimitExceeded)?' -- Full':'' }}</h5>
+                <div class="accordion-item border border-gray-200 rounded-lg mb-4" v-for="(group, index) in campStore.groups" :key="group.id">
+                    <div class="accordion-header">
+                        <button
+                            @click="toggleAccordion(index)"
+                            class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 rounded-t-lg focus:outline-none focus:bg-gray-100 transition-colors duration-200 flex items-center justify-between"
+                            :class="{ 'rounded-lg': !accordionOpen[index] }"
+                        >
+                            <h5 class="font-weight-bolder text-lg" :class="group.isGroupLimitExceeded ? 'text-danger':''">
+                                {{group.name}} {{ (group.isGroupLimitExceeded)?' -- Full':'' }}
+                            </h5>
+                            <svg
+                                class="w-5 h-5 transition-transform duration-200"
+                                :class="{ 'rotate-180': accordionOpen[index] }"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
                     </div>
-                    <camps-slider :camps_data="group.topics" :group_data="group" :seasonal_camps_dp="seasonal_camps_dp" :seasonal_camps_fp="seasonal_camps_fp" :selected_location_price="locationsStore.location.starting_price" @topic-selected="enrollTopicSelected"></camps-slider>
-                    <!-- <Carousel :settings="settings" :breakpoints="breakpoints">
-                    <Slide class="bg-white" v-for="topic in group.topics" :key="topic.id">
-                        <div class="carousel__item rounded-3xl shadow p-2 md:p-0 m-1 md:m-3">
-                        <div class="relative">
-                            <img class="object-cover object-center rounded-t-3xl md:max-h-72"
-                            :src="`https://portal.codewithus.com/images/topics/${topic.image_name_camps}`"
-                            alt="scratch">
-                            <div class="absolute right-0 bottom-0 -mb-4"></div>
+                    <div
+                        class="accordion-content overflow-hidden transition-all duration-300"
+                        :class="accordionOpen[index] ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'"
+                    >
+                        <div class="py-3 px-6">
+                            <camps-slider :camps_data="group.topics" :group_data="group" :seasonal_camps_dp="seasonal_camps_dp" :seasonal_camps_fp="seasonal_camps_fp" :selected_location_price="locationsStore.location.starting_price" @topic-selected="enrollTopicSelected"></camps-slider>
+                            <!-- <Carousel :settings="settings" :breakpoints="breakpoints">
+                            <Slide class="bg-white" v-for="topic in group.topics" :key="topic.id">
+                                <div class="carousel__item rounded-3xl shadow p-2 md:p-0 m-1 md:m-3">
+                                <div class="relative">
+                                    <img class="object-cover object-center rounded-t-3xl md:max-h-72"
+                                    :src="`https://portal.codewithus.com/images/topics/${topic.image_name_camps}`"
+                                    alt="scratch">
+                                    <div class="absolute right-0 bottom-0 -mb-4"></div>
+                                </div>
+                                <div class="pt-2 pb-2 px-2">
+                                    <div class="text-center" @click="next(topicSelected(group, topic));" v-if="!group.isGroupLimitExceeded">
+                                    <a href="#campsForm"
+                                        class="inline-flex items-center gap-2 px-5 py-2 border border-transparent text-base font-medium rounded-full text-white bg-camps hover:text-white hover:bg-camps-darker-1 focus:outline-none focus:ring-camps">
+                                        <span>Enroll</span>
+                                        <svg width="13" height="11" viewBox="0 0 13 11" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 5.5H12M12 5.5L8.03644 1.5M12 5.5L8.03644 9.5"
+                                            stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                        </svg>
+                                    </a>
+                                    </div>
+                                    <div class="text-center" v-if="group.isGroupLimitExceeded">
+                                    <button class="inline-flex items-center gap-2 px-5 py-2 border border-transparent text-base font-medium rounded-full text-white bg-red-500 cursor-not-allowed hover:text-white hover:bg-camps-darker-1 focus:outline-none focus:bg-red-500" :disabled="group.isGroupLimitExceeded">Full
+                                        <svg width="13" height="11" viewBox="0 0 13 11" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 5.5H12M12 5.5L8.03644 1.5M12 5.5L8.03644 9.5"
+                                            stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                        </svg>
+                                    </button>
+                                    </div>
+                                </div>
+                                </div>
+                            </Slide>
+                            <template #addons>
+                                <Navigation />
+                                <pagination />
+                            </template>
+                            </Carousel> -->
                         </div>
-                        <div class="pt-2 pb-2 px-2">
-                            <div class="text-center" @click="next(topicSelected(group, topic));" v-if="!group.isGroupLimitExceeded">
-                            <a href="#campsForm"
-                                class="inline-flex items-center gap-2 px-5 py-2 border border-transparent text-base font-medium rounded-full text-white bg-camps hover:text-white hover:bg-camps-darker-1 focus:outline-none focus:ring-camps">
-                                <span>Enroll</span>
-                                <svg width="13" height="11" viewBox="0 0 13 11" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 5.5H12M12 5.5L8.03644 1.5M12 5.5L8.03644 9.5"
-                                    stroke="white" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round"></path>
-                                </svg>
-                            </a>
-                            </div>
-                            <div class="text-center" v-if="group.isGroupLimitExceeded">
-                            <button class="inline-flex items-center gap-2 px-5 py-2 border border-transparent text-base font-medium rounded-full text-white bg-red-500 cursor-not-allowed hover:text-white hover:bg-camps-darker-1 focus:outline-none focus:bg-red-500" :disabled="group.isGroupLimitExceeded">Full
-                                <svg width="13" height="11" viewBox="0 0 13 11" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 5.5H12M12 5.5L8.03644 1.5M12 5.5L8.03644 9.5"
-                                    stroke="white" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round"></path>
-                                </svg>
-                            </button>
-                            </div>
-                        </div>
-                        </div>
-                    </Slide>
-                    <template #addons>
-                        <Navigation />
-                        <pagination />
-                    </template>
-                    </Carousel> -->
+                    </div>
                 </div>
-                </div>
+            </div>
 
                 <div v-if="!campStore.groups_count" class="m-5 space-y-10 flex justify-center">Camps not available</div>
             </div>
@@ -773,6 +797,7 @@
         selected_location_id: '',
         tempGroups: [],
         checkout: null,
+        accordionOpen: [],
         stripe_error: null,
         coupons: {
           id: null,
@@ -1246,6 +1271,49 @@
 
             this.next(this.topicSelected(selectedGroup, selectedTopic));
         },
+        getSliderStyle() {
+            if (!this.locationsStore.locations.length || !this.locationsStore.location) {
+                return { left: '4px', width: '0px' };
+            }
+
+            const activeIndex = this.locationsStore.locations.findIndex(
+                location => location.id === this.locationsStore.location.id
+            );
+
+            if (activeIndex === -1) {
+                return { left: '4px', width: '0px' };
+            }
+
+            const totalButtons = this.locationsStore.locations.length;
+            const buttonWidth = `calc(${100 / totalButtons}% - 8px)`;
+            const leftPosition = `calc(${(100 / totalButtons) * activeIndex}% + 4px)`;
+
+            return {
+                left: leftPosition,
+                width: buttonWidth
+            };
+        },
+        toggleAccordion(index) {
+            // Vue 3 compatible way to update reactive array
+            this.accordionOpen[index] = !this.accordionOpen[index];
+        },
+    },
+    mounted() {
+        // Initialize accordion state - first item open by default
+        this.$nextTick(() => {
+            this.accordionOpen = this.campStore.groups.map((_, index) => index === 0);
+        });
+    },
+    watch: {
+        'campStore.groups': {
+            handler(newGroups) {
+                if (newGroups && newGroups.length > 0) {
+                    // Initialize accordion state when groups are loaded
+                    this.accordionOpen = newGroups.map((_, index) => index === 0);
+                }
+            },
+            immediate: true
+        }
     }
 }
 </script>

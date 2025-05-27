@@ -1,6 +1,6 @@
 <template>
 <div class="carousel-container w-full max-w-7xl mx-auto px-4 relative">
-    <Carousel ref="carousel" :wrap-around="false" :breakpoints="breakpoints" @slide-start="checkNavButtons" >
+    <Carousel ref="carousel" :wrap-around="false" :breakpoints="breakpoints" :settings="carouselSettings" @slide-start="checkNavButtons" >
         <Slide v-for="(topic, index) in camps_data" :key="index">
             <div class="relative w-full group m-1 bg-white border shadow-lg rounded-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-1">
                 <!-- Image with overlay gradient -->
@@ -251,6 +251,10 @@ export default defineComponent({
     },
     data() {
         return {
+            carouselSettings: {
+                snapAlign: 'start',
+                wrapAround: false
+            },
             slides: [
                 {
                     image: "https://img-c.udemycdn.com/course/240x135/5170404_d282_9.jpg",
@@ -400,12 +404,18 @@ export default defineComponent({
             breakpoints: {
                 0: {
                     itemsToShow: 1,
+                    snapAlign: 'start',
+                    wrapAround: false
                 },
                 640: {
                     itemsToShow: 2,
+                    snapAlign: 'start',
+                    wrapAround: false
                 },
                 1024: {
                     itemsToShow: 4,
+                    snapAlign: 'start',
+                    wrapAround: false
                 },
             },
         };
@@ -425,11 +435,13 @@ export default defineComponent({
 
 .carousel__viewport {
     perspective: 2000px;
+    justify-content: flex-start !important;
 }
 
 .carousel__track {
     transform-style: preserve-3d;
     gap: 0 !important;
+    justify-content: flex-start !important;
 }
 
 .carousel__slide--sliding {
@@ -488,6 +500,30 @@ export default defineComponent({
     overflow: hidden;
 }
 
+/* Force left alignment for fewer items */
+.carousel__viewport {
+    display: flex !important;
+    justify-content: flex-start !important;
+}
+
+.carousel__track {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+}
+
+/* When there are fewer items, align them to the left */
+@media (min-width: 1024px) {
+    .carousel__track {
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+    }
+
+    .carousel__viewport {
+        justify-content: flex-start !important;
+    }
+}
+
 /* Make cards more compact */
 .space-y-1 > * + * {
     margin-top: 0.15rem;
@@ -520,3 +556,5 @@ export default defineComponent({
     }
 }
 </style>
+
+
