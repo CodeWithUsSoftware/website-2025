@@ -19,6 +19,7 @@ Route::view('/reschedule', 'reschedule');
 Route::view('/sitemap', 'sitemap');
 Route::view('/computer-science-standards/index', 'computer-science-standards/index');
 Route::view('/contact', 'contact-us');
+Route::view('/how-to-videos', 'how_to_videos');
 
 Route::get('student_spotlight', [\App\Http\Controllers\TopicController::class, 'getSpotLight']);
 Route::get('/student-spotlight-video', [\App\Http\Controllers\StudentSpotLightController::class, 'getStudentSpotlightVideos']);
