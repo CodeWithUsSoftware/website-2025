@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-
     <section class="pb-0">
         <div class="relative max-w-full mx-auto ">
             <div class="relative py-10 px-8 overflow-hidden lg:px-16 takeover-panel-topic">
@@ -43,11 +42,11 @@
                 </div>
 
                 <button id="tab-beginners" class="ai-tab-button relative z-10 px-8 py-3 text-sm font-medium rounded-full flex items-center space-x-2 transition-colors duration-200 text-black font-semibold">
-                    <span>AI 101 (Ages 8+)</span>
+                    <span>Intro to AI (Ages 8+)</span>
 
                 </button>
                 <button id="tab-advanced" class="ai-tab-button relative z-10 px-8 py-3 text-sm font-medium rounded-full flex items-center space-x-2 transition-colors duration-200 text-gray-700">
-                    <span>AI - Advanced (Ages 12+)</span>
+                    <span>AI & Data (Ages 12+)</span>
 
                 </button>
             </div>
@@ -331,7 +330,43 @@
                 <img src="/images/ai_course/students_collaborating.jpg" alt="Students collaborating" class="rounded-xl shadow-xl">
             </div>
             <div class="md:w-1/2">
-                <div id="beginners-join" class="tab-join-content">
+                <div id="beginners-join" class="tab-join-content hidden">
+                    <h3 class="text-2xl font-bold mb-6 text-[#4698a7]">Who Can Join?</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#4698a7] mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="text-sm text-gray-600">This course is designed for Elementary and Middle school students (or beginners, ages 7+) eager to AI and its application!</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#4698a7] mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="text-sm text-gray-600">No prior coding experience is required, making it a great starting point for students interested in technology and innovation.</span>
+                        </li>
+                    </ul>
+
+                    <div class="mt-12">
+                        <h3 class="text-2xl font-bold mb-6 text-[#4698a7]">Why Join?</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#4698a7] mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="text-sm text-gray-600">Hands-On Projects – Build real-world applications like chatbots, image recognition models, and more with expert instructors.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#4698a7] mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="text-sm text-gray-600">Collaborative Learning – Work on team-based challenges and problem-solving activities.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="advanced-join" class="tab-join-content">
                     <h3 class="text-2xl font-bold mb-6 text-[#4698a7]">Who Can Join?</h2>
                     <ul class="space-y-4">
                         <li class="flex items-start">
@@ -379,41 +414,7 @@
                     </div>
                 </div>
 
-                <div id="advanced-join" class="tab-join-content hidden">
-                    <h3 class="text-2xl font-bold mb-6 text-[#4698a7]">Who Can Join?</h2>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#4698a7] mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span class="text-sm text-gray-600">This course is designed for Elementary and Middle school students (or beginners, ages 7+) eager to AI and its application!</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#4698a7] mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span class="text-sm text-gray-600">No prior coding experience is required, making it a great starting point for students interested in technology and innovation.</span>
-                        </li>
-                    </ul>
 
-                    <div class="mt-12">
-                        <h3 class="text-2xl font-bold mb-6 text-[#4698a7]">Why Join?</h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#4698a7] mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span class="text-sm text-gray-600">Hands-On Projects – Build real-world applications like chatbots, image recognition models, and more with expert instructors.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#4698a7] mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span class="text-sm text-gray-600">Collaborative Learning – Work on team-based challenges and problem-solving activities.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -424,344 +425,16 @@
     <div class="container mx-auto px-4">
         <div class="mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-[#4698a7] mb-0 pb-0"><span id="content-title">Course Content</span></h2>
-            <div class="text-sm text-gray-600 text-center"><span id="content-subtitle">Monday to Thursday (3 hours/day) for 2 weeks</span></div>
         </div>
         <div class="flex justify-between items-center max-w-4xl mx-auto mb-8">
-            <p class="text-sm text-gray-600"><span id="content-duration">8 days, 24+ hours live instructions</span></p>
+            <p class="text-sm text-gray-600"><span id="content-duration"></span></p>
             <button id="expand-all-btn" class="px-4 py-2 bg-[#4698a7] text-white rounded-lg hover:bg-[#0cc0df] transition-colors duration-200 text-sm font-medium">
                 Expand All
             </button>
         </div>
 
-        <div id="beginners-schedule" class="tab-schedule-content max-w-4xl mx-auto space-y-6">
-            <!-- Day 1 Section -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
-                <div class="px-8 py-6">
-                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="1">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex flex-col">
-                                <h3 class="text-lg font-bold text-gray-800 mb-1">1: Introduction to Python</h3>
-                                <p class="text-sm text-gray-600">Getting started with Python basics</p>
-                            </div>
-                        </div>
-                        <div class="section-toggle">
-                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
-                    @foreach([
-                                'Overview of Python & real-world applications',
-                                'Writing basic scripts: Input/Output',
-                                'Understanding Data Types',
-                                'String manipulation techniques'
-                            ] as $item)
-                            <li class="flex items-start group">
-                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
-                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-sm text-gray-700 leading-relaxed">{{ $item }}</span>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Day 2 Section -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
-                <div class="px-8 py-6">
-                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="2">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex flex-col">
-                                <h3 class="text-lg font-bold text-gray-800 mb-1">2: Core Python Concepts</h3>
-                                <p class="text-sm text-gray-600">Lists, functions and control statements</p>
-                            </div>
-                        </div>
-                        <div class="section-toggle">
-                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
-                            @foreach([
-                                'Lists: indexing, slicing, and list operations',
-                                'Writing functions and using return values',
-                                'If/Else statements, Boolean logic & comparisons',
-                                'Introduction to loops (for/while) for automation',
-                                'Organizing data with Dictionaries'
-                            ] as $item)
-                            <li class="flex items-start group">
-                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
-                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-sm text-gray-700 leading-relaxed">{{ $item }}</span>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3 Section -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
-                <div class="px-8 py-6">
-                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="3">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex flex-col">
-                                <h3 class="text-lg font-bold text-gray-800 mb-1">3: File Handling in Python</h3>
-                                <p class="text-sm text-gray-600">Working with files and automation</p>
-                            </div>
-                        </div>
-                        <div class="section-toggle">
-                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
-                            @foreach([
-                                'Reading and writing files in Python',
-                                'Understanding and avoiding infinite loops',
-                                'Navigating files using the OS module',
-                                'Python scripts from the command line'
-                            ] as $item)
-                            <li class="flex items-start group">
-                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
-                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-sm text-gray-700 leading-relaxed">{{ $item }}</span>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4 Section -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
-                <div class="px-8 py-6">
-                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="4">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex flex-col">
-                                <h3 class="text-lg font-bold text-gray-800 mb-1">4: AI Fundamentals</h3>
-                                <p class="text-sm text-gray-600">Introduction to artificial intelligence concepts</p>
-                            </div>
-                        </div>
-                        <div class="section-toggle">
-                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
-                            @foreach([
-                                'Introduction to AI, machine learning, and real-world applications',
-                                'Understanding how data is used to train AI models',
-                                'Ethics & bias in AI and responsible data science practices'
-                            ] as $item)
-                            <li class="flex items-start group">
-                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
-                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-sm text-gray-700 leading-relaxed">{{ $item }}</span>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5 Section -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
-                <div class="px-8 py-6">
-                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="5">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex flex-col">
-                                <h3 class="text-lg font-bold text-gray-800 mb-1">5: Introduction to Data Analysis</h3>
-                                <p class="text-sm text-gray-600">Working with Pandas and datasets</p>
-                            </div>
-                        </div>
-                        <div class="section-toggle">
-                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
-                    @foreach([
-                                'Exploring datasets with Pandas',
-                                'Basic Numpy operations',
-                                'Using Pandas to read CSV files and perform basic data cleaning',
-                                'Understanding data joins: left, right, inner, outer merges'
-                            ] as $item)
-                            <li class="flex items-start group">
-                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
-                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-sm text-gray-700 leading-relaxed">{{ $item }}</span>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 6 Section -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
-                <div class="px-8 py-6">
-                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="6">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex flex-col">
-                                <h3 class="text-lg font-bold text-gray-800 mb-1">6: Advanced Data Analysis</h3>
-                                <p class="text-sm text-gray-600">Data cleaning and manipulation techniques</p>
-                            </div>
-                        </div>
-                        <div class="section-toggle">
-                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
-                            @foreach([
-                                'Cleaning messy datasets for analysis with Pandas',
-                                'Filtering, sorting, and modifying DataFrames',
-                                'Identifying and handling duplicate or inconsistent data',
-                                'Using lambda functions for efficient operations',
-                                'Handling missing data'
-                            ] as $item)
-                            <li class="flex items-start group">
-                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
-                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-sm text-gray-700 leading-relaxed">{{ $item }}</span>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 7 Section -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
-                <div class="px-8 py-6">
-                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="7">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex flex-col">
-                                <h3 class="text-lg font-bold text-gray-800 mb-1">7: Data Visualization</h3>
-                                <p class="text-sm text-gray-600">Creating charts and visualizing insights</p>
-                            </div>
-                        </div>
-                        <div class="section-toggle">
-                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
-                            <li class="flex items-start group">
-                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
-                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-sm text-gray-700 leading-relaxed">Grouping columns, aggregating data & using Pivot Tables</span>
-                            </li>
-                            <li class="flex items-start group">
-                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
-                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-sm text-gray-700 leading-relaxed">Creating bar charts, line graphs, and pie charts with Matplotlib</span>
-                            </li>
-                            <li class="flex items-start group">
-                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
-                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-sm text-gray-700 leading-relaxed">Customizing and interpreting visualizations for data insights</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 8 Section -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
-                <div class="px-8 py-6">
-                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="8">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex flex-col">
-                                <h3 class="text-lg font-bold text-gray-800 mb-1">8: Final Project</h3>
-                                <p class="text-sm text-gray-600">Applying skills to create a complete project</p>
-                            </div>
-                        </div>
-                        <div class="section-toggle">
-                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
-                            <li class="flex items-start group">
-                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
-                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-sm text-gray-700 leading-relaxed">Applying Python skills to analyze a real-world dataset</span>
-                            </li>
-                            <li class="flex items-start group">
-                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
-                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-sm text-gray-700 leading-relaxed">Creating visualizations to present key insights</span>
-                            </li>
-                            <li class="flex items-start group">
-                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
-                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-sm text-gray-700 leading-relaxed">Writing a summary report or presenting findings to the class</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-
-        <div id="advanced-schedule" class="tab-schedule-content hidden max-w-4xl mx-auto space-y-6">
+        <div id="beginners-schedule" class="tab-schedule-content hidden max-w-4xl mx-auto space-y-6">
             <!-- 1 Section -->
             <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
                 <div class="px-8 py-6">
@@ -1156,6 +829,334 @@
                 </div>
             </div>
         </div>
+
+        <div id="advanced-schedule" class="tab-schedule-content max-w-4xl mx-auto space-y-6">
+            <!-- Day 1 Section -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
+                <div class="px-8 py-6">
+                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="1">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex flex-col">
+                                <h3 class="text-lg font-bold text-gray-800 mb-1">1: Introduction to Python</h3>
+                                <p class="text-sm text-gray-600">Getting started with Python basics</p>
+                            </div>
+                        </div>
+                        <div class="section-toggle">
+                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
+                    @foreach([
+                                'Overview of Python & real-world applications',
+                                'Writing basic scripts: Input/Output',
+                                'Understanding Data Types',
+                                'String manipulation techniques'
+                            ] as $item)
+                            <li class="flex items-start group">
+                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
+                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm text-gray-700 leading-relaxed">{{ $item }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2 Section -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
+                <div class="px-8 py-6">
+                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="2">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex flex-col">
+                                <h3 class="text-lg font-bold text-gray-800 mb-1">2: Core Python Concepts</h3>
+                                <p class="text-sm text-gray-600">Lists, functions and control statements</p>
+                            </div>
+                        </div>
+                        <div class="section-toggle">
+                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
+                            @foreach([
+                                'Lists: indexing, slicing, and list operations',
+                                'Writing functions and using return values',
+                                'If/Else statements, Boolean logic & comparisons',
+                                'Introduction to loops (for/while) for automation',
+                                'Organizing data with Dictionaries'
+                            ] as $item)
+                            <li class="flex items-start group">
+                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
+                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm text-gray-700 leading-relaxed">{{ $item }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 Section -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
+                <div class="px-8 py-6">
+                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="3">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex flex-col">
+                                <h3 class="text-lg font-bold text-gray-800 mb-1">3: File Handling in Python</h3>
+                                <p class="text-sm text-gray-600">Working with files and automation</p>
+                            </div>
+                        </div>
+                        <div class="section-toggle">
+                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
+                            @foreach([
+                                'Reading and writing files in Python',
+                                'Understanding and avoiding infinite loops',
+                                'Navigating files using the OS module',
+                                'Python scripts from the command line'
+                            ] as $item)
+                            <li class="flex items-start group">
+                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
+                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm text-gray-700 leading-relaxed">{{ $item }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Section -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
+                <div class="px-8 py-6">
+                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="4">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex flex-col">
+                                <h3 class="text-lg font-bold text-gray-800 mb-1">4: AI Fundamentals</h3>
+                                <p class="text-sm text-gray-600">Introduction to artificial intelligence concepts</p>
+                            </div>
+                        </div>
+                        <div class="section-toggle">
+                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
+                            @foreach([
+                                'Introduction to AI, machine learning, and real-world applications',
+                                'Understanding how data is used to train AI models',
+                                'Ethics & bias in AI and responsible data science practices'
+                            ] as $item)
+                            <li class="flex items-start group">
+                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
+                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm text-gray-700 leading-relaxed">{{ $item }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 Section -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
+                <div class="px-8 py-6">
+                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="5">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex flex-col">
+                                <h3 class="text-lg font-bold text-gray-800 mb-1">5: Introduction to Data Analysis</h3>
+                                <p class="text-sm text-gray-600">Working with Pandas and datasets</p>
+                            </div>
+                        </div>
+                        <div class="section-toggle">
+                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
+                    @foreach([
+                                'Exploring datasets with Pandas',
+                                'Basic Numpy operations',
+                                'Using Pandas to read CSV files and perform basic data cleaning',
+                                'Understanding data joins: left, right, inner, outer merges'
+                            ] as $item)
+                            <li class="flex items-start group">
+                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
+                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm text-gray-700 leading-relaxed">{{ $item }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6 Section -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
+                <div class="px-8 py-6">
+                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="6">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex flex-col">
+                                <h3 class="text-lg font-bold text-gray-800 mb-1">6: Advanced Data Analysis</h3>
+                                <p class="text-sm text-gray-600">Data cleaning and manipulation techniques</p>
+                            </div>
+                        </div>
+                        <div class="section-toggle">
+                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
+                            @foreach([
+                                'Cleaning messy datasets for analysis with Pandas',
+                                'Filtering, sorting, and modifying DataFrames',
+                                'Identifying and handling duplicate or inconsistent data',
+                                'Using lambda functions for efficient operations',
+                                'Handling missing data'
+                            ] as $item)
+                            <li class="flex items-start group">
+                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
+                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm text-gray-700 leading-relaxed">{{ $item }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7 Section -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
+                <div class="px-8 py-6">
+                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="7">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex flex-col">
+                                <h3 class="text-lg font-bold text-gray-800 mb-1">7: Data Visualization</h3>
+                                <p class="text-sm text-gray-600">Creating charts and visualizing insights</p>
+                            </div>
+                        </div>
+                        <div class="section-toggle">
+                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
+                            <li class="flex items-start group">
+                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
+                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm text-gray-700 leading-relaxed">Grouping columns, aggregating data & using Pivot Tables</span>
+                            </li>
+                            <li class="flex items-start group">
+                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
+                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm text-gray-700 leading-relaxed">Creating bar charts, line graphs, and pie charts with Matplotlib</span>
+                            </li>
+                            <li class="flex items-start group">
+                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
+                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm text-gray-700 leading-relaxed">Customizing and interpreting visualizations for data insights</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8 Section -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 section-item">
+                <div class="px-8 py-6">
+                    <div class="flex items-center justify-between mb-4 cursor-pointer section-header" data-section="8">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex flex-col">
+                                <h3 class="text-lg font-bold text-gray-800 mb-1">8: Final Project</h3>
+                                <p class="text-sm text-gray-600">Applying skills to create a complete project</p>
+                            </div>
+                        </div>
+                        <div class="section-toggle">
+                            <svg class="w-6 h-6 text-[#4698a7] transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="section-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul class="space-y-4 px-8 pb-6 pt-2 bg-gray-50/50 rounded-lg">
+                            <li class="flex items-start group">
+                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
+                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm text-gray-700 leading-relaxed">Applying Python skills to analyze a real-world dataset</span>
+                            </li>
+                            <li class="flex items-start group">
+                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
+                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm text-gray-700 leading-relaxed">Creating visualizations to present key insights</span>
+                            </li>
+                            <li class="flex items-start group">
+                                <div class="w-5 h-5 bg-[#4698a7]/20 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-[#4698a7]/30 transition-colors duration-200">
+                                    <svg class="h-3 w-3 text-[#4698a7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-sm text-gray-700 leading-relaxed">Writing a summary report or presenting findings to the class</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
     </div>
 </div>
 
@@ -1193,7 +1194,7 @@
                                     <span style="color: #4698a7!important;">
                                         {{-- {!! trans('pricing.ai_seasonal_camps_prices') !!} --}}
                                         ${!! trans('pricing.ai_seasonal_camps_discounted_price') !!}</span> <small class="text-sm">
-                                            /month </small>
+                                            /week </small>
                                         <span class="relative">
                                         ${!! trans('pricing.ai_seasonal_camps_full_price') !!}
                                             <span class="absolute right-0 border border-danger left-0 top-5"></span>
@@ -1570,18 +1571,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 350);
 
-        // Update content titles based on tab
-        if (contentTitle && contentSubtitle && contentDuration) {
-            if (targetTab === 'beginners') {
-                contentTitle.textContent = 'Course Content';
-                contentSubtitle.textContent = 'Monday to Thursday (3 hours/day) for 2 weeks';
-                contentDuration.textContent = '8 days, 24+ hours live instructions';
-            } else {
-                contentTitle.textContent = 'Course Content';
-                contentSubtitle.textContent = 'Monday to Friday (2 hours/day) for 2 weeks';
-                contentDuration.textContent = '10 days, 20+ hours live instructions';
-            }
-        }
 
         // Update accordion button state when switching tabs
         setTimeout(() => {
@@ -1591,9 +1580,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize slider on page load
     window.addEventListener('load', () => {
+        console.log('Page loaded, initializing first tab');
         const defaultButton = document.getElementById('tab-beginners');
         if (defaultButton) {
             updateSlider(defaultButton);
+            // Initialize the first tab content
+            switchTab('beginners');
         }
     });
 
@@ -1704,4 +1696,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize button state
     updateExpandAllButton();
 });
+
+// Add click event listeners to tab buttons
+tabButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Tab clicked:', this.id);
+        const targetTab = this.id.replace('tab-', '');
+        switchTab(targetTab);
+    });
+});
+
+// Initialize first tab immediately after DOM is ready
+console.log('Initializing first tab on DOM ready');
+const initialButton = document.getElementById('tab-beginners');
+if (initialButton) {
+    updateSlider(initialButton);
+    switchTab('beginners');
+}
 </script>

@@ -9,8 +9,9 @@
             <div class="relative max-w-full mx-auto ">
                 <div class="relative py-10 px-8 overflow-hidden lg:px-16 page-banner-topic">
                     <div class="absolute inset-0  mix-blend-multiply">
-                        <img src="https://wbcomdesigns.com/wp-content/uploads/2017/01/blog-post-inspiration-for-WordPress.jpg"
-                            alt="" class="w-full h-auto object-cover" />
+                        {{-- <img src="https://wbcomdesigns.com/wp-content/uploads/2017/01/blog-post-inspiration-for-WordPress.jpg"
+                            alt="" class="w-full h-auto object-cover" /> --}}
+                        <img src="/images/blog-banner.jpg" alt="" class="w-full h-auto object-cover" />
                     </div>
                     {{-- <div class="absolute inset-0 mix-blend-multiply">
                         <img v-if="image_overlay" :src="image_overlay" alt="" class="w-full h-auto object-cover" />
