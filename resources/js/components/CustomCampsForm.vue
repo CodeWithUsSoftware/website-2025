@@ -47,9 +47,9 @@
       </div>
 
       <div class="md:col-span-2 text-center">
-        <button type="submit" :disabled="loader.buttonLoader" class="w-full md:w-80 shadow-camps inline-flex items-center justify-center px-4 py-2 text-sm border border-camps rounded-full text-white bg-camps hover:bg-camps-darker-1 focus:outline-none">
+        <button type="submit"  class="w-full md:w-80 shadow-camps inline-flex items-center justify-center px-4 py-2 text-sm border border-camps rounded-full text-white bg-camps hover:bg-camps-darker-1 focus:outline-none">
           <span>Send</span>
-          <Loader v-if="loader.buttonLoader" variants="animate-spin" />
+          <!-- <Loader  variants="animate-spin" /> -->
         </button>
       </div>
 
@@ -57,6 +57,8 @@
   </div>
   </div>
 </form>
+<loader></loader>
+<Notification></Notification>
 </template>
 <script>
 import recaptcha from "../../../mixins/recaptcha";
