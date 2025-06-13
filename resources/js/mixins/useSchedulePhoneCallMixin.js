@@ -210,7 +210,7 @@ export default {
       this.error = ''
       axios.post('/web/bookPhoneCallSlotByUser', this.phone_call)
         .then(() => {
-          this.step = 5
+          this.next();
         }).catch(error => {
           this.error = true
           this.errorMsg = error.response.data.message
