@@ -4,6 +4,7 @@ import _ from "lodash"
 import axios from "axios"
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
 axios.defaults.baseURL = "https://portal.codewithus.com/api"
+// axios.defaults.baseURL = "http://localhost:3000/api"
 
 window.axios = axios // optional: assign it to window for global use
 window._ = _;
@@ -15,6 +16,7 @@ import Notification from "./components/Notification.vue";
 import Loader from "./components/Loader.vue";
 import VueTelInput from "vue3-tel-input";
 import TrialForm from "./components/TrialForm.vue";
+import TrialFormMobile from "./components/TrialFormMobile.vue";
 import MonthlySubscriptionForm from "./components/MonthlySubscriptionForm.vue";
 import TrialFormForSchools from "./components/TrialFormForSchools.vue";
 import SchoolProgramForm from "./components/SchoolProgramForm.vue";
@@ -75,6 +77,7 @@ const app = createApp({
 app.component("Notification", Notification);
 app.component("loader", Loader);
 app.component("trial-form", TrialForm);
+app.component("trial-form-mobile", TrialFormMobile);
 app.component("monthly-subscription-form", MonthlySubscriptionForm);
 app.component("trial-form-for-schools", TrialFormForSchools);
 app.component("school-program-form", SchoolProgramForm);

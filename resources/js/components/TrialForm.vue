@@ -385,9 +385,8 @@
                 <p v-if="stripe_error" class="capitalize text-danger">Error : {{stripe_error}}</p>
               </div> -->
 
-                <div id="checkout">
-                    <!-- Checkout will insert the payment form here -->
-                </div>
+                <!-- <div id="checkout">
+                </div> -->
 
               <!-- <div class="flex justify-between pt-2">
                 <h6 class="font-bold">Total Amount</h6>
@@ -439,26 +438,6 @@ import moment from "moment";
 //let stripe = Stripe("pk_test_516dVSfF9uOieGMSt1f9SDZ684fKcYd7hocVBUMs4yyJbikYit4S3GKus0Jw8QYfYzyNOimuPDoLBPq1KgVkSkzW900USvWxqzE");
 let stripe = Stripe("pk_live_516dVSfF9uOieGMSt6Qeg8rOw4qbphnczqA98pthtHhcOAfGtCLeqFCbTi7kNzq1q8dfFD5diFn6pl97SxMw4VNCM00SHImDA69");
 
-let elements = stripe.elements();
-let cardElement = undefined;
-let form = undefined;
-let style = {
-    base: {
-        color: "#32325d",
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSmoothing: "antialiased",
-        margin: "5px",
-        fontSize: "16px",
-        "::placeholder": {
-            color: "#aab7c4"
-        }
-    },
-    invalid: {
-        color: "#fa755a",
-        iconColor: "#fa755a"
-    }
-};
-
 export default  {
   components : { VueCal },
     setup(){
@@ -505,6 +484,7 @@ export default  {
   data() {
     return {
         stripe_error : '',
+        checkout: null,
     //   homework: false,
       landing_page: false,
       referral_code: false,
@@ -864,7 +844,7 @@ export default  {
                 mode:'trial',
             });
 
-            //console.log(response.data.error);
+            console.log(response.data.error);
             if (response.data.error) {
                 this.stripe_error = response.data.error;
             }
