@@ -385,8 +385,8 @@
                 <p v-if="stripe_error" class="capitalize text-danger">Error : {{stripe_error}}</p>
               </div> -->
 
-                <!-- <div id="checkout">
-                </div> -->
+                <div id="checkout">
+                </div>
 
               <!-- <div class="flex justify-between pt-2">
                 <h6 class="font-bold">Total Amount</h6>
