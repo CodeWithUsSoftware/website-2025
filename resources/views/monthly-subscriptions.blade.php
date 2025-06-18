@@ -21,11 +21,17 @@
 @section('content')
     <div>
         <section id="buy-classes" class="py-10 md:py-20 max-w-6xl mx-auto">
-            <monthly-subscription-form private_classes_discount_price="{{trans('coding_classes.private_classes_discount_price')}}" group_classes_discount_price="{{trans('coding_classes.group_classes_discount_price')}}"
-            :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"//>
+            <div id="desktop-form">
+                <monthly-subscription-form private_classes_discount_price="{{trans('coding_classes.private_classes_discount_price')}}" group_classes_discount_price="{{trans('coding_classes.group_classes_discount_price')}}"
+                :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"//>
+            </div>
+            <div id="mobile-form">
+                <monthly-subscription-form-mobile private_classes_discount_price="{{trans('coding_classes.private_classes_discount_price')}}" group_classes_discount_price="{{trans('coding_classes.group_classes_discount_price')}}"
+                :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"//>
+            </div>
         </section>
 
-        <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20 hidden md:block">
             <div class="max-w-6xl mx-auto px-2">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 flex items-center justify-center">
                     <div class="md:order-2"> <img loading="lazy" class="rounded" src="/images/trial_form/flying.png"
@@ -111,7 +117,7 @@
             </div>
         </section>
 
-        <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20 hidden md:block">
             <div class="max-w-6xl mx-auto px-2">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 flex items-center justify-center">
                     <div> <img loading="lazy" class="rounded object-cover" src="/images/trial_form/student_1.png"
@@ -124,7 +130,7 @@
             </div>
         </section>
 
-        <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20 hidden md:block">
             <div class="max-w-6xl mx-auto px-2">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 flex items-center justify-center">
                     <div class="md:order-2"> <img loading="lazy" class="rounded" src="/images/trial_form/student_2.png"
@@ -137,7 +143,7 @@
             </div>
         </section>
 
-        <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20 hidden md:block">
             <div class="max-w-6xl mx-auto px-2">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 flex items-center justify-center">
                     <div> <img loading="lazy" class="rounded" src="/images/trial_form/student_3.png" alt=""></div>
@@ -149,7 +155,7 @@
             </div>
         </section>
 
-        <section class="py-10 md:py-20 max-w-6xl mx-auto">
+        <section class="py-10 md:py-20 max-w-6xl mx-auto hidden md:block">
             <h4 class="text-primary text-center md:text-left md:pl-36">{{ trans('monthaly_subs.did_you_know') }}</h4>
             <div
                 class="md:flex md:items-center md:justify-center md:space-x-10 md:max-w-3xl md:mx-auto bg-white m-2 p-2 text-center">
@@ -175,7 +181,7 @@
             </div>
         </section>
 
-        <section class="max-w-6xl mx-auto text-center">
+        <section class="max-w-6xl mx-auto text-center hidden md:block">
             <a href="#buy-classes"
                 class="hover:text-white shadow-primary space-x-2 inline-flex items-center px-4 py-2 text-sm border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none ">
                 <span>Buy and Schedule Classes</span>
@@ -186,7 +192,7 @@
             </a>
         </section>
 
-        <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20 hidden md:block">
             @include('layouts.TrustedBySiliconValley')
 
         </section>
@@ -195,4 +201,49 @@
 
         @include('layouts.FooterIcons')
     </div>
+@endsection
+@section('footer_scripts')
+<script>
+    (function() {
+        function showCorrectForm() {
+            const isMobile = window.innerWidth < 768;
+            console.log('Is Mobile:', isMobile);
+
+            const desktopForm = document.getElementById('desktop-form');
+            const mobileForm = document.getElementById('mobile-form');
+
+            console.log('Desktop form exists:', !!desktopForm);
+            console.log('Mobile form exists:', !!mobileForm);
+
+            if (isMobile) {
+                if (desktopForm) {
+                    console.log('Removing desktop form');
+                    desktopForm.remove();
+                }
+            } else {
+                if (mobileForm) {
+                    console.log('Removing mobile form');
+                    mobileForm.remove();
+                }
+            }
+
+            // Check what's left
+            setTimeout(() => {
+                console.log('After removal - Desktop form:', !!document.getElementById('desktop-form'));
+                console.log('After removal - Mobile form:', !!document.getElementById('mobile-form'));
+                console.log('Checkout div exists:', !!document.getElementById('checkout'));
+            }, 50);
+        }
+
+        function initForms() {
+            setTimeout(showCorrectForm, 100);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initForms);
+        } else {
+            initForms();
+        }
+    })();
+</script>
 @endsection

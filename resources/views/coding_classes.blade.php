@@ -224,28 +224,43 @@
 <script>
     (function() {
         function showCorrectForm() {
-            const isMobile = window.innerWidth < 768; // md breakpoint
+            const isMobile = window.innerWidth < 768;
+            console.log('Is Mobile:', isMobile);
+
             const desktopForm = document.getElementById('desktop-form');
             const mobileForm = document.getElementById('mobile-form');
 
+            console.log('Desktop form exists:', !!desktopForm);
+            console.log('Mobile form exists:', !!mobileForm);
+
             if (isMobile) {
-                // Completely remove desktop form from DOM
                 if (desktopForm) {
+                    console.log('Removing desktop form');
                     desktopForm.remove();
                 }
             } else {
-                // Completely remove mobile form from DOM
                 if (mobileForm) {
+                    console.log('Removing mobile form');
                     mobileForm.remove();
                 }
             }
+
+            // Check what's left
+            setTimeout(() => {
+                console.log('After removal - Desktop form:', !!document.getElementById('desktop-form'));
+                console.log('After removal - Mobile form:', !!document.getElementById('mobile-form'));
+                console.log('Checkout div exists:', !!document.getElementById('checkout'));
+            }, 50);
         }
 
-        // Run immediately when DOM is ready
+        function initForms() {
+            setTimeout(showCorrectForm, 100);
+        }
+
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', showCorrectForm);
+            document.addEventListener('DOMContentLoaded', initForms);
         } else {
-            showCorrectForm();
+            initForms();
         }
     })();
 </script>
