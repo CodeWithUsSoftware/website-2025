@@ -15,9 +15,13 @@
         </section> --}}
 
         <section class="py-10 md:py-20">
-            <Reschedule schedule_a_makeup_class_heading="{{ trans('reschedule.schedule_a_makeup_class_heading') }}" schedule_a_makeup_class_text="{{ trans('reschedule.schedule_a_makeup_class_text') }}"/>
+            <div class="hidden md:block">
+                <Reschedule schedule_a_makeup_class_heading="{{ trans('reschedule.schedule_a_makeup_class_heading') }}" schedule_a_makeup_class_text="{{ trans('reschedule.schedule_a_makeup_class_text') }}"/>
+            </div>
+            <div class="block md:hidden">
+                <reschedule-mobile schedule_a_makeup_class_heading="{{ trans('reschedule.schedule_a_makeup_class_heading') }}" schedule_a_makeup_class_text="{{ trans('reschedule.schedule_a_makeup_class_text') }}"/>
+            </div>
         </section>
-
         <section>
             @include('layouts.FooterIcons')
         </section>

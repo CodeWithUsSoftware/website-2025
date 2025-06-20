@@ -11,18 +11,18 @@
 @section('title', 'School Program | Code With Us')
 @section('content')
     <div>
-        <section class="pb-0">
+        <section class="pb-0 hidden md:block">
             <img src="/images/school_programs/school_program.jpg" alt="" class="w-full h-auto" />
         </section>
 
-        <section class="lg:py-10 md:py-10" style="margin-top:5%;">
+        <section class="lg:py-10 md:py-10 hidden md:block" style="margin-top:5%;">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 text-center space-y-3">
                 <h3>{{ trans('school_program.school_program_with_us') }}</h3>
                 <p class="text-md">{!! trans('school_program.school_program_with_us_details') !!}</p>
             </div>
         </section>
 
-        <section class="mb-10">
+        <section class="mb-10 hidden md:block">
             <div class="items-center justify-center text-center py-3 pt-10 text-sm">
                 <div>
                     <a href="/computer-science-standards/united-states">
@@ -45,7 +45,7 @@
         </section>
         {{-- Owl Carousel --}}
         <section>
-            <div class="max-w-5xl mx-auto">
+            <div class="max-w-5xl mx-auto  hidden md:block">
                 <div class="mb-10">
                     <h3 class="text-center">{{ trans('schools.most_popular_coding') }}</h3>
                 </div>
@@ -104,7 +104,7 @@
             </div>
         </section>
 
-        <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20 hidden md:block">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 text-center">
                 <h3 class="text-black-lighter-1">{{ trans('schools.school_programs_comparison_chart') }}</h3>
             </div>
@@ -570,14 +570,23 @@
         </section>
 
         <section class="py-10 md:py-20 max-w-5xl mx-auto" id="trial_form">
-            <trial-form-for-schools free_session_email="{{ trans('free_session.email') }}"
+            <div class="hidden md:block">
+                <trial-form-for-schools free_session_email="{{ trans('free_session.email') }}"
                 technology_requirements="{{ trans('school_free_session.technology_requirements') }}"
                 phone_number="{{ trans('free_session.phone_number') }}"
                 :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"/>
+            </div>
+
+            <div class="block md:hidden">
+                <trial-form-for-schools-mobile free_session_email="{{ trans('free_session.email') }}"
+                technology_requirements="{{ trans('school_free_session.technology_requirements') }}"
+                phone_number="{{ trans('free_session.phone_number') }}"
+                :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"/>
+            </div>
         </section>
 
         <section>
-            <div class="items-center justify-center text-center py-3 pt-10 text-sm">
+            <div class="items-center justify-center text-center py-3 pt-10 text-sm  hidden md:block">
                 <div>
                     <a href="https://calendly.com/info-cwu" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-primary mx-auto" fill="none"
@@ -598,13 +607,13 @@
             </div>
         </section>
 
-        <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20  hidden md:block">
             <school-program-form
                 send_us_your_school_program_details="{{ trans('school_program.send_us_your_school_program_details') }}"
                 fill_school_program_form="{{ trans('school_program.fill_school_program_form') }}" />
         </section>
 
-        <section class="py-10" id="faqs">
+        <section class="py-10  hidden md:block" id="faqs">
             <div class="px-3 md:px-0">
                 <div class="bg-white p-5 shadow md:max-w-5xl md:mx-auto rounded-xl space-y-2">
                     <div class="bg-primary p-5 rounded-lg">

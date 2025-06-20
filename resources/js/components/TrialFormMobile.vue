@@ -437,15 +437,21 @@
                                     </div>
 
                                     <div class="space-y-3">
+                                        {{ registration.student }}
                                         <select
                                             v-model="registration.student"
                                             @change="handleStudentSelection"
                                             required
                                             class="form-select"
                                         >
-                                            <option value="" disabled>
-                                                Select a student
-                                            </option>
+                                            <option
+    v-if="registration.student"
+    :value="{ id: '' }"
+    disabled
+    selected
+  >
+    Select an existing student or add new
+  </option>
                                             <option
                                                 v-for="student in existingStudents"
                                                 :key="student.id"
