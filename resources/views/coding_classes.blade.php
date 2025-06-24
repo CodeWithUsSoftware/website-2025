@@ -223,40 +223,98 @@
 @section('footer_scripts')
 <script>
     (function() {
-        function showCorrectForm() {
-            const isMobile = window.innerWidth < 768;
-            console.log('Is Mobile:', isMobile);
+        'use strict';
 
+        // Store form templates for recreation
+        let desktopFormHTML = '';
+        let mobileFormHTML = '';
+        let formContainer = null;
+
+        // Immediate cleanup to prevent ID conflicts
+        function immediateCleanup() {
+            const isMobile = window.innerWidth < 768;
             const desktopForm = document.getElementById('desktop-form');
             const mobileForm = document.getElementById('mobile-form');
 
-            console.log('Desktop form exists:', !!desktopForm);
-            console.log('Mobile form exists:', !!mobileForm);
+            if (isMobile && desktopForm) {
+                desktopForm.remove();
+            } else if (!isMobile && mobileForm) {
+                mobileForm.remove();
+            }
+        }
 
-            if (isMobile) {
-                if (desktopForm) {
-                    console.log('Removing desktop form');
-                    desktopForm.remove();
-                }
-            } else {
-                if (mobileForm) {
-                    console.log('Removing mobile form');
-                    mobileForm.remove();
+        function storeFormTemplates() {
+            const desktopForm = document.getElementById('desktop-form');
+            const mobileForm = document.getElementById('mobile-form');
+
+            if (desktopForm) {
+                desktopFormHTML = desktopForm.outerHTML;
+                formContainer = desktopForm.parentElement;
+            }
+            if (mobileForm) {
+                mobileFormHTML = mobileForm.outerHTML;
+                if (!formContainer) {
+                    formContainer = mobileForm.parentElement;
                 }
             }
-
-            // Check what's left
-            setTimeout(() => {
-                console.log('After removal - Desktop form:', !!document.getElementById('desktop-form'));
-                console.log('After removal - Mobile form:', !!document.getElementById('mobile-form'));
-                console.log('Checkout div exists:', !!document.getElementById('checkout'));
-            }, 50);
         }
 
+        function updateFormVisibility() {
+            const isMobile = window.innerWidth < 768;
+            const desktopForm = document.getElementById('desktop-form');
+            const mobileForm = document.getElementById('mobile-form');
+
+            if (isMobile) {
+                // Remove desktop form if it exists
+                if (desktopForm) {
+                    desktopForm.remove();
+                }
+                // Create mobile form if it doesn't exist
+                if (!mobileForm && mobileFormHTML && formContainer) {
+                    formContainer.insertAdjacentHTML('beforeend', mobileFormHTML);
+                    // Give Vue a moment to initialize the new component
+                    setTimeout(() => {
+                        if (window.Vue && window.Vue.nextTick) {
+                            window.Vue.nextTick();
+                        }
+                    }, 50);
+                }
+            } else {
+                // Remove mobile form if it exists
+                if (mobileForm) {
+                    mobileForm.remove();
+                }
+                // Create desktop form if it doesn't exist
+                if (!desktopForm && desktopFormHTML && formContainer) {
+                    formContainer.insertAdjacentHTML('beforeend', desktopFormHTML);
+                    // Give Vue a moment to initialize the new component
+                    setTimeout(() => {
+                        if (window.Vue && window.Vue.nextTick) {
+                            window.Vue.nextTick();
+                        }
+                    }, 50);
+                }
+            }
+        }
+
+        // Handle resize events efficiently
+        let resizeTimeout;
+        function handleResize() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(updateFormVisibility, 100);
+        }
+
+        // Execute immediate cleanup first
+        immediateCleanup();
+
+        // Initial setup
         function initForms() {
-            setTimeout(showCorrectForm, 100);
+            storeFormTemplates();
+            updateFormVisibility();
+            window.addEventListener('resize', handleResize);
         }
 
+        // Execute when DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initForms);
         } else {

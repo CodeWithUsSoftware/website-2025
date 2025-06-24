@@ -96,7 +96,9 @@
                         <!-- Step 1: Class Options -->
                         <section v-if="step === 1">
                             <div class="text-center mb-3">
-                                <h3 class="text-base font-medium text-gray-900 mb-1">
+                                <h3
+                                    class="text-base font-medium text-gray-900 mb-1"
+                                >
                                     Schedule a Trial Class!
                                 </h3>
                                 <p class="text-sm text-gray-600">
@@ -112,7 +114,11 @@
                                     </label>
                                     <select
                                         v-model="registration.topic_id"
-                                        @change="handleTopicSelection(registration.topic_id)"
+                                        @change="
+                                            handleTopicSelection(
+                                                registration.topic_id
+                                            )
+                                        "
                                         required
                                         class="form-select"
                                     >
@@ -124,10 +130,18 @@
                                             :key="topic.id"
                                             :value="topic.id"
                                         >
-                                            {{ topic.name !== 'JavaScript' ? topic.name : 'Web Design' }}
+                                            {{
+                                                topic.name !== "JavaScript"
+                                                    ? topic.name
+                                                    : "Web Design"
+                                            }}
                                         </option>
                                     </select>
-                                    <small class="text-red-500 text-sm" v-if="error.errors.topic_id">{{error.errors.topic_id}}</small>
+                                    <small
+                                        class="text-red-500 text-sm"
+                                        v-if="error.errors.topic_id"
+                                        >{{ error.errors.topic_id }}</small
+                                    >
                                 </div>
                             </div>
 
@@ -145,13 +159,28 @@
                         <!-- Step 2: Date & Time Selection -->
                         <section v-if="step === 2">
                             <div class="text-center mb-3">
-                                <h3 class="text-base font-medium text-gray-900 mb-1">
+                                <h3
+                                    class="text-base font-medium text-gray-900 mb-1"
+                                >
                                     Select Date & Time
                                 </h3>
-                                <p class="text-red-500 text-xs" v-if="registration.topic_id">
+                                <p
+                                    class="text-red-500 text-xs"
+                                    v-if="registration.topic_id"
+                                >
                                     Please Select any date starting from
-                                    {{filters.date_format(new Date().addDays(5).format())}}
-                                    to {{filters.date_format(new Date().addDays(30).format())}} only!
+                                    {{
+                                        filters.date_format(
+                                            new Date().addDays(5).format()
+                                        )
+                                    }}
+                                    to
+                                    {{
+                                        filters.date_format(
+                                            new Date().addDays(30).format()
+                                        )
+                                    }}
+                                    only!
                                 </p>
                             </div>
 
@@ -164,34 +193,72 @@
                                         @ready="ready"
                                         :time="false"
                                         active-view="month"
-                                        :disable-views="['years', 'year', 'week', 'day']"
+                                        :disable-views="[
+                                            'years',
+                                            'year',
+                                            'week',
+                                            'day',
+                                        ]"
                                         hide-view-selector
                                         xsmall
-                                        :selected-date="registration.selected_date_raw"
+                                        :selected-date="
+                                            registration.selected_date_raw
+                                        "
                                         @cell-focus="dateClicked"
                                         :disable-days="actualDays"
                                     />
                                 </div>
 
                                 <!-- Time Slots -->
-                                <div v-if="registration.selected_date" class="space-y-3">
+                                <div
+                                    v-if="registration.selected_date"
+                                    class="space-y-3"
+                                >
                                     <div class="text-center">
-                                        <h4 class="text-blue-500 font-medium text-sm">
-                                            {{ filters.day_date(registration.selected_date_raw) }}
-                                            ({{ filters.format_time_zone(timezone) }})
+                                        <h4
+                                            class="text-blue-500 font-medium text-sm"
+                                        >
+                                            {{
+                                                filters.day_date(
+                                                    registration.selected_date_raw
+                                                )
+                                            }}
+                                            ({{
+                                                filters.format_time_zone(
+                                                    timezone
+                                                )
+                                            }})
                                         </h4>
                                     </div>
 
-                                    <div class="space-y-2 max-h-40 overflow-y-auto">
-                                        <template v-for="(slot, index) in available_time_slots" :key="index">
-                                            <div v-if="registration.selected_date && slot">
+                                    <div
+                                        class="space-y-2 max-h-40 overflow-y-auto"
+                                    >
+                                        <template
+                                            v-for="(
+                                                slot, index
+                                            ) in available_time_slots"
+                                            :key="index"
+                                        >
+                                            <div
+                                                v-if="
+                                                    registration.selected_date &&
+                                                    slot
+                                                "
+                                            >
                                                 <button
-                                                    @click="selectClassHandler(slot)"
+                                                    @click="
+                                                        selectClassHandler(slot)
+                                                    "
                                                     type="button"
                                                     class="w-full px-3 py-2.5 rounded-lg font-medium transition-colors text-sm"
                                                     :class="
-                                                        registration.slot.slot === slot.slot &&
-                                                        registration.slot.teacher.id === slot.teacher.id
+                                                        registration.slot
+                                                            .slot ===
+                                                            slot.slot &&
+                                                        registration.slot
+                                                            .teacher.id ===
+                                                            slot.teacher.id
                                                             ? 'bg-blue-500 text-white border-2 border-blue-500'
                                                             : 'bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100'
                                                     "
@@ -202,15 +269,28 @@
                                         </template>
                                     </div>
 
-                                    <div v-if="loader" class="flex justify-center py-8">
-                                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                                    <div
+                                        v-if="loader"
+                                        class="flex justify-center py-8"
+                                    >
+                                        <div
+                                            class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"
+                                        ></div>
                                     </div>
-                                    <div v-else-if="!available_time_slots" class="text-center py-6">
-                                        <p class="text-red-500 text-sm" v-html="notification"></p>
+                                    <div
+                                        v-else-if="!available_time_slots"
+                                        class="text-center py-6"
+                                    >
+                                        <p
+                                            class="text-red-500 text-sm"
+                                            v-html="notification"
+                                        ></p>
                                     </div>
                                 </div>
                                 <div v-else class="text-center py-4">
-                                    <p class="text-gray-500 text-sm">Select a date to view available times</p>
+                                    <p class="text-gray-500 text-sm">
+                                        Select a date to view available times
+                                    </p>
                                 </div>
                             </div>
 
@@ -223,8 +303,14 @@
                                     Next
                                 </button>
                                 <div class="text-center text-xs text-gray-600">
-                                    <p>Don't see something that fits your schedule?</p>
-                                    <a :href="'/contact'" class="text-blue-500 underline font-medium">
+                                    <p>
+                                        Don't see something that fits your
+                                        schedule?
+                                    </p>
+                                    <a
+                                        :href="'/contact'"
+                                        class="text-blue-500 underline font-medium"
+                                    >
                                         Send a custom request to the team
                                     </a>
                                 </div>
@@ -234,8 +320,13 @@
                         <!-- Step 3: School Information -->
                         <section v-if="step === 3">
                             <div class="text-center mb-3">
-                                <h3 class="text-base font-medium text-gray-900 mb-1">
-                                    <span class="inline-block bg-blue-500 text-white px-2 py-1 rounded text-xs font-medium mr-2">School</span>
+                                <h3
+                                    class="text-base font-medium text-gray-900 mb-1"
+                                >
+                                    <span
+                                        class="inline-block bg-blue-500 text-white px-2 py-1 rounded text-xs font-medium mr-2"
+                                        >School</span
+                                    >
                                     Information
                                 </h3>
                                 <p class="text-sm text-gray-600">
@@ -259,11 +350,17 @@
                                         @country-changed="onPhoneNumberEnter"
                                         v-model="phone"
                                         :autoDefaultCountry="true"
-                                        :defaultCountry="countries.countries.character_code"
+                                        :defaultCountry="
+                                            countries.countries.character_code
+                                        "
                                         required
                                         class="w-full"
                                     />
-                                    <small v-if="errors && errors.phone_number" class="text-red-500 text-sm">{{errors.phone_number}}</small>
+                                    <small
+                                        v-if="errors && errors.phone_number"
+                                        class="text-red-500 text-sm"
+                                        >{{ errors.phone_number }}</small
+                                    >
                                 </div>
 
                                 <!-- Email -->
@@ -278,17 +375,23 @@
                                         :placeholder="free_session_email"
                                         v-model="registration.parent.email"
                                         class="form-input"
-                                    >
+                                    />
                                 </div>
 
                                 <!-- Existing Schools or New School -->
-                                <div v-if="existingStudents.length" class="space-y-3">
+                                <div
+                                    v-if="existingStudents.length"
+                                    class="space-y-3"
+                                >
                                     <div>
                                         <h4 class="form-label">
                                             Choose a School
                                             <span class="text-red-500">*</span>
                                         </h4>
-                                        <p class="text-xs text-gray-500 mb-2">Select an existing school below or add new</p>
+                                        <p class="text-xs text-gray-500 mb-2">
+                                            Select an existing school below or
+                                            add new
+                                        </p>
                                     </div>
 
                                     <div class="space-y-2">
@@ -315,8 +418,16 @@
                                             @click="addNewStudentHandler"
                                             class="form-button form-button-add-new"
                                         >
-                                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                                            <svg
+                                                class="w-5 h-5 mr-3"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                                    clip-rule="evenodd"
+                                                />
                                             </svg>
                                             Add a New School
                                         </button>
@@ -324,7 +435,12 @@
                                 </div>
 
                                 <!-- School Name (New School) -->
-                                <div v-if="registration.addNewStudent || !existingStudents.length">
+                                <div
+                                    v-if="
+                                        registration.addNewStudent ||
+                                        !existingStudents.length
+                                    "
+                                >
                                     <label class="form-label">
                                         School Name
                                         <span class="text-red-500">*</span>
@@ -335,7 +451,7 @@
                                         required
                                         class="form-input"
                                         placeholder="Enter school name"
-                                    >
+                                    />
                                 </div>
 
                                 <!-- Grade and Number of Students -->
@@ -351,7 +467,7 @@
                                             required
                                             class="form-input"
                                             placeholder="e.g., 5th"
-                                        >
+                                        />
                                     </div>
 
                                     <div>
@@ -366,7 +482,7 @@
                                             required
                                             class="form-input"
                                             placeholder="25"
-                                        >
+                                        />
                                     </div>
                                 </div>
 
@@ -396,19 +512,27 @@
                                         required
                                         class="form-input"
                                         placeholder="e.g., Google search, referral..."
-                                    >
+                                    />
                                 </div>
                             </div>
 
                             <div class="mt-4">
                                 <button
                                     @click="submitStepTwo"
-                                    :disabled="buttonLoader || !registration.student.full_name"
+                                    :disabled="
+                                        buttonLoader ||
+                                        !registration.student.full_name
+                                    "
                                     class="form-button form-button-primary"
                                 >
                                     <span v-if="!buttonLoader">Next</span>
-                                    <div v-else class="flex items-center justify-center">
-                                        <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                                    <div
+                                        v-else
+                                        class="flex items-center justify-center"
+                                    >
+                                        <div
+                                            class="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"
+                                        ></div>
                                         Processing...
                                     </div>
                                 </button>
@@ -418,7 +542,9 @@
                         <!-- Step 4: Confirmation -->
                         <section v-if="step === 4">
                             <div class="text-center mb-4">
-                                <h3 class="text-base font-medium text-gray-900 mb-1">
+                                <h3
+                                    class="text-base font-medium text-gray-900 mb-1"
+                                >
                                     Confirm Your Booking
                                 </h3>
                                 <p class="text-sm text-gray-600">
@@ -426,58 +552,103 @@
                                 </p>
                             </div>
 
-                            <div class="bg-gray-50 rounded-lg p-4 space-y-3 text-sm mb-6">
+                            <div
+                                class="bg-gray-50 rounded-lg p-4 space-y-3 text-sm mb-6"
+                            >
                                 <div class="flex justify-between">
-                                    <span class="font-medium text-gray-600">Class:</span>
-                                    <span class="text-gray-900">{{filters.day_date(registration.selected_date_raw)}}</span>
+                                    <span class="font-medium text-gray-600"
+                                        >Class:</span
+                                    >
+                                    <span class="text-gray-900">{{
+                                        filters.day_date(
+                                            registration.selected_date_raw
+                                        )
+                                    }}</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <span class="font-medium text-gray-600">Time:</span>
-                                    <span class="text-gray-900">{{ registration.slot.slot_display }} ({{filters.format_time_zone(timezone)}})</span>
+                                    <span class="font-medium text-gray-600"
+                                        >Time:</span
+                                    >
+                                    <span class="text-gray-900"
+                                        >{{
+                                            registration.slot.slot_display
+                                        }}
+                                        ({{
+                                            filters.format_time_zone(timezone)
+                                        }})</span
+                                    >
                                 </div>
                                 <div class="flex justify-between">
-                                    <span class="font-medium text-gray-600">Location:</span>
-                                    <span class="text-gray-900">{{registration.location.location_name}}</span>
+                                    <span class="font-medium text-gray-600"
+                                        >Location:</span
+                                    >
+                                    <span class="text-gray-900">{{
+                                        registration.location.location_name
+                                    }}</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <span class="font-medium text-gray-600">School Name:</span>
-                                    <span class="text-gray-900 capitalize">{{registration.student.full_name}}</span>
+                                    <span class="font-medium text-gray-600"
+                                        >School Name:</span
+                                    >
+                                    <span class="text-gray-900 capitalize">{{
+                                        registration.student.full_name
+                                    }}</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <span class="font-medium text-gray-600">Email:</span>
-                                    <span class="text-gray-900 break-all">{{registration.parent.email}}</span>
+                                    <span class="font-medium text-gray-600"
+                                        >Email:</span
+                                    >
+                                    <span class="text-gray-900 break-all">{{
+                                        registration.parent.email
+                                    }}</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <span class="font-medium text-gray-600">Phone:</span>
-                                    <span class="text-gray-900">{{phoneObject.countryCallingCode}} {{registration.parent.phone_number}}</span>
+                                    <span class="font-medium text-gray-600"
+                                        >Phone:</span
+                                    >
+                                    <span class="text-gray-900"
+                                        >{{ phoneObject.countryCallingCode }}
+                                        {{
+                                            registration.parent.phone_number
+                                        }}</span
+                                    >
                                 </div>
                             </div>
 
                             <!-- Terms and Conditions -->
                             <div class="space-y-3 mb-6">
-                                <label class="flex items-start space-x-2 cursor-pointer">
+                                <label
+                                    class="flex items-start space-x-2 cursor-pointer"
+                                >
                                     <input
                                         required
                                         type="checkbox"
                                         class="mt-1 h-4 w-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500"
-                                    >
+                                    />
                                     <span class="text-xs text-gray-600">
                                         I agree to the
-                                        <a :href="drive_link" class="text-blue-500 hover:underline" target="_blank">
-                                            terms of service, billing and privacy policy
+                                        <a
+                                            :href="drive_link"
+                                            class="text-blue-500 hover:underline"
+                                            target="_blank"
+                                        >
+                                            terms of service, billing and
+                                            privacy policy
                                         </a>
                                         of Code With Us
                                     </span>
                                 </label>
 
-                                <label class="flex items-start space-x-2 cursor-pointer">
+                                <label
+                                    class="flex items-start space-x-2 cursor-pointer"
+                                >
                                     <input
                                         required
                                         type="checkbox"
                                         class="mt-1 h-4 w-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500"
-                                    >
+                                    />
                                     <span class="text-xs text-gray-600">
-                                        {{technology_requirements}}
+                                        {{ technology_requirements }}
                                     </span>
                                 </label>
                             </div>
@@ -488,9 +659,16 @@
                                     :disabled="buttonLoader"
                                     class="form-button form-button-primary"
                                 >
-                                    <span v-if="!buttonLoader">Book A Class</span>
-                                    <div v-else class="flex items-center justify-center">
-                                        <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                                    <span v-if="!buttonLoader"
+                                        >Book A Class</span
+                                    >
+                                    <div
+                                        v-else
+                                        class="flex items-center justify-center"
+                                    >
+                                        <div
+                                            class="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"
+                                        ></div>
                                         Booking...
                                     </div>
                                 </button>
@@ -506,34 +684,61 @@
                         <!-- Step 5: Success -->
                         <section v-if="step === 5">
                             <div class="text-center space-y-4">
-                                <div class="w-12 h-12 mx-auto bg-green-100 rounded-full flex items-center justify-center">
-                                    <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                <div
+                                    class="w-12 h-12 mx-auto bg-green-100 rounded-full flex items-center justify-center"
+                                >
+                                    <svg
+                                        class="w-6 h-6 text-green-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M5 13l4 4L19 7"
+                                        />
                                     </svg>
                                 </div>
-                                <h3 class="text-lg font-semibold text-green-600">
+                                <h3
+                                    class="text-lg font-semibold text-green-600"
+                                >
                                     Thank you!
                                 </h3>
                                 <p class="text-gray-600 text-sm">
-                                    You successfully booked a class, as per details below:
+                                    You successfully booked a class, as per
+                                    details below:
                                 </p>
 
-                                <div class="bg-gray-50 rounded-lg p-3 mt-4 text-left space-y-1.5 text-xs">
+                                <div
+                                    class="bg-gray-50 rounded-lg p-3 mt-4 text-left space-y-1.5 text-xs"
+                                >
                                     <p>
                                         <span class="font-medium">Class:</span>
-                                        {{ filters.day_date(registration.selected_date_raw) }}
+                                        {{
+                                            filters.day_date(
+                                                registration.selected_date_raw
+                                            )
+                                        }}
                                     </p>
                                     <p>
                                         <span class="font-medium">Time:</span>
                                         {{ registration.slot.slot_display }}
                                     </p>
                                     <p>
-                                        <span class="font-medium">Timezone:</span>
+                                        <span class="font-medium"
+                                            >Timezone:</span
+                                        >
                                         {{ filters.format_time_zone(timezone) }}
                                     </p>
                                     <p>
-                                        <span class="font-medium">Location:</span>
-                                        {{ registration.location.location_name }}
+                                        <span class="font-medium"
+                                            >Location:</span
+                                        >
+                                        {{
+                                            registration.location.location_name
+                                        }}
                                     </p>
                                     <p>
                                         <span class="font-medium">School:</span>
@@ -545,7 +750,8 @@
                                     </p>
                                     <p>
                                         <span class="font-medium">Phone:</span>
-                                        {{ phoneObject.countryCallingCode }} {{ registration.parent.phone_number }}
+                                        {{ phoneObject.countryCallingCode }}
+                                        {{ registration.parent.phone_number }}
                                     </p>
                                 </div>
 
@@ -553,7 +759,8 @@
                                     href="https://www.codewithus.com/school-program#freeform"
                                     class="inline-block mt-4 text-blue-500 underline font-medium text-sm"
                                 >
-                                    Please click here to learn how to access your trial class
+                                    Please click here to learn how to access
+                                    your trial class
                                 </a>
                             </div>
                         </section>
@@ -573,332 +780,140 @@ import { useFiltersStore } from "../store/filtersStore";
 import { useTopics } from "../store/topics";
 import { useErrorStore } from "../store/errorsStore";
 import recaptcha from "../../../mixins/recaptcha";
-import VueCal from 'vue-cal'
-import 'vue-cal/dist/vuecal.css'
+import useTrialFormForSchoolMixin from "../mixins/useTrialFormForSchoolMixin";
+import VueCal from "vue-cal";
+import "vue-cal/dist/vuecal.css";
 import moment from "moment";
 
 export default {
-  components: { VueCal },
-  mixins: [recaptcha],
-  setup() {
-    const countries = useCountriesStore()
-    const locations = useLocationsStore()
-    const filters = useFiltersStore()
-    const topics = useTopics()
-    const error = useErrorStore()
-    return {
-      countries, locations, topics, filters, error
-    }
-  },
-  props: ['free_session_email', 'technology_requirements', 'phone_number', 'drive_link'],
-  data() {
-    return {
-      termsAndConditions: false,
-      techRequirements: false,
-      buttonLoader: false,
-      showAddStudentLink: false,
-      slide_animation: 'slide-left',
-      step: 1,
-      existingStudents: [],
-      phone: '',
-      phoneObject: '',
-      registration: {
-        homework: this.homework,
-        landing_page: this.landing_page,
-        referral_code: this.referral_code,
-        isPaymentSuccess: false,
-        selectTaskClassLater: false,
-        slot: '',
-        location: '',
-        location_id: '',
-        topic: '',
-        topic_id: '',
-        addNewStudent: false,
-        selected_date: '',
-        selected_date_raw: '',
-        partner_signup: null,
-        registration_type: 'Free Private Sessions For Schools',
-        class_type: 'private',
-        ad_source: '',
-        expectations: '',
-        parent: '',
-        student: '',
-        grade: '',
-        students: '',
-        notes: '',
-        time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        private_session_plan_id: 'prod_K699XNKkvZd84J',
-        group_session_plan_id: '',
-        private_session_amount: 30,
-        group_session_amount: 0
-      },
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      bindProps: {
-        inputOptions: {
-          required: true,
-          styleClasses: 'form-input',
-          placeholder: this.phone_number
-        }
-      },
-      preferredCountries: ['US', 'GB', 'CA', 'CN', 'IN'],
-      available_time_slots: '',
-      idempotent_id: '',
-      calendar_start_date: '',
-      calendar_end_date: '',
-      disableDays: [],
-      allowedDays: [],
-      actualDays: [],
-      notification: '',
-      holidays_for_scheduling: JSON.parse(localStorage.getItem("holidays")) || [],
-      flag_to_get_available_call_slots: false,
-    }
-  },
-  computed: {
-    group_session_is_free() {
-      return this.registration.group_session_amount <= 0 && this.registration.class_type === 'group';
+    components: { VueCal },
+    mixins: [recaptcha, useTrialFormForSchoolMixin],
+    setup() {
+        const countries = useCountriesStore();
+        const locations = useLocationsStore();
+        const filters = useFiltersStore();
+        const topics = useTopics();
+        const error = useErrorStore();
+        return {
+            countries,
+            locations,
+            topics,
+            filters,
+            error,
+        };
     },
-  },
-  watch: {
-    step(newVal, oldVal) {
-      if (newVal > oldVal) {
-        this.slide_animation = 'slide-left'
-      } else {
-        this.slide_animation = 'slide-right'
-      }
+    props: [
+        "free_session_email",
+        "technology_requirements",
+        "phone_number",
+        "drive_link",
+    ],
+    data() {
+        return {
+            termsAndConditions: false,
+            techRequirements: false,
+            buttonLoader: false,
+            showAddStudentLink: false,
+            slide_animation: "slide-left",
+            step: 1,
+            existingStudents: [],
+            phone: "",
+            phoneObject: "",
+            registration: {
+                homework: this.homework,
+                landing_page: this.landing_page,
+                referral_code: this.referral_code,
+                isPaymentSuccess: false,
+                selectTaskClassLater: false,
+                slot: "",
+                location: "",
+                location_id: "",
+                topic: "",
+                topic_id: "",
+                addNewStudent: false,
+                selected_date: "",
+                selected_date_raw: "",
+                partner_signup: null,
+                registration_type: "Free Private Sessions For Schools",
+                class_type: "private",
+                ad_source: "",
+                expectations: "",
+                parent: "",
+                student: "",
+                grade: "",
+                students: "",
+                notes: "",
+                time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                private_session_plan_id: "prod_K699XNKkvZd84J",
+                group_session_plan_id: "",
+                private_session_amount: 30,
+                group_session_amount: 0,
+            },
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            bindProps: {
+                inputOptions: {
+                    required: true,
+                    styleClasses: "form-input",
+                    placeholder: this.phone_number,
+                },
+            },
+            preferredCountries: ["US", "GB", "CA", "CN", "IN"],
+            available_time_slots: "",
+            idempotent_id: "",
+            calendar_start_date: "",
+            calendar_end_date: "",
+            disableDays: [],
+            allowedDays: [],
+            actualDays: [],
+            notification: "",
+            holidays_for_scheduling:
+                JSON.parse(localStorage.getItem("holidays")) || [],
+            flag_to_get_available_call_slots: false,
+        };
     },
-  },
-  created() {
-    this.notificationMessage();
-    this.resetSelectedSlot();
-    this.locations.fetchSchoolLocation();
-    this.topics.fetchTopics();
-    this.schoolObject();
-    this.countries.get();
-    this.parentObject();
-    this.registration.class_type = 'private'
-    this.registration.location_id = this.locations.school_location.id
-    this.registration.location = this.locations.school_location
-  },
-  methods: {
-    ready(e) {
-      this.disableDays = [];
-      this.calendar_start_date = moment(e.startDate)
-      this.calendar_end_date = moment(e.endDate)
-      this.disableDays = this.getDaysBetweenDates(moment(e.startDate), moment(e.endDate))
-      this.allowedDays = this.getDaysBetweenDates(moment().add(5, 'days'), moment().add(30, 'days'))
+    computed: {
+        group_session_is_free() {
+            return (
+                this.registration.group_session_amount <= 0 &&
+                this.registration.class_type === "group"
+            );
+        },
+    },
+    watch: {
+        step(newVal, oldVal) {
+            if (newVal > oldVal) {
+                this.slide_animation = "slide-left";
+            } else {
+                this.slide_animation = "slide-right";
+            }
+        },
+    },
+    created() {
+        this.notificationMessage();
+        this.resetSelectedSlot();
+        this.locations.fetchSchoolLocation();
+        this.topics.fetchTopics();
+        this.schoolObject();
+        this.countries.get();
+        this.parentObject();
+        this.registration.class_type = "private";
+        this.registration.location_id = this.locations.school_location.id;
+        this.registration.location = this.locations.school_location;
+    },
+    methods: {
+        next() {
+            if (typeof window !== 'undefined') {
+                window.location = "#freeform";
+            }
 
-      this.actualDays = _.difference(this.disableDays, this.allowedDays);
-
-      if (this.holidays_for_scheduling.length) {
-        this.actualDays = this.actualDays.concat(this.holidays_for_scheduling);
-      }
+            if(this.step === 4) {
+                this.addFreeSession()
+            } else {
+                this.step++;
+            }
+        },
     },
-    notificationMessage() {
-      if (this.loader) {
-        this.notification = 'Please wait until the selected date classes have been loaded!'
-      } else if (Object.keys(this.error.errors).length) {
-        this.notification = 'Please fill in the required fields above'
-      } else {
-        this.notification = `
-             Please Select any date starting from <br>
-             ${this.filters.date_format(new Date().addDays(5).format())}
-             <br> to ${this.filters.date_format(new Date().addDays(30).format())} only!
-              `;
-      }
-    },
-    getDaysBetweenDates(startDate, endDate) {
-      let now = startDate.clone(), dates = [];
-      while (now.isSameOrBefore(endDate)) {
-        dates.push(new Date(now).format());
-        now.add(1, 'days');
-      }
-      return dates;
-    },
-    resetSelectedSlot() {
-      this.registration.slot = {
-        existing: false,
-        slot: '',
-        slot_display: '',
-        space: '',
-        space_count: 0,
-        taskclass: { id: 0 },
-        teacher: { id: 0 }
-      }
-    },
-    reloadData() {
-      if (this.registration.topic_id && this.registration.location_id && this.registration.class_type) {
-        if (!this.registration.selected_date_raw) {
-          this.nextAvailableDate();
-        } else {
-          this.getAvailableTimeSlots();
-        }
-      }
-    },
-    nextAvailableDate() {
-      let date = new Date().addDays(5).format();
-      this.registration.selected_date = this.filters.date_format(date);
-      this.registration.selected_date_raw = date
-      this.available_time_slots = '';
-      this.getAvailableTimeSlots()
-    },
-    handleTopicSelection(topic_id) {
-      this.topics.topics.forEach(topic => {
-        if (topic_id === topic.id) {
-          this.registration.topic = topic
-        }
-      })
-      this.registration.location = this.locations.school_location
-      this.registration.location_id = this.locations.school_location.id
-      this.reloadData();
-    },
-    submitStepTwo() {
-      let _this = this;
-      _this.registration.parent.phone = _this.phoneObject;
-      if (_this.registration.parent.full_name === '') {
-        _this.registration.parent.full_name = _this.registration.student.full_name;
-      }
-      _this.step++;
-    },
-    next() {
-      if (typeof window !== 'undefined') {
-        window.location = "#freeform";
-      }
-
-      if(this.step === 4) {
-        this.addFreeSession()
-      } else {
-        this.step++;
-      }
-    },
-    back() {
-      if (typeof window !== 'undefined') {
-        window.location = "#freeform";
-      }
-      this.step > 1 ? this.step-- : ''
-    },
-    dateClicked(e) {
-      this.registration.selected_date = this.filters.date_format(e);
-      this.registration.selected_date_raw = e
-      this.available_time_slots = '';
-      this.getAvailableTimeSlots()
-    },
-    selectClassHandler(slot) {
-      this.registration.slot = slot
-    },
-    getAvailableTimeSlots() {
-      let _this = this;
-      _this.resetSelectedSlot();
-      _this.available_time_slots = ''
-      axios.post('/forms/getAvailableTimeSlots', _this.registration)
-        .then(response => {
-          _this.available_time_slots = response.data.data.available_time_slots;
-          _this.flag_to_get_available_call_slots = true;
-        }).catch(error => {
-        })
-    },
-    schoolObject() {
-      this.registration.student = {
-        id: '',
-        full_name:'',
-        age : '',
-        grade: '',
-        students: '',
-        notes: '',
-        dob:'',
-        is_school : true,
-        postal_address:'',
-        homework_type : '',
-        homework_types : [],
-        additional_email:'',
-        additional_phone_number:''
-      }
-    },
-    parentObject() {
-      this.registration.parent = {
-        id: '',
-        full_name:'',
-        dial_code : '',
-        phone_number : '',
-        email: '',
-        country_id:'',
-        phone : '',
-        additional_email:'',
-        additional_phone_number:''
-      }
-    },
-    phoneInput(number, obj) {
-      if(obj){
-        this.phoneObject = obj;
-        this.registration.parent.phone = obj;
-        this.registration.parent.dial_code = obj.countryCallingCode
-        this.registration.parent.phone_number = obj.nationalNumber
-      }
-    },
-    onPhoneNumberEnter() {
-      this.getExistingSchools();
-    },
-    getExistingSchools(){
-      let _this = this;
-      this.existingStudents = [];
-      this.schoolObject();
-      if(_this.registration.parent.phone_number !=null) {
-        _this.registration.parent.phone = _this.phoneObject;
-       axios.post('/forms/getExistingSchools', _this.registration)
-        .then(response => {
-          _this.showAddStudentLink = true;
-          _this.existingStudents = response.data.data.students;
-          if(response.data.data.parent)
-          {
-            _this.registration.parent = response.data.data.parent
-          }
-        }).catch(error => {
-          _this.showAddStudentLink = true;
-          _this.addNewStudentHandler();
-        })
-      }
-    },
-    addNewStudentHandler() {
-      this.registration.addNewStudent = !this.registration.addNewStudent;
-      this.existingStudents = [];
-      this.registration.student = {
-        id: '',
-        full_name:'',
-        age : '',
-        is_school : true,
-        grade: '',
-        students: '',
-        notes: '',
-        dob:'',
-        postal_address:'',
-        additional_email:'',
-        additional_phone_number:'',
-        homework_type : '',
-        homework_types : []
-      };
-    },
-    addFreeSession(){
-      let _this = this;
-        _this.verifyCaptcha().then(res => {
-            _this.error = '';
-            _this.registration.parent.phone = _this.phoneObject;
-            _this.registration.partner_code = _this.partner_code;
-            _this.registration.isPaymentSuccess = true;
-                axios.post('/forms/storeFreeTrialForSchools', _this.registration)
-                    .then(response => {
-                    _this.step = _this.step + 1;
-                    }).catch(error => {
-
-                });
-        }).catch(err => {
-
-        })
-    },
-    handleSchoolSelection() {
-      // Reset the addNewStudent flag when an existing school is selected
-      this.registration.addNewStudent = false;
-    },
-  }
-}
+};
 </script>
 
 <style scoped>
@@ -1042,7 +1057,7 @@ export default {
 }
 
 .radio-option-label input[type="radio"]:checked::after {
-    content: '' !important;
+    content: "" !important;
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
@@ -1086,7 +1101,8 @@ export default {
 }
 
 /* Slide transitions */
-.slide-left-enter-active, .slide-left-leave-active {
+.slide-left-enter-active,
+.slide-left-leave-active {
     transition: transform 0.3s ease-in-out;
 }
 
@@ -1098,7 +1114,8 @@ export default {
     transform: translateX(-100%);
 }
 
-.slide-right-enter-active, .slide-right-leave-active {
+.slide-right-enter-active,
+.slide-right-leave-active {
     transition: transform 0.3s ease-in-out;
 }
 

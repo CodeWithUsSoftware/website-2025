@@ -607,13 +607,13 @@
             </div>
         </section>
 
-        <section class="py-10 md:py-20  hidden md:block">
+        <section class="py-10 md:py-20 hidden md:block">
             <school-program-form
                 send_us_your_school_program_details="{{ trans('school_program.send_us_your_school_program_details') }}"
                 fill_school_program_form="{{ trans('school_program.fill_school_program_form') }}" />
         </section>
 
-        <section class="py-10  hidden md:block" id="faqs">
+        <section class="py-10 hidden md:block" id="faqs">
             <div class="px-3 md:px-0">
                 <div class="bg-white p-5 shadow md:max-w-5xl md:mx-auto rounded-xl space-y-2">
                     <div class="bg-primary p-5 rounded-lg">
