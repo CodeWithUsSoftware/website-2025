@@ -252,12 +252,12 @@
     "isDynamicEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-B3eVkCxr.css",
+    "file": "assets/app-BIte7miA.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-DI7HWBLZ.js",
+    "file": "assets/app-2Ad5QygG.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -307,7 +307,7 @@
       "node_modules/vue-cal/dist/drag-and-drop.es.js"
     ],
     "css": [
-      "assets/app-CRsqqS7p.css"
+      "assets/app-BUzkAfvx.css"
     ]
   }
 }
