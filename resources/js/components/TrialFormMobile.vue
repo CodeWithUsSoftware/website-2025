@@ -301,13 +301,8 @@
                                                             : 'bg-blue-50 text-blue-600 border-2 border-transparent hover:border-blue-200'
                                                     "
                                                 >
-                                                    {{ slot.slot_display }}
-                                                    <div class="text-xs">
-                                                        {{
-                                                            slot.teacher
-                                                                .full_name
-                                                        }}
-                                                    </div>
+                                                    {{ slot.slot_display }} -
+                                                    {{ slot.teacher.full_name }}
                                                 </button>
                                             </div>
                                         </template>
@@ -516,8 +511,6 @@
                                             v-model="registration.student.age"
                                             required
                                             placeholder="Enter student's age"
-                                            min="5"
-                                            max="18"
                                             class="form-input"
                                         />
                                     </div>

@@ -12,7 +12,7 @@
 
 @section('content')
     <div>
-        <section class="pb-0">
+        <section class="pb-0 hidden md:block">
             <div class="relative max-w-full mx-auto ">
                 <div class="relative py-10 px-8 overflow-hidden lg:px-16 takeover-panel-topic">
                     <div class="absolute inset-0  mix-blend-multiply">
@@ -43,7 +43,7 @@
             </div>
         </section>
 
-        <section class="pt-10 md:pt-20 pb-5 md:pb-10">
+        <section class="pt-10 md:pt-20 pb-5 md:pb-10 hidden md:block">
             <div class="max-w-5xl mx-auto ">
                 <div class="text-center">
                     <h4 id="campsForm">{{ trans('camps.camps_signup') }}</h4>
@@ -52,10 +52,8 @@
             </div>
         </section>
 
-
-
         <!-- Trust Banner -->
-        <section class="py-4 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <section class="py-4 bg-gradient-to-r from-blue-50 to-indigo-50 hidden md:block">
             <div class="max-w-5xl mx-auto">
                 <div class="flex items-center justify-center">
                     <div class="relative overflow-hidden rounded-lg shadow-md bg-white p-6 border border-blue-100">
@@ -100,17 +98,22 @@
 
         <section>
             <div class="max-w-5xl mx-auto">
-                <camps-form :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"
-                    :seasonal_camps_dp="'{!! trans('pricing.seasonal_camps_discounted_price') !!}'"
-                    :seasonal_camps_fp="'{!! trans('pricing.seasonal_camps_full_price') !!}'"></camps-form>
+                <div id="desktop-form">
+                    <camps-form :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"
+                        :seasonal_camps_dp="'{!! trans('pricing.seasonal_camps_discounted_price') !!}'" :seasonal_camps_fp="'{!! trans('pricing.seasonal_camps_full_price') !!}'" />
+                </div>
+                <div id="mobile-form">
+                    <camps-form-mobile :drive_link="'https://drive.google.com/file/d/{!! trans('email_tc_file.tc_file_link') !!}/view'"
+                        :seasonal_camps_dp="'{!! trans('pricing.seasonal_camps_discounted_price') !!}'" :seasonal_camps_fp="'{!! trans('pricing.seasonal_camps_full_price') !!}'" />
+                </div>
             </div>
         </section>
 
-        <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20 hidden md:block">
             <custom-camps-form />
         </section>
 
-        <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20 hidden md:block">
             <div class="max-w-5xl mx-auto px-2">
                 <h4 class="text-center">{{ trans('camps.exciting_code_camps') }}</h4>
                 <div class="text-center -mt-4 pb-10">
@@ -127,7 +130,7 @@
             </div>
         </section>
 
-        <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20 hidden md:block">
             <div class="max-w-5xl mx-auto px-2">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 flex items-center justify-center">
                     <div class="md:order-2">
@@ -141,7 +144,7 @@
             </div>
         </section>
 
-        <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20 hidden md:block">
             <div class="max-w-5xl mx-auto px-2">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 flex items-center justify-center">
                     <div>
@@ -155,7 +158,7 @@
             </div>
         </section>
 
-        <section class="py-10 md:py-20">
+        <section class="py-10 md:py-20 hidden md:block">
             <div class="max-w-5xl mx-auto px-2">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 flex items-center justify-center">
                     <div class="md:order-2">
@@ -169,7 +172,7 @@
             </div>
         </section>
         {{-- Camps Pricing --}}
-        <section class="py-20">
+        <section class="py-20 hidden md:block">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 text-center">
                 {!! trans('camps.prices_for_kids_coding') !!}
             </div>
@@ -200,7 +203,8 @@
                     <div class="bg-camps h-8 rounded-b-3xl"></div>
                 </div>
                 <div class="bg-white rounded-3xl shadow-card">
-                    <div><img class="h-44 w-full rounded-t-3xl" src="/images/pricing_guide/camps/2.webp" alt="coding_camps">
+                    <div><img class="h-44 w-full rounded-t-3xl" src="/images/pricing_guide/camps/2.webp"
+                            alt="coding_camps">
                     </div>
                     <div class="pt-6 pb-8 px-10">
                         <div class="text-center">
@@ -232,4 +236,109 @@
 
         @include('layouts.FooterIcons')
     </div>
+@endsection
+
+@section('footer_scripts')
+    <script>
+        (function() {
+            'use strict';
+
+            // Store form templates for recreation
+            let desktopFormHTML = '';
+            let mobileFormHTML = '';
+            let formContainer = null;
+
+            // Immediate cleanup to prevent ID conflicts
+            function immediateCleanup() {
+                const isMobile = window.innerWidth < 768;
+                const desktopForm = document.getElementById('desktop-form');
+                const mobileForm = document.getElementById('mobile-form');
+
+                if (isMobile && desktopForm) {
+                    desktopForm.remove();
+                } else if (!isMobile && mobileForm) {
+                    mobileForm.remove();
+                }
+            }
+
+            function storeFormTemplates() {
+                const desktopForm = document.getElementById('desktop-form');
+                const mobileForm = document.getElementById('mobile-form');
+
+                if (desktopForm) {
+                    desktopFormHTML = desktopForm.outerHTML;
+                    formContainer = desktopForm.parentElement;
+                }
+                if (mobileForm) {
+                    mobileFormHTML = mobileForm.outerHTML;
+                    if (!formContainer) {
+                        formContainer = mobileForm.parentElement;
+                    }
+                }
+            }
+
+            function updateFormVisibility() {
+                const isMobile = window.innerWidth < 768;
+                const desktopForm = document.getElementById('desktop-form');
+                const mobileForm = document.getElementById('mobile-form');
+
+                if (isMobile) {
+                    // Remove desktop form if it exists
+                    if (desktopForm) {
+                        desktopForm.remove();
+                    }
+                    // Create mobile form if it doesn't exist
+                    if (!mobileForm && mobileFormHTML && formContainer) {
+                        formContainer.insertAdjacentHTML('beforeend', mobileFormHTML);
+                        // Give Vue a moment to initialize the new component
+                        setTimeout(() => {
+                            if (window.Vue && window.Vue.nextTick) {
+                                window.Vue.nextTick();
+                            }
+                        }, 50);
+                    }
+                } else {
+                    // Remove mobile form if it exists
+                    if (mobileForm) {
+                        mobileForm.remove();
+                    }
+                    // Create desktop form if it doesn't exist
+                    if (!desktopForm && desktopFormHTML && formContainer) {
+                        formContainer.insertAdjacentHTML('beforeend', desktopFormHTML);
+                        // Give Vue a moment to initialize the new component
+                        setTimeout(() => {
+                            if (window.Vue && window.Vue.nextTick) {
+                                window.Vue.nextTick();
+                            }
+                        }, 50);
+                    }
+                }
+            }
+
+            // Handle resize events efficiently
+            let resizeTimeout;
+
+            function handleResize() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(updateFormVisibility, 100);
+            }
+
+            // Execute immediate cleanup first
+            immediateCleanup();
+
+            // Initial setup
+            function initForms() {
+                storeFormTemplates();
+                updateFormVisibility();
+                window.addEventListener('resize', handleResize);
+            }
+
+            // Execute when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initForms);
+            } else {
+                initForms();
+            }
+        })();
+    </script>
 @endsection

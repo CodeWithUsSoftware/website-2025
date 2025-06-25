@@ -192,10 +192,10 @@
                                     class="space-y-3"
                                 >
                                     <div>
-                                        <h4 class="form-label">
+                                        <h6 class="form-label">
                                             Select verification method
                                             <span class="text-red-500">*</span>
-                                        </h4>
+                                        </h6>
                                     </div>
 
                                     <div class="space-y-2">
@@ -486,7 +486,7 @@
                                                 @click.stop="
                                                     cancelClass(task_class)
                                                 "
-                                                class="flex-1 py-2 px-3 text-xs font-medium border border-red-500 rounded-full text-white bg-red-500 hover:bg-red-600 transition-colors"
+                                                class="form-button flex-1 py-2 px-3 text-xs font-medium border border-red-500 rounded-full text-white bg-red-500 hover:bg-red-600 transition-colors"
                                             >
                                                 Cancel
                                             </button>
@@ -494,7 +494,7 @@
                                                 @click.stop="
                                                     testNew(task_class)
                                                 "
-                                                class="flex-1 py-2 px-3 text-xs font-medium border border-blue-500 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-colors"
+                                                class="form-button flex-1 py-2 px-3 text-xs font-medium border border-blue-500 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-colors"
                                             >
                                                 Reschedule
                                             </button>
@@ -691,13 +691,10 @@
                                                                     slot.starts_at_local_time
                                                                 )
                                                             }}
-                                                            <div
-                                                                class="text-xs"
-                                                            >
-                                                                {{
-                                                                    slot.teacher_name
-                                                                }}
-                                                            </div>
+                                                            -
+                                                            {{
+                                                                slot.teacher_name
+                                                            }}
                                                         </button>
                                                     </div>
                                                 </template>

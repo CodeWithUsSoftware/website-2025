@@ -98,53 +98,30 @@
                             </div>
 
                             <div class="space-y-4 flex-1">
-                                <!-- Plan Options -->
-                                <div class="space-y-3">
-                                    <div
-                                        v-for="plan in plans"
-                                        :key="plan.value"
-                                        @click="switchPlan(plan.value)"
-                                        class="p-3 border-2 rounded-lg cursor-pointer transition-all"
-                                        :class="
-                                            selectedPlan === plan.value
-                                                ? 'border-blue-500 bg-blue-50'
-                                                : 'border-gray-200 hover:border-gray-300'
-                                        "
+                                <!-- Plan Selection -->
+                                <div>
+                                    <label class="form-label">
+                                        Subscription Plan
+                                        <span class="text-red-500">*</span>
+                                    </label>
+                                    <select
+                                        v-model="selectedPlan"
+                                        @change="handlePlanChange"
+                                        required
+                                        class="form-select"
                                     >
-                                        <div
-                                            class="flex justify-between items-center"
+                                        <option value="" disabled>
+                                            Choose your subscription plan
+                                        </option>
+                                        <option
+                                            v-for="plan in plans"
+                                            :key="plan.value"
+                                            :value="plan.value"
                                         >
-                                            <div>
-                                                <h4
-                                                    class="text-sm font-medium text-gray-900"
-                                                >
-                                                    {{ plan.label }}
-                                                </h4>
-                                                <p
-                                                    class="text-xs text-gray-600 mt-1"
-                                                >
-                                                    {{ plan.discount }} off
-                                                    Classes
-                                                </p>
-                                            </div>
-                                            <div
-                                                class="w-5 h-5 rounded-full border-2 flex items-center justify-center"
-                                                :class="
-                                                    selectedPlan === plan.value
-                                                        ? 'border-blue-500 bg-blue-500'
-                                                        : 'border-gray-300'
-                                                "
-                                            >
-                                                <div
-                                                    v-if="
-                                                        selectedPlan ===
-                                                        plan.value
-                                                    "
-                                                    class="w-2 h-2 bg-white rounded-full"
-                                                ></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            {{ plan.label }} -
+                                            {{ plan.discount }} off Classes
+                                        </option>
+                                    </select>
                                 </div>
 
                                 <!-- Location Selection -->
@@ -244,7 +221,7 @@
                                                 value="Small Group"
                                                 class="form-radio"
                                             />
-                                            <span class="text-sm"
+                                            <span class="text-sm text-gray-900"
                                                 >Small Group (3:1)</span
                                             >
                                         </label>
@@ -259,7 +236,7 @@
                                                 value="Private"
                                                 class="form-radio"
                                             />
-                                            <span class="text-sm"
+                                            <span class="text-sm text-gray-900"
                                                 >Private (1:1)</span
                                             >
                                         </label>
@@ -286,7 +263,7 @@
                                                 :value="1"
                                                 class="form-radio"
                                             />
-                                            <span class="text-sm"
+                                            <span class="text-sm text-gray-900"
                                                 >Once per week</span
                                             >
                                         </label>
@@ -301,7 +278,7 @@
                                                 :value="2"
                                                 class="form-radio"
                                             />
-                                            <span class="text-sm"
+                                            <span class="text-sm text-gray-900"
                                                 >Twice per week</span
                                             >
                                         </label>
@@ -420,13 +397,8 @@
                                                             : 'bg-blue-50 text-blue-600 border-2 border-transparent hover:border-blue-200'
                                                     "
                                                 >
-                                                    {{ slot.slot_display }}
-                                                    <div class="text-xs">
-                                                        {{
-                                                            slot.teacher
-                                                                .full_name
-                                                        }}
-                                                    </div>
+                                                    {{ slot.slot_display }} -
+                                                    {{ slot.teacher.full_name }}
                                                 </button>
                                             </div>
                                         </template>
@@ -467,7 +439,7 @@
                                         Selected Classes:
                                     </h4>
                                     <div
-                                        class="mt-6 grid grid-cols-1 md:grid-cols-2 md:gap-2"
+                                        class="grid grid-cols-1 md:grid-cols-2 md:gap-2"
                                     >
                                         <div
                                             v-for="(
@@ -927,54 +899,111 @@
                                 <div
                                     class="bg-gray-50 rounded-lg p-3 mt-4 text-left space-y-1.5 text-xs"
                                 >
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Plan:</span>
+                                        <span class="font-medium"
+                                            >{{
+                                                selectedPlanLabel
+                                            }}
+                                            Subscription</span
+                                        >
+                                    </div>
+
                                     <div
                                         v-for="(
                                             slot, index
                                         ) in registration.selectedTaskClasses"
                                         :key="index"
                                     >
-                                        <p>
-                                            <span class="font-medium"
-                                                >Class {{ index + 1 }}:</span
-                                            >
-                                            {{ filters.day_date(slot.date) }}
-                                        </p>
-                                        <p>
-                                            <span class="font-medium"
-                                                >Time:</span
-                                            >
-                                            {{ slot.slot_display }}
-                                        </p>
-                                        <p>
-                                            <span class="font-medium"
-                                                >Teacher:</span
-                                            >
-                                            {{ slot.teacher.full_name }}
-                                        </p>
                                         <div
-                                            class="border-b border-gray-200 pb-2 mb-2"
-                                        ></div>
-                                    </div>
-                                    <p>
-                                        <span class="font-medium"
-                                            >Timezone:</span
+                                            class="border-t border-gray-200 pt-2 mt-2"
                                         >
-                                        {{ filters.format_time_zone(timezone) }}
-                                    </p>
-                                    <p>
-                                        <span class="font-medium"
+                                            <div class="flex justify-between">
+                                                <span class="text-gray-600"
+                                                    >Class
+                                                    {{ index + 1 }}:</span
+                                                >
+                                                <span class="font-medium">{{
+                                                    filters.day_date(slot.date)
+                                                }}</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-gray-600"
+                                                    >Time:</span
+                                                >
+                                                <span class="font-medium">{{
+                                                    slot.slot_display
+                                                }}</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-gray-600"
+                                                    >Teacher:</span
+                                                >
+                                                <span class="font-medium">{{
+                                                    slot.teacher.full_name
+                                                }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600"
                                             >Location:</span
                                         >
-                                        {{
+                                        <span class="font-medium">{{
                                             registration.location.location_name
-                                        }}
-                                    </p>
-                                    <p>
-                                        <span class="font-medium"
+                                        }}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600"
+                                            >Timeslot Duration:</span
+                                        >
+                                        <span class="font-medium">{{
+                                            formattedTimeslotDuration
+                                        }}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600"
                                             >Student:</span
                                         >
-                                        {{ registration.student.full_name }}
-                                    </p>
+                                        <span class="font-medium">{{
+                                            registration.student.full_name
+                                        }}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600"
+                                            >Email:</span
+                                        >
+                                        <span class="font-medium">{{
+                                            registration.parent.email
+                                        }}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600"
+                                            >Phone:</span
+                                        >
+                                        <span class="font-medium">{{
+                                            formattedPhoneNumber
+                                        }}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600"
+                                            >Timezone:</span
+                                        >
+                                        <span class="font-medium">{{
+                                            filters.format_time_zone(timezone)
+                                        }}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600"
+                                            >Amount:</span
+                                        >
+                                        <span class="font-medium"
+                                            >${{ total_amount }}/{{
+                                                billingCycleText
+                                            }}</span
+                                        >
+                                    </div>
                                 </div>
 
                                 <a
@@ -1158,18 +1187,8 @@ export default {
             bindProps: {
                 inputOptions: {
                     required: true,
-                    styleClasses: "form-input",
-                    placeholder: "Phone Number",
-                    autocomplete: "tel",
-                },
-                dropdownOptions: {
-                    showDialCodeInSelection: true,
-                    showFlags: true,
-                    showSearchBox: true,
-                },
-                validationOptions: {
-                    showHelperText: true,
-                    required: true,
+                    styleClasses: "",
+                    placeholder: this.phone_number,
                 },
             },
             preferredCountries: ["US", "GB", "CA", "CN", "IN"],
@@ -1190,10 +1209,6 @@ export default {
                 { value: "quarterly", label: "Quarterly", discount: "30%" },
                 { value: "semi", label: "Semi Annually", discount: "35%" },
             ],
-            sliderPosition: {
-                width: 0,
-                translateX: 0,
-            },
         };
     },
     computed: {
@@ -1297,6 +1312,7 @@ export default {
         },
         isStep0Valid() {
             return (
+                this.selectedPlan &&
                 this.registration.location_id &&
                 this.registration.topic_id &&
                 this.registration.timeslot_duration &&
@@ -1387,9 +1403,7 @@ export default {
         }
     },
     mounted() {
-        this.$nextTick(() => {
-            this.updateSlider();
-        });
+        // No longer need to initialize slider since we're using a dropdown
     },
     beforeUnmount() {
         if (this.checkout) {
@@ -1538,18 +1552,13 @@ export default {
             }
         },
 
-        updateSlider(activeButton) {
-            if (!activeButton) {
-                activeButton = document.querySelector(
-                    `button[data-plan="${this.selectedPlan}"]`
-                );
-                if (!activeButton) return;
-            }
+        handlePlanChange() {
+            this.switchPlan(this.selectedPlan);
+        },
 
-            this.sliderPosition = {
-                width: activeButton.offsetWidth,
-                translateX: activeButton.offsetLeft,
-            };
+        updateSlider(activeButton) {
+            // This method is no longer needed since we're using a dropdown
+            // Keeping it for compatibility with the mixin
         },
 
         handleBillingCycleChange() {

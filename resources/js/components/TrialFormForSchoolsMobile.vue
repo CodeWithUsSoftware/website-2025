@@ -384,10 +384,10 @@
                                     class="space-y-3"
                                 >
                                     <div>
-                                        <h4 class="form-label">
+                                        <h6 class="form-label">
                                             Choose a School
                                             <span class="text-red-500">*</span>
-                                        </h4>
+                                        </h6>
                                         <p class="text-xs text-gray-500 mb-2">
                                             Select an existing school below or
                                             add new
@@ -712,47 +712,73 @@
                                 </p>
 
                                 <div
-                                    class="bg-gray-50 rounded-lg p-3 mt-4 text-left space-y-1.5 text-xs"
+                                    class="bg-gray-50 rounded-lg p-4 space-y-3 text-sm"
                                 >
-                                    <p>
-                                        <span class="font-medium">Class:</span>
-                                        {{
+                                    <div class="flex justify-between">
+                                        <span class="font-medium text-gray-600"
+                                            >Class:</span
+                                        >
+                                        <span class="text-gray-900">{{
                                             filters.day_date(
                                                 registration.selected_date_raw
                                             )
-                                        }}
-                                    </p>
-                                    <p>
-                                        <span class="font-medium">Time:</span>
-                                        {{ registration.slot.slot_display }}
-                                    </p>
-                                    <p>
-                                        <span class="font-medium"
-                                            >Timezone:</span
+                                        }}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-medium text-gray-600"
+                                            >Time:</span
                                         >
-                                        {{ filters.format_time_zone(timezone) }}
-                                    </p>
-                                    <p>
-                                        <span class="font-medium"
+                                        <span class="text-gray-900"
+                                            >{{
+                                                registration.slot.slot_display
+                                            }}
+                                            ({{
+                                                filters.format_time_zone(
+                                                    timezone
+                                                )
+                                            }})</span
+                                        >
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-medium text-gray-600"
                                             >Location:</span
                                         >
-                                        {{
+                                        <span class="text-gray-900">{{
                                             registration.location.location_name
-                                        }}
-                                    </p>
-                                    <p>
-                                        <span class="font-medium">School:</span>
-                                        {{ registration.student.full_name }}
-                                    </p>
-                                    <p>
-                                        <span class="font-medium">Email:</span>
-                                        {{ registration.parent.email }}
-                                    </p>
-                                    <p>
-                                        <span class="font-medium">Phone:</span>
-                                        {{ phoneObject.countryCallingCode }}
-                                        {{ registration.parent.phone_number }}
-                                    </p>
+                                        }}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-medium text-gray-600"
+                                            >School Name:</span
+                                        >
+                                        <span
+                                            class="text-gray-900 capitalize"
+                                            >{{
+                                                registration.student.full_name
+                                            }}</span
+                                        >
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-medium text-gray-600"
+                                            >Email:</span
+                                        >
+                                        <span class="text-gray-900 break-all">{{
+                                            registration.parent.email
+                                        }}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-medium text-gray-600"
+                                            >Phone:</span
+                                        >
+                                        <span class="text-gray-900"
+                                            >{{
+                                                phoneObject.countryCallingCode
+                                            }}
+                                            {{
+                                                registration.parent.phone_number
+                                            }}</span
+                                        >
+                                    </div>
                                 </div>
 
                                 <a
@@ -902,12 +928,12 @@ export default {
     },
     methods: {
         next() {
-            if (typeof window !== 'undefined') {
+            if (typeof window !== "undefined") {
                 window.location = "#freeform";
             }
 
-            if(this.step === 4) {
-                this.addFreeSession()
+            if (this.step === 4) {
+                this.addFreeSession();
             } else {
                 this.step++;
             }
