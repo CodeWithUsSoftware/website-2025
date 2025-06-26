@@ -740,21 +740,23 @@
                                                 <span class="text-gray-600"
                                                     >Class
                                                     {{ index + 1 }}
-                                                    Schedule:</span
-                                                >
+                                                    Schedule:
+                                                </span>
                                                 <span class="font-medium"
                                                     >{{
                                                         filters.to_day(
                                                             slot.date
                                                         )
                                                     }},
-                                                    {{ slot.slot_display }}</span
+                                                    {{ slot.slot_display }}
+                                                    <span class="block"
+                                                        >({{
+                                                            filters.format_time_zone(
+                                                                timezone
+                                                            )
+                                                        }})</span
                                                     >
-                                                    <span>({{
-                                                        filters.format_time_zone(
-                                                            timezone
-                                                        )
-                                                    }})</span>
+                                                </span>
                                             </div>
                                             <!-- <div class="flex justify-between">
                                                 <span class="text-gray-600"
@@ -896,7 +898,7 @@
                                 >
                                     Subscription Confirmed!
                                 </h3>
-                                <p class="text-gray-600 text-sm">
+                                <p class="text-gray-600 text-xs">
                                     You successfully subscribed to weekly
                                     classes.
                                 </p>
@@ -935,11 +937,14 @@
                                                             slot.date
                                                         )
                                                     }},
-                                                    {{ slot.slot_display }} ({{
-                                                        filters.format_time_zone(
-                                                            timezone
-                                                        )
-                                                    }})
+                                                    {{ slot.slot_display }}
+                                                    <span class="block"
+                                                        >({{
+                                                            filters.format_time_zone(
+                                                                timezone
+                                                            )
+                                                        }})</span
+                                                    >
                                                 </span>
                                             </div>
                                             <!-- <div class="flex justify-between">
@@ -993,14 +998,14 @@
                                             formattedPhoneNumber
                                         }}</span>
                                     </div>
-                                    <div class="flex justify-between">
+                                    <!-- <div class="flex justify-between">
                                         <span class="text-gray-600"
                                             >Timezone:</span
                                         >
                                         <span class="font-medium">{{
                                             filters.format_time_zone(timezone)
                                         }}</span>
-                                    </div>
+                                    </div> -->
                                     <div class="flex justify-between">
                                         <span class="text-gray-600"
                                             >Amount:</span
