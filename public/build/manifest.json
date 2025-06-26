@@ -257,7 +257,7 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-BnrSToSk.js",
+    "file": "assets/app-DsOnB23S.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -307,7 +307,7 @@
       "node_modules/vue-cal/dist/drag-and-drop.es.js"
     ],
     "css": [
-      "assets/app-Bwg326Lq.css"
+      "assets/app-dIY5pR7Y.css"
     ]
   }
 }
