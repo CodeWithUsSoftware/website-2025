@@ -430,8 +430,11 @@
                                         </div>
                                         <div class="space-y-3 mt-3 mb-3">
                                             <h6 class="font-bold text-sm flex">
-                                                Choose the timeslot
-                                                Duration<span
+                                                Choose the timeslot ({{
+                                                    filters.format_time_zone(
+                                                        timezone
+                                                    )
+                                                }})<span
                                                     class="text-danger font-bold text-xl"
                                                     >*</span
                                                 >
@@ -499,7 +502,7 @@
                                                 />
                                                 <label
                                                     class="text-black-lighter-2 text-sm"
-                                                    >Small Group(3:1)</label
+                                                    >Small Group (3 to 1)</label
                                                 >
                                             </div>
                                             <div class="flex px-2 space-x-2">
@@ -527,7 +530,7 @@
                                                 />
                                                 <label
                                                     class="text-black-lighter-2 text-sm"
-                                                    >Private (1:1)</label
+                                                    >Private (1 to 1)</label
                                                 >
                                             </div>
                                             <small
@@ -568,7 +571,7 @@
                                                 />
                                                 <label
                                                     class="text-black-lighter-2 text-sm"
-                                                    >One per week</label
+                                                    >1 class / week</label
                                                 >
                                             </div>
                                             <div class="flex px-2 space-x-2">
@@ -596,7 +599,7 @@
                                                 />
                                                 <label
                                                     class="text-black-lighter-2 text-sm"
-                                                    >Two per week</label
+                                                    >2 classes / week</label
                                                 >
                                             </div>
                                             <small
@@ -1311,7 +1314,7 @@
                             >
                                 <div class="">
                                     <label class="text-sm text-gray-700 flex"
-                                        >Phone Number
+                                        >Number
                                         <span
                                             class="text-danger font-bold text-xl"
                                             >*</span
@@ -1386,7 +1389,7 @@
                                             <div
                                                 class="text-black-lighter-2 flex"
                                             >
-                                                Choose a Student
+                                                Select a Student
                                                 <span
                                                     class="text-danger font-bold text-xl"
                                                     >*</span
@@ -1563,12 +1566,24 @@
                                     class="pb-2"
                                     :key="index"
                                 >
-                                    <p>
+                                    <!-- <p>
                                         <span class="font-bold"
                                             ><span class="text-primary"
                                                 >Class - </span
                                             >{{ index + 1 }}</span
                                         >
+                                    </p> -->
+                                    <p>
+                                        <span class="font-bold"
+                                            ><span class="text-primary"
+                                                >Class {{ index + 1 }} Schedule
+                                                :</span
+                                            ></span
+                                        >
+                                        {{ filters.to_day(slot.date) }},
+                                        {{ slot.slot_display }} ({{
+                                            filters.format_time_zone(timezone)
+                                        }})
                                     </p>
                                     <p>
                                         <span class="font-bold"
@@ -1580,7 +1595,7 @@
                                             slot.teacher.full_name
                                         }}</span>
                                     </p>
-                                    <p>
+                                    <!-- <p>
                                         <span class="font-bold"
                                             ><span class="text-primary"
                                                 >Class:</span
@@ -1595,7 +1610,7 @@
                                             ></span
                                         >
                                         {{ slot.slot_display }}
-                                    </p>
+                                    </p> -->
                                     <p>
                                         <span class="font-bold"
                                             ><span class="text-primary"

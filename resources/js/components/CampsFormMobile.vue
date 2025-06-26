@@ -358,7 +358,7 @@
                             >
                                 <div>
                                     <label class="form-label">
-                                        Phone Number
+                                        Number
                                         <span class="text-red-500">*</span>
                                     </label>
                                     <vue-tel-input
@@ -396,7 +396,7 @@
                             >
                                 <div>
                                     <label class="form-label">
-                                        Choose a Student
+                                        Select a Student
                                         <span class="text-red-500">*</span>
                                     </label>
                                     <p class="text-xs text-gray-500 mb-3">

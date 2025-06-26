@@ -1,25 +1,48 @@
 <template>
-    <div class="max-w-5xl bg-white rounded-2xl mx-auto shadow-card py-10 overflow-x-hidden" v-if="showForm">
+    <div
+        class="max-w-5xl bg-white rounded-2xl mx-auto shadow-card py-10 overflow-x-hidden"
+        v-if="showForm"
+    >
         <div v-if="step < 6" class="hidden sm:flex justify-center">
             <nav class="flex" aria-label="Breadcrumb">
-                <ol role="list" class="bg-white rounded-md shadow px-6 flex space-x-4">
+                <ol
+                    role="list"
+                    class="bg-white rounded-md shadow px-6 flex space-x-4"
+                >
                     <li class="flex">
                         <div class="flex items-center">
-                            <a href="#reschedule" @click="step = 1"
+                            <a
+                                href="#reschedule"
+                                @click="step = 1"
                                 class="text-gray-400 hover:text-gray-500 cursor-pointer"
-                                :class="step === 1 ? ' py-2' : ''">
+                                :class="step === 1 ? ' py-2' : ''"
+                            >
                                 <div v-if="step === 1">
-                                    <img :class="step === 1
-                                            ? 'bg-primary hover:bg-primary-darker-1 w-20 h-20'
-                                            : 'bg-gray-500 hover:bg-gray-700'
-                                        " width="24" height="24" src="/images/trial_form/monthly_form.webp" alt="" />
+                                    <img
+                                        :class="
+                                            step === 1
+                                                ? 'bg-primary hover:bg-primary-darker-1 w-20 h-20'
+                                                : 'bg-gray-500 hover:bg-gray-700'
+                                        "
+                                        width="24"
+                                        height="24"
+                                        src="/images/trial_form/monthly_form.webp"
+                                        alt=""
+                                    />
                                     <span class="sr-only">Home</span>
                                 </div>
                                 <div v-else>
-                                    <a @click="step = 1" href="#reschedule" class="ml-4 text-sm" :class="step === 1
-                                            ? 'text-primary hover:text-primary-darker-1'
-                                            : 'text-gray-500 hover:text-gray-700'
-                                        ">Student Info</a>
+                                    <a
+                                        @click="step = 1"
+                                        href="#reschedule"
+                                        class="ml-4 text-sm"
+                                        :class="
+                                            step === 1
+                                                ? 'text-primary hover:text-primary-darker-1'
+                                                : 'text-gray-500 hover:text-gray-700'
+                                        "
+                                        >Student Info</a
+                                    >
                                 </div>
                             </a>
                         </div>
@@ -27,80 +50,156 @@
 
                     <li class="flex" v-if="step > 1">
                         <div class="flex items-center">
-                            <svg class="flex-shrink-0 w-6 h-full text-gray-200" viewBox="0 0 24 44"
-                                preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true">
-                                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                            <svg
+                                class="flex-shrink-0 w-6 h-full text-gray-200"
+                                viewBox="0 0 24 44"
+                                preserveAspectRatio="none"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z"
+                                />
                             </svg>
-                            <a @click="step = 2" href="#reschedule" class="ml-4 text-sm" :class="step === 2
-                                    ? 'text-primary hover:text-primary-darker-1'
-                                    : 'text-gray-500 hover:text-gray-700'
-                                ">Credentials</a>
+                            <a
+                                @click="step = 2"
+                                href="#reschedule"
+                                class="ml-4 text-sm"
+                                :class="
+                                    step === 2
+                                        ? 'text-primary hover:text-primary-darker-1'
+                                        : 'text-gray-500 hover:text-gray-700'
+                                "
+                                >Credentials</a
+                            >
                         </div>
                     </li>
 
                     <li class="flex" v-if="step > 2">
                         <div class="flex items-center">
-                            <svg class="flex-shrink-0 w-6 h-full text-gray-200" viewBox="0 0 24 44"
-                                preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true">
-                                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                            <svg
+                                class="flex-shrink-0 w-6 h-full text-gray-200"
+                                viewBox="0 0 24 44"
+                                preserveAspectRatio="none"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z"
+                                />
                             </svg>
-                            <a @click="step = 3" :class="step === 3
-                                    ? 'text-primary hover:text-primary-darker-1'
-                                    : 'text-gray-500 hover:text-gray-700'
-                                " href="#reschedule" class="ml-4 text-sm" aria-current="page">Existing Class</a>
+                            <a
+                                @click="step = 3"
+                                :class="
+                                    step === 3
+                                        ? 'text-primary hover:text-primary-darker-1'
+                                        : 'text-gray-500 hover:text-gray-700'
+                                "
+                                href="#reschedule"
+                                class="ml-4 text-sm"
+                                aria-current="page"
+                                >Existing Class</a
+                            >
                         </div>
                     </li>
 
                     <li class="flex" v-if="step > 3 && !reschedule.cancel">
                         <div class="flex items-center">
-                            <svg class="flex-shrink-0 w-6 h-full text-gray-200" viewBox="0 0 24 44"
-                                preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true">
-                                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                            <svg
+                                class="flex-shrink-0 w-6 h-full text-gray-200"
+                                viewBox="0 0 24 44"
+                                preserveAspectRatio="none"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z"
+                                />
                             </svg>
-                            <a @click="step = 4" :class="step === 4
-                                    ? 'text-primary hover:text-primary-darker-1'
-                                    : 'text-gray-500 hover:text-gray-700'
-                                " href="#reschedule" class="ml-4 text-sm" aria-current="page">Make-up Class</a>
+                            <a
+                                @click="step = 4"
+                                :class="
+                                    step === 4
+                                        ? 'text-primary hover:text-primary-darker-1'
+                                        : 'text-gray-500 hover:text-gray-700'
+                                "
+                                href="#reschedule"
+                                class="ml-4 text-sm"
+                                aria-current="page"
+                                >Make-up Class</a
+                            >
                         </div>
                     </li>
 
                     <li class="flex" v-if="step > 4">
                         <div class="flex items-center">
-                            <svg class="flex-shrink-0 w-6 h-full text-gray-200" viewBox="0 0 24 44"
-                                preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true">
-                                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                            <svg
+                                class="flex-shrink-0 w-6 h-full text-gray-200"
+                                viewBox="0 0 24 44"
+                                preserveAspectRatio="none"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z"
+                                />
                             </svg>
-                            <a :class="step === 5
-                                    ? 'text-primary hover:text-primary-darker-1'
-                                    : 'text-gray-500 hover:text-gray-700'
-                                " href="#reschedule" class="ml-4 text-sm" aria-current="page">Confirmation</a>
+                            <a
+                                :class="
+                                    step === 5
+                                        ? 'text-primary hover:text-primary-darker-1'
+                                        : 'text-gray-500 hover:text-gray-700'
+                                "
+                                href="#reschedule"
+                                class="ml-4 text-sm"
+                                aria-current="page"
+                                >Confirmation</a
+                            >
                         </div>
                     </li>
                 </ol>
             </nav>
         </div>
 
-        <div v-if="step < 6" class="sm:hidden bg-white rounded-md shadow px-4 py-3">
+        <div
+            v-if="step < 6"
+            class="sm:hidden bg-white rounded-md shadow px-4 py-3"
+        >
             <div class="flex flex-col items-center justify-center space-y-2">
                 <!-- Current Step Title (centered) -->
                 <span class="text-sm font-medium text-gray-700 text-center">
                     <template v-if="step === 1">Student Info</template>
                     <template v-else-if="step === 2">Credentials</template>
                     <template v-else-if="step === 3">Existing Class</template>
-                    <template v-else-if="step === 4 && !reschedule.cancel">Make-up Class</template>
+                    <template v-else-if="step === 4 && !reschedule.cancel"
+                        >Make-up Class</template
+                    >
                     <template v-else-if="step === 5">Confirmation</template>
                 </span>
 
                 <!-- Back Button -->
-                <button v-if="step > 1" @click="step -= 1"
-                    class="px-4 py-1 text-xs text-primary border border-primary rounded-full flex items-center justify-center shadow-sm hover:bg-primary hover:text-white transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                <button
+                    v-if="step > 1"
+                    @click="step -= 1"
+                    class="px-4 py-1 text-xs text-primary border border-primary rounded-full flex items-center justify-center shadow-sm hover:bg-primary hover:text-white transition"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-3 w-3"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 19l-7-7 7-7"
+                        />
                     </svg>
                     <span>Back</span>
                 </button>
@@ -118,43 +217,80 @@
                     <div class="pt-2">
                         <div class="mt-6 grid grid-cols-1 gap-3 md:gap-6">
                             <div class="px-4">
-                                <label class="block text-sm text-gray-700 flex">Phone Number
-                                    <span class="text-danger font-bold text-xl">*</span>
+                                <label class="block text-sm text-gray-700 flex"
+                                    >Number
+                                    <span class="text-danger font-bold text-xl"
+                                        >*</span
+                                    >
                                 </label>
                                 <div class="mt-1">
-                                    <vue-tel-input v-bind="bindProps" :preferredCountries="preferredCountries"
-                                        :autoFormat="false" @input="phoneInput" @focus="resetStudentInfoStep"
-                                        v-model="phone" :autoDefaultCountry="true" :defaultCountry="countries.countries.character_code
-                                            " required></vue-tel-input>
+                                    <vue-tel-input
+                                        v-bind="bindProps"
+                                        :preferredCountries="preferredCountries"
+                                        :autoFormat="false"
+                                        @input="phoneInput"
+                                        @focus="resetStudentInfoStep"
+                                        v-model="phone"
+                                        :autoDefaultCountry="true"
+                                        :defaultCountry="
+                                            countries.countries.character_code
+                                        "
+                                        required
+                                    ></vue-tel-input>
 
-                                    <small v-if="errors && errors.phone_number" class="text-red-500">{{
-                                        errors.errors.phone_number[0]
-                                    }}</small>
-                                    <div v-if="errorMessage" class="text-red-500 text-sm text-center pt-2">
+                                    <small
+                                        v-if="errors && errors.phone_number"
+                                        class="text-red-500"
+                                        >{{
+                                            errors.errors.phone_number[0]
+                                        }}</small
+                                    >
+                                    <div
+                                        v-if="errorMessage"
+                                        class="text-red-500 text-sm text-center pt-2"
+                                    >
                                         {{ errorMessage }}
                                     </div>
                                 </div>
                             </div>
 
                             <div class="md:col-span-2">
-                                <fieldset class="mt-6 px-4" v-if="existingStudents.length">
+                                <fieldset
+                                    class="mt-6 px-4"
+                                    v-if="existingStudents.length"
+                                >
                                     <div>
                                         <div class="text-black-lighter-2 flex">
-                                            Choose a Student
-                                            <span class="text-danger font-bold text-xl">*</span>
+                                            Select a Student
+                                            <span
+                                                class="text-danger font-bold text-xl"
+                                                >*</span
+                                            >
                                         </div>
                                         <p class="text-sm text-gray-500">
                                             Select an existing student below or
                                             add new
                                         </p>
                                     </div>
-                                    <div class="grid grid-cols-1 md:grid-cols-3 mt-4 space-y-2">
-                                        <div class="flex items-center" v-for="s in existingStudents">
-                                            <input type="radio" name="student" :value="s" v-model="reschedule.student"
+                                    <div
+                                        class="grid grid-cols-1 md:grid-cols-3 mt-4 space-y-2"
+                                    >
+                                        <div
+                                            class="flex items-center"
+                                            v-for="s in existingStudents"
+                                        >
+                                            <input
+                                                type="radio"
+                                                name="student"
+                                                :value="s"
+                                                v-model="reschedule.student"
                                                 class="focus:ring-primary h-4 w-4 text-primary border-gray-300"
-                                                required />
-                                            <label class="ml-3 block text-sm text-gray-700 capitalize">{{ s.full_name
-                                                }}</label>
+                                                required
+                                            />
+                                            <label
+                                                class="ml-3 block text-sm text-gray-700 capitalize"
+                                                >{{ s.full_name }}</label
+                                            >
                                         </div>
                                     </div>
                                 </fieldset>
@@ -173,32 +309,59 @@
                         </p>
                         <div class="grid grid-cols-1 md:grid-cols-3 mt-4">
                             <div class="flex items-center">
-                                <input type="radio" name="verification" value="code" v-model="reschedule.type"
-                                    class="focus:ring-primary h-4 w-4 text-primary border-gray-300" required />
-                                <label class="ml-3 block text-sm text-gray-700 capitalize">Get Verification Code</label>
+                                <input
+                                    type="radio"
+                                    name="verification"
+                                    value="code"
+                                    v-model="reschedule.type"
+                                    class="focus:ring-primary h-4 w-4 text-primary border-gray-300"
+                                    required
+                                />
+                                <label
+                                    class="ml-3 block text-sm text-gray-700 capitalize"
+                                    >Get Verification Code</label
+                                >
                             </div>
                             <div class="flex items-center">
-                                <input type="radio" name="verification" value="password" v-model="reschedule.type"
-                                    class="focus:ring-primary h-4 w-4 text-primary border-gray-300" required />
-                                <label class="ml-3 block text-sm text-gray-700 capitalize">Enter Students
-                                    Password</label>
+                                <input
+                                    type="radio"
+                                    name="verification"
+                                    value="password"
+                                    v-model="reschedule.type"
+                                    class="focus:ring-primary h-4 w-4 text-primary border-gray-300"
+                                    required
+                                />
+                                <label
+                                    class="ml-3 block text-sm text-gray-700 capitalize"
+                                    >Enter Students Password</label
+                                >
                             </div>
                         </div>
                     </fieldset>
                 </div>
                 <div class="pt-5 text-center px-3">
                     <transition name="fade">
-                        <button @click="onPhoneNumberEnter" v-if="!existingStudents.length"
-                            :disabled="!this.phoneObject.valid" type="button"
-                            class="w-full md:w-52 disabled:opacity-50 disabled:cursor-not-allowed shadow-primary space-x-2 inline-flex items-center justify-center py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none">
+                        <button
+                            @click="onPhoneNumberEnter"
+                            v-if="!existingStudents.length"
+                            :disabled="!this.phoneObject.valid"
+                            type="button"
+                            class="w-full md:w-52 disabled:opacity-50 disabled:cursor-not-allowed shadow-primary space-x-2 inline-flex items-center justify-center py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none"
+                        >
                             <span>Fetch Students</span>
                             <!-- <Loader v-if="buttonLoader" variants="animate-spin" /> -->
                         </button>
-                        <button v-else @click="submitStepOne" type="button" :disabled="buttonLoader ||
-                            !reschedule.student.id ||
-                            !reschedule.type
+                        <button
+                            v-else
+                            @click="submitStepOne"
+                            type="button"
+                            :disabled="
+                                buttonLoader ||
+                                !reschedule.student.id ||
+                                !reschedule.type
                             "
-                            class="w-full md:w-52 disabled:opacity-50 disabled:cursor-not-allowed shadow-primary space-x-2 inline-flex items-center justify-center py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none">
+                            class="w-full md:w-52 disabled:opacity-50 disabled:cursor-not-allowed shadow-primary space-x-2 inline-flex items-center justify-center py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none"
+                        >
                             <span>Next</span>
                             <!-- <Loader v-if="buttonLoader" variants="animate-spin" /> -->
                         </button>
@@ -209,40 +372,67 @@
 
         <!-- Verification Step -->
         <transition :name="slide_animation">
-            <form class="md:px-32 md:space-y-5 px-4" v-if="step === 2" @submit.prevent="studentVerification">
+            <form
+                class="md:px-32 md:space-y-5 px-4"
+                v-if="step === 2"
+                @submit.prevent="studentVerification"
+            >
                 <div v-if="reschedule.type === 'password'">
-                    <label class="block text-sm text-gray-700 flex">Password
+                    <label class="block text-sm text-gray-700 flex"
+                        >Password
                         <span class="text-danger font-bold text-xl">*</span>
                     </label>
                     <div class="mt-1">
-                        <input v-model="reschedule.pass_code" type="password" required autocomplete="off"
-                            class="shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-100 bg-gray-100 rounded-full" />
+                        <input
+                            v-model="reschedule.pass_code"
+                            type="password"
+                            required
+                            autocomplete="off"
+                            class="shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-100 bg-gray-100 rounded-full"
+                        />
                         <div class="flex items-center justify-start mt-2">
-                            <div v-if="errorMessage" class="text-red-500 text-sm">
+                            <div
+                                v-if="errorMessage"
+                                class="text-red-500 text-sm"
+                            >
                                 {{ errorMessage }}
                             </div>
-                            <div class="text-primary cursor-pointer text-sm" @click="resetPassword">
+                            <div
+                                class="text-primary cursor-pointer text-sm"
+                                @click="resetPassword"
+                            >
                                 Forgot password? Click to reset!
                             </div>
                         </div>
                     </div>
                 </div>
                 <div v-if="reschedule.type === 'code'">
-                    <label class="block text-sm text-gray-700 flex pb-2 flex">Enter Verification Code:
+                    <label class="block text-sm text-gray-700 flex pb-2 flex"
+                        >Enter Verification Code:
                         <span class="text-danger font-bold text-xl">*</span>
                     </label>
                     <div class="mt-1">
-                        <input v-model="reschedule.pass_code" type="number" required
-                            class="shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-100 bg-gray-100 rounded-full" />
-                        <div @click="reschedule.type = 'password'" class="text-primary cursor-pointer text-sm mt-1">
+                        <input
+                            v-model="reschedule.pass_code"
+                            type="number"
+                            required
+                            class="shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-100 bg-gray-100 rounded-full"
+                        />
+                        <div
+                            @click="reschedule.type = 'password'"
+                            class="text-primary cursor-pointer text-sm mt-1"
+                        >
                             Did not receive SMS, click to enter student
                             password!
                         </div>
                     </div>
                 </div>
                 <div class="py-2">
-                    <button type="submit" :disabled="buttonLoader"
-                        class="w-full disabled:opacity-50 disabled:cursor-not-allowed shadow-primary space-x-2 inline-flex items-center justify-center py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none">
+                    <button
+                        type="submit"
+                        :disabled="buttonLoader"
+                        class="w-full disabled:opacity-50 disabled:cursor-not-allowed shadow-primary space-x-2 inline-flex items-center justify-center py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none"
+                    >
                         <span>Verify</span>
                         <!-- <Loader v-if="buttonLoader" variants="animate-spin" /> -->
                     </button>
@@ -255,55 +445,87 @@
                 <p>Class selected to reschedule:</p>
                 <span class="capitalize">{{
                     reschedule.selectedClassToReschedule.name
-                    }}</span>, {{ reschedule.selectedClassToReschedule.starts_at }}, ({{
-                        filters.format_time_zone(timezone)
-                    }})
-                <span v-if="reschedule.selectedClassToReschedule.teacher.length">, Teacher:
+                }}</span
+                >, {{ reschedule.selectedClassToReschedule.starts_at }}, ({{
+                    filters.format_time_zone(timezone)
+                }})
+                <span v-if="reschedule.selectedClassToReschedule.teacher.length"
+                    >, Teacher:
                     {{
                         reschedule.selectedClassToReschedule.teacher[0]
                             .full_name
-                    }}</span>
+                    }}</span
+                >
             </div>
         </div>
 
         <transition :name="slide_animation">
             <div class="md:px-32 md:space-y-5" v-if="step === 3">
                 <div>
-                    <h2 class="text-lg leading-6 font-medium text-center" :class="reschedule.selectedClassToReschedule
-                            ? 'text-green-500'
-                            : 'text-red-500'
-                        ">
+                    <h2
+                        class="text-lg leading-6 font-medium text-center"
+                        :class="
+                            reschedule.selectedClassToReschedule
+                                ? 'text-green-500'
+                                : 'text-red-500'
+                        "
+                    >
                         <span v-if="available_time_slots.length">
-                            <span class="text-left">Classes available to reschedule please click on
-                                one to select:</span>
+                            <span class="text-left"
+                                >Classes available to reschedule please click on
+                                one to select:</span
+                            >
                         </span>
-                        <span class="text-lg leading-6 font-medium text-danger"
-                            v-if="!tasks_classes.length && step === 3">
+                        <span
+                            class="text-lg leading-6 font-medium text-danger"
+                            v-if="!tasks_classes.length && step === 3"
+                        >
                             No classes available for make-up
                         </span>
                     </h2>
 
                     <fieldset class="mt-2 space-y-2 px-4">
-                        <div class="divide-y divide-gray-200" v-for="task_class in tasks_classes">
+                        <div
+                            class="divide-y divide-gray-200"
+                            v-for="task_class in tasks_classes"
+                        >
                             <!-- This example requires Tailwind CSS v2.0+ -->
-                            <div class="relative flex flex-col md:flex-row items-start gap-2 py-4 border p-2 rounded-2xl items-center cursor-pointer"
-                                @click="rescheduleNow(task_class)" :class="reschedule.selectedClassToReschedule.id ===
-                                        task_class.id
+                            <div
+                                class="relative flex flex-col md:flex-row items-start gap-2 py-4 border p-2 rounded-2xl items-center cursor-pointer"
+                                @click="rescheduleNow(task_class)"
+                                :class="
+                                    reschedule.selectedClassToReschedule.id ===
+                                    task_class.id
                                         ? 'border-primary border-2 bg-indigo-100'
                                         : ''
-                                    ">
+                                "
+                            >
                                 <div class="min-w-0 flex-1 text-sm">
-                                    <label class="font-medium text-gray-700 capitalize"><span
-                                            class="text-primary">Class:</span>
-                                        {{ task_class.name }}</label>
-                                    <p id="account-mastercard-description" class="text-gray-500">
-                                        <span class="text-primary">Starts At:</span>
+                                    <label
+                                        class="font-medium text-gray-700 capitalize"
+                                        ><span class="text-primary"
+                                            >Class:</span
+                                        >
+                                        {{ task_class.name }}</label
+                                    >
+                                    <p
+                                        id="account-mastercard-description"
+                                        class="text-gray-500"
+                                    >
+                                        <span class="text-primary"
+                                            >Starts At:</span
+                                        >
                                         {{ task_class.starts_at }} ({{
                                             filters.format_time_zone(timezone)
                                         }})
                                     </p>
-                                    <p class="text-gray-500 capitalize" v-if="task_class.teacher.length">
-                                        <span class="text-primary">Teacher:</span>
+                                    <p
+                                        class="text-gray-500 capitalize"
+                                        v-if="task_class.teacher.length"
+                                    >
+                                        <span class="text-primary"
+                                            >Teacher:</span
+                                        >
                                         {{ task_class.teacher[0].full_name }}
                                     </p>
                                 </div>
@@ -316,33 +538,49 @@
                   <div class=" flex items-center h-5">
                   </div> -->
 
-                                <div class="w-full md:w-1/2 flex items-center gap-2" v-if="
-                                    !task_class.parent_id &&
-                                    task_class.is_absent_rescheduled_after_class_starts ===
-                                    0
-                                ">
-                                    <button v-if="
-                                        task_class.students[0].pivot
-                                            .rescheduled !== 2
-                                    " @click.stop="cancelClass(task_class)" type="button"
-                                        class="w-full md:w-1/2 shadow-danger py-2 text-sm font-medium border border-danger rounded-full text-white bg-danger hover:bg-danger-darker-1 focus:outline-none">
+                                <div
+                                    class="w-full md:w-1/2 flex items-center gap-2"
+                                    v-if="
+                                        !task_class.parent_id &&
+                                        task_class.is_absent_rescheduled_after_class_starts ===
+                                            0
+                                    "
+                                >
+                                    <button
+                                        v-if="
+                                            task_class.students[0].pivot
+                                                .rescheduled !== 2
+                                        "
+                                        @click.stop="cancelClass(task_class)"
+                                        type="button"
+                                        class="w-full md:w-1/2 shadow-danger py-2 text-sm font-medium border border-danger rounded-full text-white bg-danger hover:bg-danger-darker-1 focus:outline-none"
+                                    >
                                         Cancel
                                     </button>
-                                    <button @click.stop="testNew(task_class)" type="button"
-                                        class="w-full md:w-1/2 shadow-primary py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none">
+                                    <button
+                                        @click.stop="testNew(task_class)"
+                                        type="button"
+                                        class="w-full md:w-1/2 shadow-primary py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none"
+                                    >
                                         Reschedule
                                     </button>
                                     <div class="flex items-center h-5"></div>
                                 </div>
-                                <div class="flex flex-col md:flex-row gap-2 text-warning" v-else-if="
-                                    !task_class.parent_id &&
-                                    task_class.is_absent_rescheduled_after_class_starts ===
-                                    1
-                                ">
+                                <div
+                                    class="flex flex-col md:flex-row gap-2 text-warning"
+                                    v-else-if="
+                                        !task_class.parent_id &&
+                                        task_class.is_absent_rescheduled_after_class_starts ===
+                                            1
+                                    "
+                                >
                                     Reach out to the admins if you have any
                                     questions.
                                 </div>
-                                <div class="flex flex-col md:flex-row gap-2 text-danger" v-else>
+                                <div
+                                    class="flex flex-col md:flex-row gap-2 text-danger"
+                                    v-else
+                                >
                                     This is a Make Up Class, cannot be
                                     rescheduled!
                                 </div>
@@ -364,16 +602,26 @@
         </transition>
 
         <transition :name="slide_animation">
-            <form v-if="step === 4" @submit.prevent="next" class="divide-y divide-black-lighter-4">
+            <form
+                v-if="step === 4"
+                @submit.prevent="next"
+                class="divide-y divide-black-lighter-4"
+            >
                 <div class="space-y-8 pb-20">
                     <div class="py-2 px-5">
                         <div class="">
-                            <label class="block text-sm text-gray-700 flex">Teachers
-                                <span class="text-danger font-bold text-xl">*</span>
+                            <label class="block text-sm text-gray-700 flex"
+                                >Teachers
+                                <span class="text-danger font-bold text-xl"
+                                    >*</span
+                                >
                             </label>
                             <div class="mt-1">
-                                <select v-model="reschedule.showAllTeacher" @change="handleChangeInTeacher()"
-                                    class="shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-100 bg-gray-100 rounded-full">
+                                <select
+                                    v-model="reschedule.showAllTeacher"
+                                    @change="handleChangeInTeacher()"
+                                    class="shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-100 bg-gray-100 rounded-full"
+                                >
                                     <option selected disabled value="">
                                         Select Teacher
                                     </option>
@@ -384,23 +632,43 @@
                                         Current Teacher
                                     </option>
                                 </select>
-                                <small v-if="errors && errors.location_id" class="text-red-500">{{ errors.location_id[0]
-                                    }}</small>
+                                <small
+                                    v-if="errors && errors.location_id"
+                                    class="text-red-500"
+                                    >{{ errors.location_id[0] }}</small
+                                >
                             </div>
                         </div>
-                        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 md:gap-2">
-                            <vue-cal style="height: 350px" @view-change="ready" @ready="ready" :time="false"
-                                ref="vueCal" active-view="month" :disable-views="[
+                        <div
+                            class="mt-6 grid grid-cols-1 md:grid-cols-2 md:gap-2"
+                        >
+                            <vue-cal
+                                style="height: 350px"
+                                @view-change="ready"
+                                @ready="ready"
+                                :time="false"
+                                ref="vueCal"
+                                active-view="month"
+                                :disable-views="[
                                     'years',
                                     'year',
                                     'week',
                                     'day',
-                                ]" hide-view-selector xsmall :selected-date="reschedule.selected_date_raw"
-                                @cell-focus="dateClicked" :disable-days="actualDays">
+                                ]"
+                                hide-view-selector
+                                xsmall
+                                :selected-date="reschedule.selected_date_raw"
+                                @cell-focus="dateClicked"
+                                :disable-days="actualDays"
+                            >
                             </vue-cal>
-                            <div class="space-y-1 max-h-96 overflow-y-auto px-0 md:px-10">
-                                <div class="text-primary flex flex-col items-center justify-center md:flex-row"
-                                    v-if="reschedule.selected_date">
+                            <div
+                                class="space-y-1 max-h-96 overflow-y-auto px-0 md:px-10"
+                            >
+                                <div
+                                    class="text-primary flex flex-col items-center justify-center md:flex-row"
+                                    v-if="reschedule.selected_date"
+                                >
                                     <div>
                                         {{
                                             filters.day_date(
@@ -419,62 +687,90 @@
                                         Select Date
                                     </div>
                                 </div>
-                                <div class="flex items-center justify-center" v-if="loader">
+                                <div
+                                    class="flex items-center justify-center"
+                                    v-if="loader"
+                                >
                                     <!-- <Loader class="mt-10 w-20 h-203 animate-spin text-success" variants="h-10 w-10" /> -->
                                 </div>
 
                                 <span>
-                                    <div class="flex items-center justify-center px-10 py-10" v-if="
-                                        Object.keys(available_time_slots)
-                                            .length === 0 && !loader
-                                    ">
+                                    <div
+                                        class="flex items-center justify-center px-10 py-10"
+                                        v-if="
+                                            Object.keys(available_time_slots)
+                                                .length === 0 && !loader
+                                        "
+                                    >
                                         <p class="text-green-500 text-center">
                                             Please select another date in
                                             calendar to load available time
                                             slots
                                         </p>
                                     </div>
-                                    <div class="flex items-center justify-center px-10 py-10"
-                                        v-if="!available_time_slots">
-                                        <p class="text-red-500 text-center" v-html="notification"></p>
+                                    <div
+                                        class="flex items-center justify-center px-10 py-10"
+                                        v-if="!available_time_slots"
+                                    >
+                                        <p
+                                            class="text-red-500 text-center"
+                                            v-html="notification"
+                                        ></p>
                                     </div>
                                 </span>
 
-                                <div class="grid grid-cols-3 gap-1 md:gap-4 text-center text-primary" v-if="
-                                    available_time_slots &&
-                                    Object.keys(available_time_slots)
-                                        .length > 0
-                                ">
+                                <div
+                                    class="grid grid-cols-3 gap-1 md:gap-4 text-center text-primary"
+                                    v-if="
+                                        available_time_slots &&
+                                        Object.keys(available_time_slots)
+                                            .length > 0
+                                    "
+                                >
                                     <span class="p-1 md:p-3 md:mx-2">Time</span>
-                                    <span class="col-span-2 p-1 md:p-3 md:mx-2">Teacher</span>
+                                    <span class="col-span-2 p-1 md:p-3 md:mx-2"
+                                        >Teacher</span
+                                    >
                                 </div>
 
-                                <div class="grid grid-cols-3 cursor-pointer gap-1 md:gap-4"
-                                    v-for="slot in available_time_slots" :key="slot.slot"
-                                    @click="selectClassHandler(slot)">
-                                    <button type="button" class="p-1 md:p-3 md:mx-2 rounded-xl text-center" :class="reschedule.slot.id === slot.id &&
+                                <div
+                                    class="grid grid-cols-3 cursor-pointer gap-1 md:gap-4"
+                                    v-for="slot in available_time_slots"
+                                    :key="slot.slot"
+                                    @click="selectClassHandler(slot)"
+                                >
+                                    <button
+                                        type="button"
+                                        class="p-1 md:p-3 md:mx-2 rounded-xl text-center"
+                                        :class="
+                                            reschedule.slot.id === slot.id &&
                                             reschedule.slot.teacher_id ===
-                                            slot.teacher_id &&
+                                                slot.teacher_id &&
                                             reschedule.slot.time_int ===
-                                            slot.time_int
-                                            ? 'bg-primary text-white w-full'
-                                            : 'text-info bg-info-lighter-4 w-full'
-                                        ">
+                                                slot.time_int
+                                                ? 'bg-primary text-white w-full'
+                                                : 'text-info bg-info-lighter-4 w-full'
+                                        "
+                                    >
                                         {{
                                             filters.timeOnly(
                                                 slot.starts_at_local_time
                                             )
                                         }}
                                     </button>
-                                    <button type="button" class="col-span-2 p-1 md:p-3 md:mx-2 rounded-xl text-center"
-                                        :class="reschedule.slot.id === slot.id &&
-                                                reschedule.slot.teacher_id ===
+                                    <button
+                                        type="button"
+                                        class="col-span-2 p-1 md:p-3 md:mx-2 rounded-xl text-center"
+                                        :class="
+                                            reschedule.slot.id === slot.id &&
+                                            reschedule.slot.teacher_id ===
                                                 slot.teacher_id &&
-                                                reschedule.slot.time_int ===
+                                            reschedule.slot.time_int ===
                                                 slot.time_int
                                                 ? 'bg-primary text-white w-full'
                                                 : 'text-info bg-info-lighter-4 w-full'
-                                            ">
+                                        "
+                                    >
                                         {{ slot.teacher_name }}
                                     </button>
                                 </div>
@@ -484,13 +780,18 @@
                 </div>
                 <div class="pt-10 px-4">
                     <div class="flex justify-center">
-                        <button type="submit" :disabled="Object.keys(reschedule.slot).length < 2"
-                            class="disabled:opacity-50 disabled:cursor-not-allowed shadow-primary w-full md:w-max px-20 py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none">
+                        <button
+                            type="submit"
+                            :disabled="Object.keys(reschedule.slot).length < 2"
+                            class="disabled:opacity-50 disabled:cursor-not-allowed shadow-primary w-full md:w-max px-20 py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none"
+                        >
                             <span>Next</span>
                             <!-- <Loader v-if="buttonLoader" variants="animate-spin" /> -->
                         </button>
                     </div>
-                    <div class="flex md:flex-col items-center justify-center space-x-3 py-3 pt-10 text-sm">
+                    <div
+                        class="flex md:flex-col items-center justify-center space-x-3 py-3 pt-10 text-sm"
+                    >
                         <p>Don’t see something that fits your schedule?</p>
                         <p class="underline text-primary">
                             Email request to info@codewithus.com
@@ -529,7 +830,11 @@
                             <div class="space-y-20" v-if="!reschedule.cancel">
                                 <div class="md:pl-52 space-y-2">
                                     <p>
-                                        <span class="font-bold"><span class="text-primary">Time:</span></span>
+                                        <span class="font-bold"
+                                            ><span class="text-primary"
+                                                >Time:</span
+                                            ></span
+                                        >
                                         {{
                                             reschedule.slot.starts_at_local_time
                                         }}
@@ -538,27 +843,47 @@
                                         }})
                                     </p>
                                     <p>
-                                        <span class="font-bold"><span class="text-primary">Teacher:</span></span>
+                                        <span class="font-bold"
+                                            ><span class="text-primary"
+                                                >Teacher:</span
+                                            ></span
+                                        >
                                         <span class="capitalize">
                                             {{ reschedule.slot.teacher_name }}
                                         </span>
                                     </p>
                                     <p>
-                                        <span class="font-bold"><span class="text-primary">Student Name:</span></span>
+                                        <span class="font-bold"
+                                            ><span class="text-primary"
+                                                >Student Name:</span
+                                            ></span
+                                        >
                                         <span class="capitalize">
                                             {{ reschedule.student.full_name }}
                                         </span>
                                     </p>
                                     <p>
-                                        <span class="font-bold"><span class="text-primary">Email:</span></span>
+                                        <span class="font-bold"
+                                            ><span class="text-primary"
+                                                >Email:</span
+                                            ></span
+                                        >
                                         {{ reschedule.student.email }}
                                     </p>
                                     <p>
-                                        <span class="font-bold"><span class="text-primary">Phone Number:</span></span>
+                                        <span class="font-bold"
+                                            ><span class="text-primary"
+                                                >Phone Number:</span
+                                            ></span
+                                        >
                                         {{ reschedule.student.phone_number }}
                                     </p>
                                     <p>
-                                        <span class="font-bold"><span class="text-primary">Location:</span></span>
+                                        <span class="font-bold"
+                                            ><span class="text-primary"
+                                                >Location:</span
+                                            ></span
+                                        >
                                         {{
                                             reschedule.selectedClassToReschedule
                                                 .location.location_name
@@ -566,20 +891,30 @@
                                     </p>
                                 </div>
                                 <div class="text-center space-y-2">
-                                    <button @click="back" type="button"
-                                        class="shadow-primary w-full md:w-max px-20 py-2 text-sm font-medium border border-primary rounded-full text-primary hover:bg-primary hover:text-white focus:outline-none">
+                                    <button
+                                        @click="back"
+                                        type="button"
+                                        class="shadow-primary w-full md:w-max px-20 py-2 text-sm font-medium border border-primary rounded-full text-primary hover:bg-primary hover:text-white focus:outline-none"
+                                    >
                                         Cancel
                                     </button>
-                                    <button :disabled="buttonLoader" type="submit"
-                                        class="shadow-primary w-full md:w-max px-20 py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none">
+                                    <button
+                                        :disabled="buttonLoader"
+                                        type="submit"
+                                        class="shadow-primary w-full md:w-max px-20 py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none"
+                                    >
                                         <span>Yes, Reschedule!</span>
                                         <!-- <Loader v-if="buttonLoader" variants="animate-spin" /> -->
                                     </button>
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button v-if="reschedule.cancel" :disabled="buttonLoader" type="submit"
-                                    class="shadow-primary space-x-2 inline-flex items-center px-20 py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none">
+                                <button
+                                    v-if="reschedule.cancel"
+                                    :disabled="buttonLoader"
+                                    type="submit"
+                                    class="shadow-primary space-x-2 inline-flex items-center px-20 py-2 text-sm font-medium border border-primary rounded-full text-white bg-primary hover:bg-primary-darker-1 focus:outline-none"
+                                >
                                     <span>Yes, Cancel & Reschedule Later!</span>
                                     <!-- <Loader v-if="buttonLoader" variants="animate-spin" /> -->
                                 </button>
@@ -604,33 +939,49 @@
                 </p>
                 <div class="space-y-2" v-if="!reschedule.cancel">
                     <p>
-                        <span class="font-bold"><span class="text-primary">Time:</span></span>
+                        <span class="font-bold"
+                            ><span class="text-primary">Time:</span></span
+                        >
                         {{ reschedule.slot.starts_at_local_time }} ({{
                             filters.format_time_zone(timezone)
                         }})
                     </p>
                     <p>
-                        <span class="font-bold"><span class="text-primary">Teacher:</span></span>
+                        <span class="font-bold"
+                            ><span class="text-primary">Teacher:</span></span
+                        >
                         <span class="capitalize">
                             {{ reschedule.slot.teacher_name }}
                         </span>
                     </p>
                     <p>
-                        <span class="font-bold"><span class="text-primary">Student Name:</span></span>
+                        <span class="font-bold"
+                            ><span class="text-primary"
+                                >Student Name:</span
+                            ></span
+                        >
                         <span class="capitalize">
                             {{ reschedule.student.full_name }}
                         </span>
                     </p>
                     <p>
-                        <span class="font-bold"><span class="text-primary">Email:</span></span>
+                        <span class="font-bold"
+                            ><span class="text-primary">Email:</span></span
+                        >
                         {{ reschedule.student.email }}
                     </p>
                     <p>
-                        <span class="font-bold"><span class="text-primary">Phone Number:</span></span>
+                        <span class="font-bold"
+                            ><span class="text-primary"
+                                >Phone Number:</span
+                            ></span
+                        >
                         {{ reschedule.student.phone_number }}
                     </p>
                     <p>
-                        <span class="font-bold"><span class="text-primary">Location:</span></span>
+                        <span class="font-bold"
+                            ><span class="text-primary">Location:</span></span
+                        >
                         {{
                             reschedule.selectedClassToReschedule.location
                                 .location_name

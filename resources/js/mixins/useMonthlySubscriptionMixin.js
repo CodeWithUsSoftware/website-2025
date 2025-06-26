@@ -239,6 +239,9 @@ export default {
                 this.registration.totalAmount = this.net_price;
                 this.next();
 
+                // Wait for DOM to be ready after step change
+                await this.$nextTick();
+
                 const fetchClientSecret = async () => {
                     const response = await axios.post('/forms/checkout', {
                         registration: this.registration,
@@ -250,6 +253,7 @@ export default {
                     if (response.data.error) {
                         this.stripe_error = response.data.error;
                         this.slackNotificationForStripeError(response.data.error);
+                        throw new Error(response.data.error);
                     }
 
                     const clientSecret = response.data.fetchClientSecret;
@@ -263,22 +267,43 @@ export default {
                 };
 
                 const handleComplete = async () => {
-                    this.checkout.destroy()
+                    if (this.checkout) {
+                        this.checkout.destroy();
+                    }
                     await this.checkStatus(fetchSession);
                 }
 
+                // Clean up any existing checkout instance
                 if (this.checkout) {
                     this.checkout.destroy();
+                    this.checkout = null;
                 }
 
+                // Clear any previous error
+                this.stripe_error = "";
+
+                // Add small delay to ensure DOM element is available
+                await new Promise(resolve => setTimeout(resolve, 100));
+
+                // Verify the checkout element exists before mounting
+                const checkoutElement = document.getElementById('checkout');
+                if (!checkoutElement) {
+                    console.error('Checkout element not found in DOM');
+                    throw new Error('Checkout element not found in DOM');
+                }
+
+                console.log('Initializing Stripe checkout...');
                 this.checkout = await stripe.initEmbeddedCheckout({
                     fetchClientSecret,
                     onComplete: handleComplete
                 });
-                // Mount Checkout
+
+                console.log('Mounting Stripe checkout to element...');
                 this.checkout.mount('#checkout');
+                console.log('Stripe checkout mounted successfully');
             } catch (error) {
-                this.stripe_error = error;
+                console.error('Error in redirectToCheckout:', error);
+                this.stripe_error = error.message || error;
             }
         },
 

@@ -279,7 +279,7 @@
                                     <!-- Phone Number -->
                                     <div>
                                         <label class="form-label">
-                                            Phone Number
+                                            Number
                                             <span class="text-red-500">*</span>
                                         </label>
                                         <vue-tel-input
@@ -328,7 +328,7 @@
                                     <div v-if="existingStudents.length">
                                         <div class="mb-3">
                                             <label class="form-label">
-                                                Choose a Student
+                                                Select a Student
                                                 <span class="text-red-500"
                                                     >*</span
                                                 >
@@ -689,7 +689,7 @@ export default {
                 inputOptions: {
                     required: true,
                     styleClasses: "",
-                    placeholder: "Phone Number",
+                    placeholder: "Number",
                 },
             },
             preferredCountries: ["US", "GB", "CA", "CN", "IN"],

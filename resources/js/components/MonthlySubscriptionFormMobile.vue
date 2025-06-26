@@ -177,7 +177,9 @@
                                 <!-- Timeslot Duration -->
                                 <div>
                                     <label class="form-label">
-                                        Timeslot Duration
+                                        Timeslot ({{
+                                            filters.format_time_zone(timezone)
+                                        }})
                                         <span class="text-red-500">*</span>
                                     </label>
                                     <select
@@ -222,7 +224,7 @@
                                                 class="form-radio"
                                             />
                                             <span class="text-sm text-gray-900"
-                                                >Small Group (3:1)</span
+                                                >Small Group (3 to 1)</span
                                             >
                                         </label>
                                         <label
@@ -237,7 +239,7 @@
                                                 class="form-radio"
                                             />
                                             <span class="text-sm text-gray-900"
-                                                >Private (1:1)</span
+                                                >Private (1 to 1)</span
                                             >
                                         </label>
                                     </div>
@@ -264,7 +266,7 @@
                                                 class="form-radio"
                                             />
                                             <span class="text-sm text-gray-900"
-                                                >Once per week</span
+                                                >1 class / week</span
                                             >
                                         </label>
                                         <label
@@ -279,7 +281,7 @@
                                                 class="form-radio"
                                             />
                                             <span class="text-sm text-gray-900"
-                                                >Twice per week</span
+                                                >2 classes / week</span
                                             >
                                         </label>
                                     </div>
@@ -516,7 +518,7 @@
                                 <!-- Phone Number -->
                                 <div>
                                     <label class="form-label">
-                                        Phone Number
+                                        Number
                                         <span class="text-red-500">*</span>
                                     </label>
                                     <vue-tel-input
@@ -567,7 +569,7 @@
                                 <div v-if="existingStudents.length">
                                     <div class="mb-3">
                                         <label class="form-label">
-                                            Choose a Student
+                                            Select a Student
                                             <span class="text-red-500">*</span>
                                         </label>
                                         <p class="text-xs text-gray-500">
@@ -737,20 +739,31 @@
                                             <div class="flex justify-between">
                                                 <span class="text-gray-600"
                                                     >Class
-                                                    {{ index + 1 }}:</span
+                                                    {{ index + 1 }}
+                                                    Schedule:</span
                                                 >
-                                                <span class="font-medium">{{
-                                                    filters.day_date(slot.date)
-                                                }}</span>
+                                                <span class="font-medium"
+                                                    >{{
+                                                        filters.to_day(
+                                                            slot.date
+                                                        )
+                                                    }},
+                                                    {{ slot.slot_display }}</span
+                                                    >
+                                                    <span>({{
+                                                        filters.format_time_zone(
+                                                            timezone
+                                                        )
+                                                    }})</span>
                                             </div>
-                                            <div class="flex justify-between">
+                                            <!-- <div class="flex justify-between">
                                                 <span class="text-gray-600"
                                                     >Time:</span
                                                 >
                                                 <span class="font-medium">{{
                                                     slot.slot_display
                                                 }}</span>
-                                            </div>
+                                            </div> -->
                                             <div class="flex justify-between">
                                                 <span class="text-gray-600"
                                                     >Teacher:</span
@@ -768,14 +781,6 @@
                                         >
                                         <span class="font-medium">{{
                                             registration.location.location_name
-                                        }}</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-600"
-                                            >Timeslot Duration:</span
-                                        >
-                                        <span class="font-medium">{{
-                                            formattedTimeslotDuration
                                         }}</span>
                                     </div>
                                     <div class="flex justify-between">
@@ -897,7 +902,7 @@
                                 </p>
 
                                 <div
-                                    class="bg-gray-50 rounded-lg p-3 mt-4 text-left space-y-1.5 text-xs"
+                                    class="bg-gray-50 rounded-lg p-3 mt-4 space-y-1.5 text-sm"
                                 >
                                     <div class="flex justify-between">
                                         <span class="text-gray-600">Plan:</span>
@@ -921,20 +926,30 @@
                                             <div class="flex justify-between">
                                                 <span class="text-gray-600"
                                                     >Class
-                                                    {{ index + 1 }}:</span
+                                                    {{ index + 1 }}
+                                                    Schedule:</span
                                                 >
-                                                <span class="font-medium">{{
-                                                    filters.day_date(slot.date)
-                                                }}</span>
+                                                <span class="font-medium"
+                                                    >{{
+                                                        filters.to_day(
+                                                            slot.date
+                                                        )
+                                                    }},
+                                                    {{ slot.slot_display }} ({{
+                                                        filters.format_time_zone(
+                                                            timezone
+                                                        )
+                                                    }})
+                                                </span>
                                             </div>
-                                            <div class="flex justify-between">
+                                            <!-- <div class="flex justify-between">
                                                 <span class="text-gray-600"
                                                     >Time:</span
                                                 >
                                                 <span class="font-medium">{{
                                                     slot.slot_display
                                                 }}</span>
-                                            </div>
+                                            </div> -->
                                             <div class="flex justify-between">
                                                 <span class="text-gray-600"
                                                     >Teacher:</span
@@ -952,14 +967,6 @@
                                         >
                                         <span class="font-medium">{{
                                             registration.location.location_name
-                                        }}</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-600"
-                                            >Timeslot Duration:</span
-                                        >
-                                        <span class="font-medium">{{
-                                            formattedTimeslotDuration
                                         }}</span>
                                     </div>
                                     <div class="flex justify-between">
@@ -1321,20 +1328,6 @@ export default {
             );
         },
         isStep2Valid() {
-            // For debugging purposes
-            console.log("Validating Step 2 fields:");
-            console.log(
-                "- Student name:",
-                this.registration.student?.full_name
-            );
-            console.log("- Student age:", this.registration.student?.age);
-            console.log("- Email:", this.registration.parent?.email);
-            console.log("- Phone:", this.registration.parent?.phone_number);
-            console.log("- Phone Error:", this.phoneError);
-            console.log("- Email Error:", this.emailError);
-            console.log("- Student Name Error:", this.studentNameError);
-            console.log("- Student Age Error:", this.studentAgeError);
-
             return (
                 this.registration.student?.full_name &&
                 this.registration.student?.age &&
@@ -1359,6 +1352,12 @@ export default {
         step(newVal, oldVal) {
             this.slideAnimation =
                 newVal > oldVal ? "slide-left" : "slide-right";
+
+            // Clean up Stripe checkout when navigating away from payment step
+            if (oldVal === 4 && newVal !== 4 && this.checkout) {
+                this.checkout.destroy();
+                this.checkout = null;
+            }
         },
         "registration.billing_cycle"(newVal) {
             this.handleBillingCycleChange();
@@ -1406,11 +1405,13 @@ export default {
         // No longer need to initialize slider since we're using a dropdown
     },
     beforeUnmount() {
-        if (this.checkout) {
-            this.checkout.destroy();
-        }
         if (this.source) {
             this.source.cancel("Component unmounted");
+        }
+        // Clean up Stripe checkout instance
+        if (this.checkout) {
+            this.checkout.destroy();
+            this.checkout = null;
         }
     },
     methods: {
@@ -1429,24 +1430,12 @@ export default {
                 this.registration.parent?.email || ""
             );
             this.emailError = !isValid;
-            console.log(
-                "Email validation:",
-                this.registration.parent?.email,
-                "Valid:",
-                isValid
-            );
             return isValid;
         },
 
         validateStudentName() {
             const isValid = !!this.registration.student?.full_name?.trim();
             this.studentNameError = !isValid;
-            console.log(
-                "Student name validation:",
-                this.registration.student?.full_name,
-                "Valid:",
-                isValid
-            );
             return isValid;
         },
 
@@ -1454,7 +1443,6 @@ export default {
             const age = parseInt(this.registration.student?.age);
             const isValid = !isNaN(age) && age >= 5 && age <= 18;
             this.studentAgeError = !isValid;
-            console.log("Student age validation:", age, "Valid:", isValid);
             return isValid;
         },
 
@@ -1534,10 +1522,6 @@ export default {
                     this.registration.student.full_name;
             }
 
-            console.log(
-                "All validations passed, submitting form",
-                this.registration
-            );
             try {
                 await axios.post(
                     "/web/setSubscriptionFormStepTwo",

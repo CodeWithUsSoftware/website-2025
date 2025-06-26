@@ -326,6 +326,10 @@ export default {
             try {
                 let fetchSession = "";
                 this.next();
+
+                // Wait for DOM to be ready after step change
+                await this.$nextTick();
+
                 const fetchClientSecret = async () => {
                     this.registration.totalAmount = this.private_session_fee;
                     const response = await axios.post("/forms/checkout", {
@@ -351,13 +355,19 @@ export default {
                 };
 
                 const handleComplete = async () => {
-                    this.checkout.destroy();
+                    if (this.checkout) {
+                        this.checkout.destroy();
+                    }
                     await this.checkStatus(fetchSession);
                 };
 
                 if (this.checkout) {
                     this.checkout.destroy();
+                    this.checkout = null;
                 }
+
+                // Add small delay to ensure DOM element is available
+                await new Promise(resolve => setTimeout(resolve, 100));
 
                 this.checkout = await stripe.initEmbeddedCheckout({
                     fetchClientSecret,

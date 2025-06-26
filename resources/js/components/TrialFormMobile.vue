@@ -357,7 +357,7 @@
                                 <!-- Phone Number -->
                                 <div>
                                     <label class="form-label">
-                                        Phone Number
+                                        Number
                                         <span class="text-red-500">*</span>
                                     </label>
                                     <vue-tel-input
@@ -373,7 +373,7 @@
                                             countries.countries.character_code
                                         "
                                         required
-                                        placeholder="Phone Number"
+                                        placeholder="Number"
                                     />
                                 </div>
 
@@ -422,7 +422,7 @@
                                 <div v-if="existingStudents.length">
                                     <div class="mb-3">
                                         <label class="form-label">
-                                            Choose a Student
+                                            Select a Student
                                             <span class="text-red-500">*</span>
                                         </label>
                                         <p class="text-xs text-gray-500">
@@ -951,6 +951,12 @@ export default {
                 this.slide_animation = "slide-left";
             } else {
                 this.slide_animation = "slide-right";
+            }
+
+            // Clean up Stripe checkout when navigating away from payment step
+            if (oldVal === 6 && newVal !== 6 && this.checkout) {
+                this.checkout.destroy();
+                this.checkout = null;
             }
         },
     },
