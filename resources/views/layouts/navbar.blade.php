@@ -1,5 +1,5 @@
 <div>
-    <nav class="bg-white md:flex md:justify-between shadow-card relative">
+    <nav class="bg-white md:flex md:justify-between shadow-card fixed top-0 left-0 right-0 z-50">
         <div class="text-black-lighter-1 flex items-center justify-between p-3 md:p-0 md:pl-10 ">
 
             <a href="/">

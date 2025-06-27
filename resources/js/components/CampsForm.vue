@@ -1633,6 +1633,7 @@ import { useLocationsStore } from "../store/locations";
 import { useCampStore } from "../store/campStore";
 import { useFiltersStore } from "../store/filtersStore";
 import { useStudentsStore } from "../store/studentsStore";
+import useCampsFormMixin from "../mixins/useCampsFormMixin";
 
 let stripe = Stripe(
     "pk_live_516dVSfF9uOieGMSt6Qeg8rOw4qbphnczqA98pthtHhcOAfGtCLeqFCbTi7kNzq1q8dfFD5diFn6pl97SxMw4VNCM00SHImDA69"
@@ -1661,6 +1662,7 @@ let style = {
 
 export default {
     name: "MultiCampsForm",
+    mixins: [useCampsFormMixin],
     props: ["seasonal_camps_dp", "seasonal_camps_fp"],
     components: { Carousel, Slide, Pagination, Navigation },
     setup() {
@@ -1800,46 +1802,9 @@ export default {
         },
     },
     methods: {
-        calculateDiscount(registration, coupon) {
-            const basePrice = registration.session?.price || 0;
-            const optionalPrice = registration.optional_date
-                ? registration.session?.optional_price || 0
-                : 0;
-            const unitAmount = basePrice + optionalPrice;
-            let finalAmount = unitAmount;
-            const discountPercentage =
-                ((unitAmount / 0.8 - unitAmount) / (unitAmount / 0.8)) * 100 ||
-                null;
-            const originalPrice = unitAmount / 0.8 || null;
-
-            let isCoupon = false;
-            let couponPercentage = 0;
-            let couponAmount = coupon?.amount_off || 0;
-
-            if (couponAmount > 0) {
-                finalAmount -= couponAmount;
-                couponPercentage = (couponAmount / unitAmount) * 100 || null;
-                isCoupon = true;
-            }
-
-            return {
-                amount: finalAmount,
-                original_amount: Math.round(originalPrice * 100) / 100 || null,
-                percentage_off: discountPercentage || null,
-                coupon_percentage_off: couponPercentage || null,
-                is_coupon: isCoupon || null,
-                coupon_amount: couponAmount,
-            };
-        },
-        getCoupon(registration) {
-            // Implement logic to fetch the coupon related to the registration
-            return this.coupon || {}; // Replace with actual coupon logic
-        },
-        changeStep() {
-            this.step++;
-        },
+        // Desktop-specific methods that override or extend the mixin
         next(callback = null) {
-            // write code here to smooth scroll the page to element id #campsForm
+            // Desktop version with smooth scrolling to specific elements
             const campsForm = document.getElementById("campsForm");
             if (campsForm) {
                 campsForm.scrollIntoView({
@@ -1855,7 +1820,6 @@ export default {
 
             this.$nextTick(() => {
                 if (this.step === 2) {
-                    // console.log(this.step, '2');
                     if (this.$refs.phone) {
                         this.$refs.phone.scrollIntoView({
                             behavior: "smooth",
@@ -1864,7 +1828,6 @@ export default {
                     }
                 }
                 if (this.step === 5) {
-                    // console.log(this.step, '5');
                     if (this.$refs.campSummary) {
                         this.$refs.campSummary.scrollIntoView({
                             behavior: "smooth",
@@ -1874,7 +1837,9 @@ export default {
                 }
             });
         },
+
         back() {
+            // Desktop version with smooth scrolling
             const campsForm = document.getElementById("campsForm");
             if (campsForm) {
                 campsForm.scrollIntoView({
@@ -1884,32 +1849,9 @@ export default {
             }
             this.step--;
         },
-        changeLocation(location) {
-            this.locationsStore.location = location;
-            this.currentRegistration.location = location;
-            this.selected_location_id = location.id;
-            this.campStore.fetchFormsGroupsTopics({ location_id: location.id });
-        },
-        topicSelected(group, topic) {
-            this.currentRegistration.group = group;
-            this.currentRegistration.topic = topic;
-            this.currentRegistration.location = this.locationsStore.location;
-            this.tempGroups = this.campStore.groups;
-            this.campStore.fetchFormsGroupsSessions({ id: group.id });
-            this.campStore.groups = this.tempGroups;
-        },
-        calculateRegistrationAmount(registration) {
-            const basePrice = registration.session?.price || 0;
-            const optionalPrice = registration.optional_date
-                ? registration.session?.optional_price || 0
-                : 0;
-            const numberOfStudents = registration.students
-                ? registration.students.length
-                : 1;
-            return (basePrice + optionalPrice) * numberOfStudents;
-        },
+
         getStudentsData() {
-            // console.log('before',this.currentRegistration);
+            // Desktop version that resets students selection
             if (this.currentRegistration.phone?.nationalNumber) {
                 this.studentStore
                     .getExistingStudentsNew(this.currentRegistration)
@@ -1931,117 +1873,12 @@ export default {
                             email: "",
                             stripe_id: "",
                         };
-                        // console.log('after',this.currentRegistration);
                     });
             }
         },
-        phoneInput(number, obj) {
-            if (obj) {
-                this.currentRegistration.phone = obj;
-            }
-        },
-        handlePhoneBlur() {
-            if (this.currentRegistration.phone?.nationalNumber) {
-                this.getStudentsData();
-            }
-        },
-        addANewStudent() {
-            this.studentStore.addStudent = !this.studentStore.addStudent;
-            this.studentStore.existingStudent =
-                !this.studentStore.existingStudent;
-            this.resetExistingStudents();
 
-            if (this.studentStore.addStudent) {
-                this.currentRegistration.student = {
-                    id: "",
-                    full_name: "",
-                    age: "",
-                    email: "",
-                };
-            }
-        },
-        addStudentToParentInMultiCamps() {
-            // Ensure the student data is valid
-            if (
-                !this.currentRegistration.student.full_name ||
-                !this.currentRegistration.student.age
-            ) {
-                alert("Please fill in all required fields for the student.");
-                return;
-            }
-
-            const phoneValue = this.registrations[0]?.phone || null;
-
-            // console.log('sss',this.currentRegistration.phone == null);
-            if (this.currentRegistration.phone == null) {
-                this.currentRegistration.phone = phoneValue;
-            }
-
-            // Send the student data to the backend
-            axios
-                .post("/forms/addStudentToParentInMultiCamps", {
-                    student: this.currentRegistration.student,
-                    parent: this.currentRegistration.parent,
-                    phone: phoneValue,
-                    topic: this.currentRegistration.topic,
-                })
-                .then((response) => {
-                    if (
-                        response.data.message === "Student Added Successfully."
-                    ) {
-                        // After successful response, we reset the student input fields
-                        // console.log('before currentRegistration',this.currentRegistration);
-                        this.currentRegistration.student = {
-                            id: "",
-                            full_name: "",
-                            age: "",
-                            email: "",
-                        };
-                        this.studentStore.addStudent = false;
-                        // console.log('after currentRegistration',this.currentRegistration);
-                        // Optionally refresh the student list or handle any other post-save actions
-                        this.getStudentsData();
-                    } else {
-                        // // In case there's another message from the backend
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error adding student:", error);
-                    alert("An error occurred while adding the student.");
-                });
-        },
-        addStudentToList() {
-            if (!this.currentRegistration.students) {
-                this.currentRegistration.students = [];
-            }
-
-            if (
-                this.currentRegistration.student.full_name &&
-                this.currentRegistration.student.age
-            ) {
-                this.currentRegistration.students.push({
-                    ...this.currentRegistration.student,
-                });
-
-                // Reset the student input field
-                this.currentRegistration.student = {
-                    id: "",
-                    full_name: "",
-                    age: "",
-                    email: "",
-                };
-                this.studentStore.addStudent = false;
-            }
-        },
-        resetExistingStudents() {
-            this.currentRegistration.student = {
-                id: "",
-                full_name: "",
-                age: "",
-                email: "",
-            };
-        },
         addMore() {
+            // Desktop version with specific scrolling behavior
             this.addNewRegistration();
             this.step = 0;
             this.bookForm = false;
@@ -2055,304 +1892,6 @@ export default {
                     });
                 });
             }
-        },
-        addNewRegistration() {
-            // this.currentRegistration = {
-            // phone: null,
-            // group: null,
-            // topic: null,
-            // session: '',
-            // type: 'camps',
-            // class_type: 'Camps',
-            // selected_date: new Date(),
-            // location: this.locationsStore.location,
-            // optional_date: false,
-            // students: [],
-            // student: {
-            //     id: '',
-            //     full_name: '',
-            //     age: '',
-            //     email: ''
-            // },
-            // parent: this.registrations.length > 0 ? { ...this.registrations[0].parent } : {
-            //     id: '',
-            //     full_name: '',
-            //     age: '',
-            //     email: '',
-            //     stripe_id: '',
-            // },
-            // timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-            // };
-            // this.registrations.push(this.currentRegistration);
-
-            // Create a deep copy of the current registration
-            const newRegistration = JSON.parse(
-                JSON.stringify({
-                    phone: null,
-                    group: null,
-                    topic: null,
-                    session: "",
-                    type: "camps",
-                    class_type: "Camps",
-                    selected_date: new Date(),
-                    location: this.locationsStore.location,
-                    optional_date: false,
-                    students: [],
-                    student: {
-                        id: "",
-                        full_name: "",
-                        age: "",
-                        email: "",
-                    },
-                    parent:
-                        this.registrations.length > 0
-                            ? { ...this.registrations[0].parent }
-                            : {
-                                  id: "",
-                                  full_name: "",
-                                  age: "",
-                                  email: "",
-                                  stripe_id: "",
-                              },
-                    timezone: "America/Los_Angeles",
-                })
-            );
-
-            // Push the new independent registration
-            this.registrations.push(newRegistration);
-
-            // Set currentRegistration to the newly added registration
-            this.currentRegistration = newRegistration;
-        },
-        removeRegistration(index) {
-            this.registrations.splice(index, 1);
-            if (this.registrations.length === 0) {
-                this.addNewRegistration();
-            } else {
-                // Set currentRegistration to the last registration in the array
-                this.currentRegistration =
-                    this.registrations[this.registrations.length - 1];
-            }
-        },
-        //   redirectToCheckout() {
-        //     this.step = 4;
-        //   },
-        //   processPayment() {
-        //     // Implement payment processing logic here
-        //     console.log('Processing payment...');
-        //     this.step = 5;
-        //   },
-        //   continueShopping() {
-        //     this.isModalOpen = false;
-        //     this.step = 1;
-        //   },
-        proceedToCheckout() {
-            this.isModalOpen = false;
-            this.redirectToCheckout();
-        },
-        toggleStudent(student) {
-            if (!this.currentRegistration.students) {
-                this.currentRegistration.students = [];
-            }
-            const index = this.currentRegistration.students.findIndex(
-                (s) => s.id === student.id
-            );
-            if (index > -1) {
-                this.currentRegistration.students.splice(index, 1);
-            } else {
-                this.currentRegistration.students.push(student);
-            }
-        },
-        calculateAmount() {
-            this.totalAmount = 0;
-            this.amount = 0;
-
-            if (this.currentRegistration && this.currentRegistration.session) {
-                const basePrice = this.currentRegistration.session.price || 0;
-                const optionalPrice = this.currentRegistration.optional_date
-                    ? this.currentRegistration.session.optional_price || 0
-                    : 0;
-                const numberOfStudents = this.currentRegistration.students
-                    ? this.currentRegistration.students.length
-                    : 1;
-                this.amount = (basePrice + optionalPrice) * numberOfStudents;
-                this.totalAmount = this.amount;
-            }
-        },
-        async redirectToCheckout() {
-            try {
-                let fetchSession = "";
-                const fetchClientSecret = async () => {
-                    const totalAmount = this.registrations.reduce(
-                        (sum, reg) =>
-                            sum + this.calculateRegistrationAmount(reg),
-                        0
-                    );
-
-                    const phoneValue = this.registrations[0]?.phone || null;
-
-                    this.registrations = this.registrations.map(
-                        (registration) => ({
-                            ...registration, // Keep existing data
-                            phone: phoneValue,
-                        })
-                    );
-
-                    const response = await axios.post(
-                        "/forms/newCampsCheckout",
-                        {
-                            registrations: this.registrations,
-                            coupon: this.coupons,
-                            type: "camps",
-                            mode: "camps",
-                            totalAmount: totalAmount,
-                            allStudents: this.allStudents,
-                        }
-                    );
-
-                    if (response.data.error) {
-                        this.stripe_error = response.data.error;
-                    }
-
-                    this.next();
-                    const clientSecret = response.data.fetchClientSecret;
-                    fetchSession = response.data.fetchSession;
-
-                    // Update parent and student info for all registrations
-                    this.registrations = this.registrations.map(
-                        (reg, index) => ({
-                            ...reg,
-                            students:
-                                response.data.registrations &&
-                                response.data.registrations[index]
-                                    ? response.data.registrations[index]
-                                          .students || []
-                                    : [],
-                        })
-                    );
-
-                    this.coupons.id = response.data.couponId;
-                    this.coupons.isValid = response.data.isValid;
-                    return clientSecret;
-                };
-
-                const handleComplete = async () => {
-                    this.checkout.destroy();
-                    await this.checkStatus(fetchSession);
-                };
-
-                if (this.checkout) {
-                    this.checkout.destroy();
-                }
-
-                this.checkout = await stripe.initEmbeddedCheckout({
-                    fetchClientSecret,
-                    onComplete: handleComplete,
-                });
-                // Mount Checkout
-                this.checkout.mount("#checkout");
-            } catch (error) {
-                this.stripe_error = error;
-            }
-        },
-        async checkStatus(sessionId) {
-            try {
-                const response = await axios.post(
-                    "/forms/check_payment_status",
-                    {
-                        session_id: sessionId,
-                    }
-                );
-
-                if (response.data.error) {
-                    this.stripe_error = response.data.error;
-                    return;
-                }
-
-                if (response.data.payment_status === "complete") {
-                    // Extract phone value from the first registration
-                    const phoneValue = this.registrations[0]?.phone || null;
-
-                    this.serverTotalAmount = response.data.amount_total;
-
-                    // Update all registrations with new payment details + phone value
-                    this.registrations = this.registrations.map(
-                        (registration) => ({
-                            ...registration, // Keep existing data
-                            phone: phoneValue, // Copy phone from first registration
-                            totalAmount: response.data.amount_total || 0,
-                            amount_subtotal: response.data.amount_subtotal || 0,
-                            payment_payload: response.data.payload || {}, // Ensure payment_payload exists
-                            payment_id:
-                                response.data.payload?.payment_intent || "",
-                        })
-                    );
-
-                    // Ensure coupons object is properly updated
-                    this.coupons.amount_off =
-                        response.data.amount_discount || 0;
-                    this.coupons.isValid = response.data.isValid || false;
-
-                    // Send updated registrations list to backend
-                    const saveResponse = await axios.post(
-                        "/forms/addMultiCampRegistration",
-                        {
-                            registrations: this.registrations,
-                            coupon: this.coupons,
-                            type: "camps",
-                            allStudents: this.allStudents,
-                        }
-                    );
-
-                    if (
-                        saveResponse.data.message ===
-                        "Camp Registrations Successful."
-                    ) {
-                        this.next();
-                    }
-                }
-            } catch (error) {
-                console.error("Error checking payment status:", error);
-                this.stripe_error =
-                    "Something went wrong while checking payment status.";
-            }
-        },
-        enrollTopicSelected(selectedTopic, selectedGroup) {
-            // console.log("Parent method executed with:", selectedTopic, selectedGroup);
-            // Call topicSelected and then pass it to next()
-
-            this.next(this.topicSelected(selectedGroup, selectedTopic));
-        },
-        getSliderStyle() {
-            if (
-                !this.locationsStore.locations.length ||
-                !this.locationsStore.location
-            ) {
-                return { left: "4px", width: "0px" };
-            }
-
-            const activeIndex = this.locationsStore.locations.findIndex(
-                (location) => location.id === this.locationsStore.location.id
-            );
-
-            if (activeIndex === -1) {
-                return { left: "4px", width: "0px" };
-            }
-
-            const totalButtons = this.locationsStore.locations.length;
-            const buttonWidth = `calc(${100 / totalButtons}% - 8px)`;
-            const leftPosition = `calc(${
-                (100 / totalButtons) * activeIndex
-            }% + 4px)`;
-
-            return {
-                left: leftPosition,
-                width: buttonWidth,
-            };
-        },
-        toggleAccordion(index) {
-            // Vue 3 compatible way to update reactive array
-            this.accordionOpen[index] = !this.accordionOpen[index];
         },
     },
     mounted() {

@@ -21,13 +21,13 @@
 </head>
 
 <body>
-    <div  id="app">
+    <div id="app">
         {{-- Navbar Section --}}
         @include('layouts.navbar')
         @include('layouts.sidebar')
 
         {{-- Content Section --}}
-        <div class="relative bg-gray-50">
+        <div class="relative bg-gray-50 pt-16 md:pt-20">
             <main class="lg:relative">
                 @yield('content')
             </main>
