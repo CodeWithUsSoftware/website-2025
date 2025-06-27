@@ -1,5 +1,6 @@
 <div>
-    <nav class="bg-white md:flex md:justify-between shadow-card fixed top-0 left-0 right-0 z-50">
+    <!-- Original navbar that scrolls with content -->
+    <nav id="original-navbar" class="bg-white md:flex md:justify-between shadow-card relative z-40">
         <div class="text-black-lighter-1 flex items-center justify-between p-3 md:p-0 md:pl-10 ">
 
             <a href="/">
@@ -297,4 +298,175 @@
             </li> --}}
         </ul>
     </nav>
+
+    <!-- Fixed navbar placeholder - will be populated by JavaScript -->
+    <div id="fixed-navbar-container" class="fixed top-0 left-0 right-0 z-50 transform -translate-y-full opacity-0 transition-all duration-700 ease-out">
+        <!-- Content will be dynamically inserted here -->
+    </div>
+
+    <!-- CSS for dropdown positioning only -->
+    <style>
+        /* Ensure dropdown menus work properly in fixed navbar */
+        #fixed-navbar-container .dropdown-content {
+            position: fixed !important;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const originalNavbar = document.getElementById('original-navbar');
+            const fixedNavbarContainer = document.getElementById('fixed-navbar-container');
+            let isFixed = false;
+            let originalNavbarHeight = 0;
+            let lastScrollY = window.scrollY;
+            const threshold = 20; // Pixel threshold for showing/hiding
+
+            // Get the original navbar height
+            function updateNavbarHeight() {
+                originalNavbarHeight = originalNavbar.offsetHeight;
+            }
+
+            // Clone the original navbar and insert into fixed container
+            function createFixedNavbar() {
+                const clonedNavbar = originalNavbar.cloneNode(true);
+                clonedNavbar.id = 'fixed-navbar';
+                clonedNavbar.classList.remove('relative');
+                clonedNavbar.classList.add('fixed', 'top-0', 'left-0', 'right-0');
+                fixedNavbarContainer.innerHTML = '';
+                fixedNavbarContainer.appendChild(clonedNavbar);
+                
+                // Re-initialize dropdown functionality for cloned navbar
+                initializeDropdowns(clonedNavbar);
+            }
+
+            // Initialize dropdown functionality
+            function initializeDropdowns(navbar) {
+                const dropdowns = navbar.querySelectorAll('.dropdown');
+                dropdowns.forEach(dropdown => {
+                    const trigger = dropdown.querySelector('[tabindex="0"]');
+                    const content = dropdown.querySelector('.dropdown-content');
+                    
+                    if (trigger && content) {
+                        trigger.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            
+                            // Close all other dropdowns
+                            dropdowns.forEach(otherDropdown => {
+                                if (otherDropdown !== dropdown) {
+                                    const otherContent = otherDropdown.querySelector('.dropdown-content');
+                                    if (otherContent) {
+                                        otherContent.hidden = true;
+                                    }
+                                }
+                            });
+                            
+                            // Toggle current dropdown
+                            content.hidden = !content.hidden;
+                        });
+                    }
+                });
+
+                // Close dropdowns when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!navbar.contains(e.target)) {
+                        dropdowns.forEach(dropdown => {
+                            const content = dropdown.querySelector('.dropdown-content');
+                            if (content) {
+                                content.hidden = true;
+                            }
+                        });
+                    }
+                });
+            }
+
+            // Show fixed navbar with slide down animation using Tailwind classes
+            function showFixedNavbar() {
+                if (!isFixed) {
+                    createFixedNavbar();
+                    
+                    // Add shadow to cloned navbar
+                    const clonedNav = fixedNavbarContainer.querySelector('nav');
+                    if (clonedNav) {
+                        clonedNav.classList.add('shadow-lg');
+                    }
+                    
+                    // Use requestAnimationFrame for smooth animation
+                    requestAnimationFrame(() => {
+                        // Show the navbar by removing hidden classes and adding visible classes
+                        fixedNavbarContainer.classList.remove('-translate-y-full', 'opacity-0');
+                        fixedNavbarContainer.classList.add('translate-y-0', 'opacity-100');
+                    });
+                    
+                    isFixed = true;
+                }
+            }
+
+            // Hide fixed navbar with slide up animation using Tailwind classes
+            function hideFixedNavbar() {
+                if (isFixed) {
+                    // Hide the navbar by adding hidden classes and removing visible classes
+                    fixedNavbarContainer.classList.remove('translate-y-0', 'opacity-100');
+                    fixedNavbarContainer.classList.add('-translate-y-full', 'opacity-0');
+                    
+                    isFixed = false;
+                }
+            }
+
+            // Handle scroll events
+            function handleScroll() {
+                updateNavbarHeight();
+                const currentScrollY = window.scrollY;
+                const originalNavbarRect = originalNavbar.getBoundingClientRect();
+                
+                // Check if original navbar is out of view (with threshold)
+                const isOriginalNavbarOutOfView = originalNavbarRect.bottom < -threshold;
+                
+                // Debug logs
+                console.log('Scroll Y:', currentScrollY);
+                console.log('Original navbar bottom:', originalNavbarRect.bottom);
+                console.log('Is out of view:', isOriginalNavbarOutOfView);
+                console.log('Is fixed:', isFixed);
+                
+                if (isOriginalNavbarOutOfView && !isFixed) {
+                    console.log('Showing fixed navbar');
+                    showFixedNavbar();
+                } else if (!isOriginalNavbarOutOfView && isFixed) {
+                    console.log('Hiding fixed navbar');
+                    hideFixedNavbar();
+                }
+                
+                lastScrollY = currentScrollY;
+            }
+
+            // Initialize
+            updateNavbarHeight();
+            initializeDropdowns(originalNavbar);
+            
+            // Throttled scroll handler for better performance
+            let ticking = false;
+            function scrollHandler() {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }
+
+            // Event listeners
+            window.addEventListener('scroll', scrollHandler);
+            window.addEventListener('resize', updateNavbarHeight);
+            
+            // Initialize mobile menu functionality if it exists
+            if (typeof openFunction === 'function') {
+                // Make sure mobile menu works in both navbars
+                window.openFunction = function() {
+                    // Your existing mobile menu logic here
+                    console.log('Mobile menu opened');
+                };
+            }
+        });
+    </script>
 </div>

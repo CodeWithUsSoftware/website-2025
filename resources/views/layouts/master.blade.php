@@ -27,7 +27,7 @@
         @include('layouts.sidebar')
 
         {{-- Content Section --}}
-        <div class="relative bg-gray-50 pt-16 md:pt-20">
+        <div class="relative bg-gray-50">
             <main class="lg:relative">
                 @yield('content')
             </main>
