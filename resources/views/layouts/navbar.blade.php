@@ -305,13 +305,4 @@
         <!-- Content will be dynamically inserted here -->
     </div>
 
-    <!-- CSS for dropdown positioning only -->
-    <style>
-        /* Ensure dropdown menus work properly in fixed navbar */
-        #fixed-navbar-container .dropdown-content {
-            position: fixed !important;
-        }
-    </style>
-
-    
 </div>

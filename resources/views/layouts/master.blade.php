@@ -16,6 +16,13 @@
         .grecaptcha-badge {
             display: none;
         }
+
+        < !-- CSS for dropdown positioning only -->
+
+        /* Ensure dropdown menus work properly in fixed navbar */
+        #fixed-navbar-container .dropdown-content {
+            position: fixed !important;
+        }
     </style>
     @yield('style')
 </head>
