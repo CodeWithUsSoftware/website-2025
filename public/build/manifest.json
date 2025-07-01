@@ -309,5 +309,11 @@
     "css": [
       "assets/app-huv3GQO2.css"
     ]
+  },
+  "resources/js/navbar.js": {
+    "file": "assets/navbar-BLG6uarf.js",
+    "name": "navbar",
+    "src": "resources/js/navbar.js",
+    "isEntry": true
   }
 }
