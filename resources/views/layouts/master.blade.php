@@ -213,175 +213,113 @@
         document.addEventListener('DOMContentLoaded', function() {
             const originalNavbar = document.getElementById('original-navbar');
             const fixedNavbarContainer = document.getElementById('fixed-navbar-container');
-
-            // Check if required elements exist
-            if (!originalNavbar || !fixedNavbarContainer) {
-                console.error('Required navbar elements not found');
-                return;
-            }
-
             let isFixed = false;
             let originalNavbarHeight = 0;
-            let lastScrollY = window.scrollY || 0;
+            let lastScrollY = window.scrollY;
             const threshold = 20; // Pixel threshold for showing/hiding
-
-            // Store dropdown event listeners to avoid memory leaks
-            const dropdownListeners = new Map();
-
             // Get the original navbar height
             function updateNavbarHeight() {
-                if (originalNavbar) {
-                    originalNavbarHeight = originalNavbar.offsetHeight;
-                }
+                originalNavbarHeight = originalNavbar.offsetHeight;
             }
-
             // Clone the original navbar and insert into fixed container
             function createFixedNavbar() {
-                try {
-                    const clonedNavbar = originalNavbar.cloneNode(true);
-                    clonedNavbar.id = 'fixed-navbar';
-                    clonedNavbar.classList.remove('relative');
-                    clonedNavbar.classList.add('fixed', 'top-0', 'left-0', 'right-0');
-                    fixedNavbarContainer.innerHTML = '';
-                    fixedNavbarContainer.appendChild(clonedNavbar);
-
-                    // Re-initialize dropdown functionality for cloned navbar
-                    initializeDropdowns(clonedNavbar);
-                } catch (error) {
-                    console.error('Error creating fixed navbar:', error);
-                }
+                const clonedNavbar = originalNavbar.cloneNode(true);
+                clonedNavbar.id = 'fixed-navbar';
+                clonedNavbar.classList.remove('relative');
+                clonedNavbar.classList.add('fixed', 'top-0', 'left-0', 'right-0');
+                fixedNavbarContainer.innerHTML = '';
+                fixedNavbarContainer.appendChild(clonedNavbar);
+                // Re-initialize dropdown functionality for cloned navbar
+                initializeDropdowns(clonedNavbar);
             }
-
             // Initialize dropdown functionality
             function initializeDropdowns(navbar) {
-                if (!navbar) return;
-
-                try {
-                    const dropdowns = navbar.querySelectorAll('.dropdown');
-
-                    dropdowns.forEach(dropdown => {
-                        const trigger = dropdown.querySelector('[tabindex="0"]');
-                        const content = dropdown.querySelector('.dropdown-content');
-
-                        if (trigger && content) {
-                            const clickHandler = function(e) {
-                                e.preventDefault();
-                                e.stopPropagation();
-
-                                // Close all other dropdowns
-                                dropdowns.forEach(otherDropdown => {
-                                    if (otherDropdown !== dropdown) {
-                                        const otherContent = otherDropdown.querySelector(
-                                            '.dropdown-content');
-                                        if (otherContent) {
-                                            otherContent.hidden = true;
-                                        }
+                const dropdowns = navbar.querySelectorAll('.dropdown');
+                dropdowns.forEach(dropdown => {
+                    const trigger = dropdown.querySelector('[tabindex="0"]');
+                    const content = dropdown.querySelector('.dropdown-content');
+                    if (trigger && content) {
+                        trigger.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            // Close all other dropdowns
+                            dropdowns.forEach(otherDropdown => {
+                                if (otherDropdown !== dropdown) {
+                                    const otherContent = otherDropdown.querySelector(
+                                        '.dropdown-content');
+                                    if (otherContent) {
+                                        otherContent.hidden = true;
                                     }
-                                });
-
-                                // Toggle current dropdown
-                                content.hidden = !content.hidden;
-                            };
-
-                            trigger.addEventListener('click', clickHandler);
-
-                            // Store listener reference for cleanup
-                            dropdownListeners.set(trigger, clickHandler);
-                        }
-                    });
-
-                    // Close dropdowns when clicking outside (only add once)
-                    const outsideClickHandler = function(e) {
-                        if (!navbar.contains(e.target)) {
-                            dropdowns.forEach(dropdown => {
-                                const content = dropdown.querySelector('.dropdown-content');
-                                if (content) {
-                                    content.hidden = true;
                                 }
                             });
-                        }
-                    };
-
-                    // Remove existing listener if it exists
-                    if (navbar.outsideClickHandler) {
-                        document.removeEventListener('click', navbar.outsideClickHandler);
+                            // Toggle current dropdown
+                            content.hidden = !content.hidden;
+                        });
                     }
-
-                    document.addEventListener('click', outsideClickHandler);
-                    navbar.outsideClickHandler = outsideClickHandler;
-
-                } catch (error) {
-                    console.error('Error initializing dropdowns:', error);
-                }
+                });
+                // Close dropdowns when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!navbar.contains(e.target)) {
+                        dropdowns.forEach(dropdown => {
+                            const content = dropdown.querySelector('.dropdown-content');
+                            if (content) {
+                                content.hidden = true;
+                            }
+                        });
+                    }
+                });
             }
-
             // Show fixed navbar with slide down animation using Tailwind classes
             function showFixedNavbar() {
-                if (!isFixed && fixedNavbarContainer) {
-                    try {
-                        createFixedNavbar();
-
-                        // Add shadow to cloned navbar
-                        const clonedNav = fixedNavbarContainer.querySelector('nav');
-                        if (clonedNav) {
-                            clonedNav.classList.add('shadow-lg');
-                        }
-
-                        // Use requestAnimationFrame for smooth animation
-                        requestAnimationFrame(() => {
-                            // Show the navbar by removing hidden classes and adding visible classes
-                            fixedNavbarContainer.classList.remove('-translate-y-full', 'opacity-0');
-                            fixedNavbarContainer.classList.add('translate-y-0', 'opacity-100');
-                        });
-
-                        isFixed = true;
-                    } catch (error) {
-                        console.error('Error showing fixed navbar:', error);
+                if (!isFixed) {
+                    createFixedNavbar();
+                    // Add shadow to cloned navbar
+                    const clonedNav = fixedNavbarContainer.querySelector('nav');
+                    if (clonedNav) {
+                        clonedNav.classList.add('shadow-lg');
                     }
+                    // Use requestAnimationFrame for smooth animation
+                    requestAnimationFrame(() => {
+                        // Show the navbar by removing hidden classes and adding visible classes
+                        fixedNavbarContainer.classList.remove('-translate-y-full', 'opacity-0');
+                        fixedNavbarContainer.classList.add('translate-y-0', 'opacity-100');
+                    });
+                    isFixed = true;
                 }
             }
-
             // Hide fixed navbar with slide up animation using Tailwind classes
             function hideFixedNavbar() {
-                if (isFixed && fixedNavbarContainer) {
-                    try {
-                        // Hide the navbar by adding hidden classes and removing visible classes
-                        fixedNavbarContainer.classList.remove('translate-y-0', 'opacity-100');
-                        fixedNavbarContainer.classList.add('-translate-y-full', 'opacity-0');
-
-                        isFixed = false;
-                    } catch (error) {
-                        console.error('Error hiding fixed navbar:', error);
-                    }
+                if (isFixed) {
+                    // Hide the navbar by adding hidden classes and removing visible classes
+                    fixedNavbarContainer.classList.remove('translate-y-0', 'opacity-100');
+                    fixedNavbarContainer.classList.add('-translate-y-full', 'opacity-0');
+                    isFixed = false;
                 }
             }
-
             // Handle scroll events
             function handleScroll() {
-                try {
-                    updateNavbarHeight();
-                    const currentScrollY = window.scrollY || 0;
-                    const originalNavbarRect = originalNavbar.getBoundingClientRect();
-
-                    // Check if original navbar is out of view (with threshold)
-                    const isOriginalNavbarOutOfView = originalNavbarRect.bottom < -threshold;
-
-                    if (isOriginalNavbarOutOfView && !isFixed) {
-                        showFixedNavbar();
-                    } else if (!isOriginalNavbarOutOfView && isFixed) {
-                        hideFixedNavbar();
-                    }
-
-                    lastScrollY = currentScrollY;
-                } catch (error) {
-                    console.error('Error in scroll handler:', error);
+                updateNavbarHeight();
+                const currentScrollY = window.scrollY;
+                const originalNavbarRect = originalNavbar.getBoundingClientRect();
+                // Check if original navbar is out of view (with threshold)
+                const isOriginalNavbarOutOfView = originalNavbarRect.bottom < -threshold;
+                // Debug logs
+                console.log('Scroll Y:', currentScrollY);
+                console.log('Original navbar bottom:', originalNavbarRect.bottom);
+                console.log('Is out of view:', isOriginalNavbarOutOfView);
+                console.log('Is fixed:', isFixed);
+                if (isOriginalNavbarOutOfView && !isFixed) {
+                    console.log('Showing fixed navbar');
+                    showFixedNavbar();
+                } else if (!isOriginalNavbarOutOfView && isFixed) {
+                    console.log('Hiding fixed navbar');
+                    hideFixedNavbar();
                 }
+                lastScrollY = currentScrollY;
             }
-
             // Initialize
             updateNavbarHeight();
             initializeDropdowns(originalNavbar);
-
             // Throttled scroll handler for better performance
             let ticking = false;
 
@@ -394,19 +332,20 @@
                     ticking = true;
                 }
             }
-
             // Event listeners
             window.addEventListener('scroll', scrollHandler);
             window.addEventListener('resize', updateNavbarHeight);
-
-            // Mobile menu functionality
-            window.openFunction = window.openFunction || function() {
-                console.log('Mobile menu opened');
-                // Add your mobile menu logic here
-            };
-
+            // Initialize mobile menu functionality if it exists
+            if (typeof openFunction === 'function') {
+                // Make sure mobile menu works in both navbars
+                window.openFunction = function() {
+                    // Your existing mobile menu logic here
+                    console.log('Mobile menu opened');
+                };
+            }
         });
     </script>
+
 </body>
 
 </html>
