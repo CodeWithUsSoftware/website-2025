@@ -10,7 +10,7 @@
     <meta name="description" content="@yield('meta_description')">
     @csrf
     {{-- Custom Script --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/navbar.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('schema')
     <style>
         .grecaptcha-badge {
