@@ -47,6 +47,6 @@ Route::get('/referral_link/{code}', [\App\Http\Controllers\ReferralController::c
 Route::get('/categories/{category}', [\App\Http\Controllers\LandingPageController::class, 'getLandingPageCategory']);
 Route::get('/computer-science-standards/united-states', [\App\Http\Controllers\SchoolPageController::class, 'allCountries']);
 Route::get('/computer-science-standards/united-states/{slug}', [\App\Http\Controllers\SchoolPageController::class, 'schoolPages']);
-
+Route::get('/category-page/{slug}', [\App\Http\Controllers\LandingPageController::class, 'getLandingPage']);
 
 Route::redirect('/en/faqs', '/faqs');
